@@ -12,7 +12,7 @@ class LanguageSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height:  getHeight(context, 0.05), // التحكم في الارتفاع
+      height:  getHeight(context, 0.15), // التحكم في الارتفاع
       padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 8.0),
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.primary, // لون خلفية لطيف
