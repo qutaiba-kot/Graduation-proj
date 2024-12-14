@@ -23,8 +23,8 @@ class AuthController extends GetxController {
       Get.offAllNamed('/home');
     } else {
       Get.snackbar(
-        "Login Failed",
-        "Invalid email or password. Please try again.",
+        "Login Failed".tr,
+        "Invalid email or password. Please try again.".tr,
         snackPosition: SnackPosition.BOTTOM,
       );
     }
@@ -46,8 +46,8 @@ class AuthController extends GetxController {
       Get.offAllNamed('/home');
     } else {
       Get.snackbar(
-        "Error",
-        "Invalid OTP. Please try again.",
+        "Error".tr,
+        "Invalid OTP. Please try again.".tr,
         snackPosition: SnackPosition.BOTTOM,
       );
     }
@@ -58,8 +58,8 @@ class AuthController extends GetxController {
     // إضافة مؤقت لمنع إعادة الإرسال بشكل مستمر
     await Future.delayed(Duration(seconds: 2));
     Get.snackbar(
-      "OTP Sent",
-      "A new OTP has been sent to your phone.",
+      "OTP Sent".tr,
+      "A new OTP has been sent to your phone.".tr,
       snackPosition: SnackPosition.BOTTOM,
     );
   }
@@ -68,8 +68,8 @@ class AuthController extends GetxController {
   void resetPassword(String email) {
     if (email.isEmpty || !GetUtils.isEmail(email)) {
       Get.snackbar(
-        "Error",
-        "Please enter a valid email address.",
+        "Error".tr,
+        "Please enter a valid email address.".tr,
         snackPosition: SnackPosition.BOTTOM,
       );
       return;

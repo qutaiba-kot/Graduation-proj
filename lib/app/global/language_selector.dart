@@ -15,13 +15,13 @@ class LanguageSelector extends StatelessWidget {
       height:  getHeight(context, 0.05), // التحكم في الارتفاع
       padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 8.0),
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.onBackground, // لون خلفية لطيف
+        color: Theme.of(context).colorScheme.primary, // لون خلفية لطيف
         borderRadius: BorderRadius.circular(10.0), // زوايا مستديرة
-        border: Border.all(color: Theme.of(context).colorScheme.onBackground, width: 1.5), // حدود خارجية
+        border: Border.all(color: Theme.of(context).colorScheme.primary, width: 1.5), // حدود خارجية
       ),
       child: DropdownButton<String>(
         value: Get.locale?.languageCode,
-        dropdownColor: Theme.of(context).colorScheme.onBackground, // خلفية العناصر عند فتح القائمة
+        dropdownColor: Theme.of(context).colorScheme.primary, // خلفية العناصر عند فتح القائمة
         underline: SizedBox(), // إزالة الخط السفلي الافتراضي
         icon: Icon(Icons.language, color: Theme.of(context).colorScheme.background), // أيقونة للقائمة
         style: TextStyle(color: Theme.of(context).colorScheme.background, fontSize: 16.0), // تنسيق النص

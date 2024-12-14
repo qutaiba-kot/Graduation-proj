@@ -3,10 +3,12 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:maps/app/AppTranslations/translations.dart';
 import 'package:maps/app/theme/app_theme.dart';
+import 'app/data/user_info.dart';
 import 'app/routes/app_pages.dart';
 import 'app/supabase_config.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
   WidgetsFlutterBinding.ensureInitialized();
   await initSupabase(); // تهيئة التخزين المحلي
@@ -15,6 +17,7 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   final GetStorage storage = GetStorage();
+  final UserStorageService userStorage = UserStorageService();
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +52,10 @@ class MyApp extends StatelessWidget {
   }
 
   String _getInitialRoute() {
-    final bool isLoggedIn = GetStorage().read('isLoggedIn') ?? false;
-    return isLoggedIn ? '/home' : AppPages.INITIAL;
+if (userStorage.isLoggedIn) {
+  return '/home' ;
+} else {
+  return AppPages.INITIAL;
+}
   }
 }

@@ -11,5 +11,6 @@ abstract class Routes {
   static const ARCHIVE = '/archive';
   static const SETTINGS = '/settings';
   static const OTP_EMAIL = '/otp-email';
-  static const MY_DRAWER = '/my-drawer'; // تم تصحيح التسمية لتتبع التنسيق
+  static const MY_DRAWER = '/my-drawer';
+  static const REPORTATION = '/reportation';
 }

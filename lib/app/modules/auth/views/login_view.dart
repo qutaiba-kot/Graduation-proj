@@ -29,17 +29,17 @@ class LoginView extends StatelessWidget {
         ],
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(getWidth(context, 0.05)),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(height: getHeight(context, 0.098)),
-            CustomText(text: "login".tr, fontSize: 40),
+            CustomText(text: "login".tr, fontSize: 40 , color:Theme.of(context).colorScheme.primary ,),
             SizedBox(height: getHeight(context, 0.098)),
             Obx(() => CustomTextField(
                   controller: emailController,
                   hintText: "email".tr,
-                  backgroundColor: Theme.of(context).colorScheme.onBackground,
+                  backgroundColor: Theme.of(context).colorScheme.primary,
                   hintStyle: TextStyle(
                     color: Theme.of(context)
                         .colorScheme
@@ -63,7 +63,7 @@ class LoginView extends StatelessWidget {
             Obx(() => CustomTextField(
                   controller: passwordController,
                   hintText: "password".tr,
-                  backgroundColor: Theme.of(context).colorScheme.onBackground,
+                  backgroundColor: Theme.of(context).colorScheme.primary,
                   hintStyle: TextStyle(
                     color: Theme.of(context)
                         .colorScheme
@@ -123,16 +123,16 @@ class LoginView extends StatelessWidget {
             SizedBox(height: getHeight(context, 0.04)),
             CustomTextButton(
               text: 'forgot_password'.tr,
-              onPressed: () => Get.toNamed(Routes.REST_PASS1),
+              onPressed: () => {},//Get.toNamed(Routes.REST_PASS1),
               backgroundColor: Theme.of(context).colorScheme.background,
-              textColor: Theme.of(context).colorScheme.onBackground,
+              textColor: Theme.of(context).colorScheme.primary,
             ),
             SizedBox(height: getHeight(context, 0.02)),
             CustomTextButton(
               text: 'Dont have an account ? Sign Up '.tr,
               onPressed: () => Get.toNamed(Routes.SIGNUP),
               backgroundColor: Theme.of(context).colorScheme.background,
-              textColor: Theme.of(context).colorScheme.onBackground,
+              textColor: Theme.of(context).colorScheme.primary,
             ),
             SizedBox(height: getHeight(context, 0.04)),
             LanguageSelector(),

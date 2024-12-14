@@ -11,7 +11,7 @@ class ProfileView extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           "profile".tr,
-          style: TextStyle(color: Theme.of(context).colorScheme.onBackground),
+          style: TextStyle(color: Theme.of(context).colorScheme.primary),
         ),
         iconTheme: IconThemeData(
           color: Theme.of(context).colorScheme.onBackground,
@@ -39,7 +39,7 @@ class ProfileView extends StatelessWidget {
                     child: IconButton(
                       icon: Icon(
                         Icons.camera_alt,
-                        color: Theme.of(context).colorScheme.onBackground,
+                        color: Theme.of(context).colorScheme.primary,
                       ),
                       onPressed: () {
                         // فتح نافذة اختيار صورة
@@ -57,7 +57,7 @@ class ProfileView extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
-                    color: Theme.of(context).colorScheme.onBackground,
+                    color: Theme.of(context).colorScheme.primary,
                   ),
                 )),
 
@@ -66,32 +66,32 @@ class ProfileView extends StatelessWidget {
             // البريد الإلكتروني
             ListTile(
               leading: Icon(Icons.email,
-                  color: Theme.of(context).colorScheme.onBackground),
+                  color: Theme.of(context).colorScheme.primary),
               title: Text(
                 "email".tr,
                 style:
-                    TextStyle(color: Theme.of(context).colorScheme.onBackground),
+                    TextStyle(color: Theme.of(context).colorScheme.primary),
               ),
               subtitle: Obx(() => Text(
                     controller.email.value,
                     style: TextStyle(
-                        color: Theme.of(context).colorScheme.onBackground),
+                        color: Theme.of(context).colorScheme.primary),
                   )),
             ),
 
             // رقم الهاتف
             ListTile(
               leading: Icon(Icons.phone,
-                  color: Theme.of(context).colorScheme.onBackground),
+                  color: Theme.of(context).colorScheme.primary),
               title: Text(
                 "phone".tr,
                 style:
-                    TextStyle(color: Theme.of(context).colorScheme.onBackground),
+                    TextStyle(color: Theme.of(context).colorScheme.primary),
               ),
               subtitle: Obx(() => Text(
                     controller.phoneNumber.value,
                     style: TextStyle(
-                        color: Theme.of(context).colorScheme.onBackground),
+                        color: Theme.of(context).colorScheme.primary),
                   )),
             ),
 

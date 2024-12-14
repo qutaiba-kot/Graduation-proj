@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:maps/app/modules/reportation/bindings/reportation_binding.dart';
 
 import '../modules/archive/bindings/archive_binding.dart';
 import '../modules/archive/views/archive_view.dart';
@@ -17,6 +18,7 @@ import '../modules/home/views/home_drawer.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
 import '../modules/profile/views/profile_view.dart';
+import '../modules/reportation/views/reportation_view.dart';
 import '../modules/settings/bindings/settings_binding.dart';
 import '../modules/settings/views/settings_view.dart';
 
@@ -77,6 +79,13 @@ class AppPages {
       name: Routes.ARCHIVE,
       page: () => const ArchiveView(),
       binding: ArchiveBinding(),
+    ),
+
+
+    GetPage(
+      name: Routes.REPORTATION,
+      page: () =>  ReportationView(),
+      binding: ReportationBinding(),
     ),
 
     // صفحة الإعدادات

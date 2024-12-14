@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:bcrypt/bcrypt.dart'; // مكتبة التشفير
+import '../../../data/user_info.dart';
 
 class LoginController extends GetxController {
   // الحالة لإظهار/إخفاء النص في حقل الباسوورد
@@ -13,8 +14,8 @@ class LoginController extends GetxController {
   // حالة التحميل
   RxBool isLoading = false.obs;
 
-  // التخزين المحلي
-  final GetStorage storage = GetStorage();
+  // التخزين المحلي باستخدام UserStorageService
+  final UserStorageService userStorageService = UserStorageService();
 
   // التحقق من صيغة الإيميل
   bool validateEmail(String email) {
@@ -22,6 +23,7 @@ class LoginController extends GetxController {
         RegExp(r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$");
     if (!emailRegex.hasMatch(email)) {
       emailError.value = "Invalid email format.".tr;
+      print("Validation Error: Invalid email format: $email");
       return false;
     }
     emailError.value = '';
@@ -32,6 +34,7 @@ class LoginController extends GetxController {
   bool validatePassword(String password) {
     if (password.length < 8) {
       passwordError.value = "Password must be at least 8 characters.".tr;
+      print("Validation Error: Password too short: $password");
       return false;
     }
     passwordError.value = '';
@@ -40,7 +43,7 @@ class LoginController extends GetxController {
 
   // تنفيذ عملية تسجيل الدخول باستخدام Supabase
   void login(String email, String password) async {
-    // التحقق من الإيميل والباسوورد
+    // التحقق من صحة الإدخال
     if (!validateEmail(email) || !validatePassword(password)) {
       Get.snackbar(
         "Login Failed".tr,
@@ -54,31 +57,72 @@ class LoginController extends GetxController {
     isLoading.value = true;
 
     try {
-      final response = await Supabase.instance.client.auth
-          .signInWithPassword(email: email, password: password);
+      print("🚀 Starting login process...");
+      print("📧 Email: $email");
 
-      if (response.user != null) {
-        // حفظ حالة تسجيل الدخول والبيانات
-        storage.write('isLoggedIn', true);
-        storage.write('userEmail', email);
+      // استدعاء بيانات المستخدم بناءً على البريد الإلكتروني
+      print("Fetching user data from Supabase...");
+      final additionalData = await Supabase.instance.client
+          .from('users')
+          .select('id, email, name, phone, password_hash, trusted_score, total_reports')
+          .eq('email', email)
+          //.eq('password_hash' ,password )
+          .single();
 
-        // الانتقال إلى الصفحة الرئيسية
-        Get.offAllNamed('/home');
-      } else {
-        Get.snackbar(
-          "Login Failed".tr,
-          "Invalid email or password. Please try again.".tr,
-          snackPosition: SnackPosition.BOTTOM,
-        );
+      print("Data fetched from Supabase: $additionalData");
+
+      // التحقق من وجود بيانات المستخدم
+      if (additionalData == null || additionalData.isEmpty) {
+        print("❌ No user found with the provided email.");
+        throw Exception("Invalid email or password.");
       }
+
+      // التحقق من صحة كلمة المرور المشفرة
+    /*  final hashedPassword = additionalData['password_hash'];
+      print("🔒 Checking password...");
+      if (hashedPassword == null || !BCrypt.checkpw(password, hashedPassword)) {
+        print("❌ Invalid password.");
+        throw Exception("Invalid email or password.");
+      }
+      print("✅ Password is correct.");*/
+
+      // استخراج البيانات من الاستعلام
+      final userId = additionalData['id'] ?? 'Unknown';
+      final userEmail = additionalData['email'] ?? 'Unknown';
+      final name = additionalData['name'] ?? 'Unknown';
+      final phone = additionalData['phone'] ?? 'Unknown';
+      final trustedScore = additionalData['trusted_score'] ?? 0;
+      final totalReports = additionalData['total_reports'] ?? 0;
+
+      print(
+          "Parsed Data -> UserID: $userId, Email: $userEmail, Name: $name, Phone: $phone, Trusted Score: $trustedScore, Total Reports: $totalReports");
+
+      // تخزين البيانات محليًا
+      print("Saving user data locally...");
+      userStorageService.saveUserData(
+        email: userEmail,
+        phone: phone,
+        name: name,
+        userId: userId,
+        trustedScore: trustedScore,
+        totalReports: totalReports,
+        isLoggedIn: true,
+      );
+
+      print("✅ User data saved locally.");
+
+      // الانتقال إلى الصفحة الرئيسية
+      print("Navigating to the home page...");
+      Get.offAllNamed('/home');
     } catch (e) {
+      // التعامل مع الأخطاء
+      print("❌ Login Error: $e");
       Get.snackbar(
         "Login Error".tr,
         e.toString(),
         snackPosition: SnackPosition.BOTTOM,
       );
     } finally {
-      // تعيين حالة التحميل إلى false
       isLoading.value = false;
     }
   }
@@ -92,5 +136,6 @@ class LoginController extends GetxController {
   void resetErrors() {
     emailError.value = '';
     passwordError.value = '';
+    print("Errors reset.");
   }
 }

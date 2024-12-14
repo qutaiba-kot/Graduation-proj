@@ -37,7 +37,7 @@ class SignUpView extends StatelessWidget {
             CustomText(
               text: "signup".tr,
               fontSize: 40,
-              color: Theme.of(context).colorScheme.onBackground,
+              color: Theme.of(context).colorScheme.primary,
             ),
             SizedBox(height: getHeight(context, 0.05)),
 
@@ -45,7 +45,7 @@ class SignUpView extends StatelessWidget {
             Obx(() => CustomTextField(
                   controller: nameController,
                   hintText: "name".tr,
-                  backgroundColor: Theme.of(context).colorScheme.onBackground,
+                  backgroundColor: Theme.of(context).colorScheme.primary,
                   hintStyle: TextStyle(
                     color: Theme.of(context)
                         .colorScheme
@@ -72,7 +72,7 @@ class SignUpView extends StatelessWidget {
             Obx(() => CustomTextField(
                   controller: emailController,
                   hintText: "email".tr,
-                  backgroundColor: Theme.of(context).colorScheme.onBackground,
+                  backgroundColor: Theme.of(context).colorScheme.primary,
                   hintStyle: TextStyle(
                     color: Theme.of(context)
                         .colorScheme
@@ -82,7 +82,7 @@ class SignUpView extends StatelessWidget {
                   textColor: Theme.of(context).colorScheme.background,
                   borderColor: Theme.of(context).colorScheme.background,
                   focusedBorderColor:
-                      Theme.of(context).colorScheme.onBackground,
+                      Theme.of(context).colorScheme.primary,
                   prefixIcon: Icon(
                     Icons.email,
                     color: Theme.of(context).colorScheme.background,
@@ -100,14 +100,14 @@ class SignUpView extends StatelessWidget {
               () => CustomTextField(
                 controller: phoneController,
                 hintText: "name".tr, // إزالة hintText واعتماد labelText
-                backgroundColor: Theme.of(context).colorScheme.onBackground,
+                backgroundColor: Theme.of(context).colorScheme.primary,
                 hintStyle: TextStyle(
                   color:
                       Theme.of(context).colorScheme.background.withOpacity(0.6),
                 ),
                 textColor: Theme.of(context).colorScheme.background,
                 borderColor: Theme.of(context).colorScheme.background,
-                focusedBorderColor: Theme.of(context).colorScheme.onBackground,
+                focusedBorderColor: Theme.of(context).colorScheme.primary,
                 prefixIcon: Icon(
                   Icons.phone,
                   color: Theme.of(context).colorScheme.background,
@@ -144,7 +144,7 @@ class SignUpView extends StatelessWidget {
             Obx(() => CustomTextField(
                   controller: passwordController,
                   hintText: "password".tr,
-                  backgroundColor: Theme.of(context).colorScheme.onBackground,
+                  backgroundColor: Theme.of(context).colorScheme.primary,
                   hintStyle: TextStyle(
                     color: Theme.of(context)
                         .colorScheme
@@ -154,7 +154,7 @@ class SignUpView extends StatelessWidget {
                   textColor: Theme.of(context).colorScheme.background,
                   borderColor: Theme.of(context).colorScheme.background,
                   focusedBorderColor:
-                      Theme.of(context).colorScheme.onBackground,
+                      Theme.of(context).colorScheme.primary,
                   obscureText: !controller.isPasswordVisible.value,
                   prefixIcon: Icon(
                     Icons.lock,

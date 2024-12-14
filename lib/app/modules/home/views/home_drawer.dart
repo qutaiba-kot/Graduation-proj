@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:maps/app/modules/home/controllers/drawer_controller.dart';
 
-class MyDrawer extends StatelessWidget {
-  final MyDrawerController controller = Get.put(MyDrawerController());
+import '../../../data/user_info.dart';
 
+class MyDrawer extends StatelessWidget {
+//final MyDrawerController controller = Get.put(MyDrawerController());
+  final UserStorageService userStorage = UserStorageService();
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -14,15 +16,15 @@ class MyDrawer extends StatelessWidget {
           // معلومات المستخدم في الأعلى
           UserAccountsDrawerHeader(
             accountName: Text(
-              "user name".tr,
+              ' ${userStorage.userId ?? "unavailable".tr}',
               style: TextStyle(
-                color: Theme.of(context).colorScheme.onBackground,
+                color: Theme.of(context).colorScheme.primary,
               ),
             ),
             accountEmail: Text(
-              "grad24@gmail.com",
+              ' ${userStorage.email ?? "unavailable".tr}',
               style: TextStyle(
-                color: Theme.of(context).colorScheme.onBackground.withOpacity(0.8),
+                color: Theme.of(context).colorScheme.primary.withOpacity(0.8),
               ),
             ),
             currentAccountPicture: CircleAvatar(
@@ -34,42 +36,56 @@ class MyDrawer extends StatelessWidget {
           ),
           // العناصر الرئيسية
           ListTile(
-            leading: Icon(Icons.person, color: Theme.of(context).colorScheme.onBackground),
+            leading: Icon(Icons.person,
+                color: Theme.of(context).colorScheme.primary),
             title: Text(
               "profile".tr,
-              style: TextStyle(color: Theme.of(context).colorScheme.onBackground),
+              style: TextStyle(color: Theme.of(context).colorScheme.primary),
             ),
             onTap: () => Get.toNamed('/profile'),
           ),
           ListTile(
-            leading: Icon(Icons.archive, color: Theme.of(context).colorScheme.onBackground),
+            leading: Icon(Icons.report,
+                color: Theme.of(context).colorScheme.primary),
+            title: Text(
+              "report".tr,
+              style: TextStyle(color: Theme.of(context).colorScheme.primary),
+            ),
+            onTap: () => Get.toNamed('/reportation'),
+          ),
+          /*ListTile(
+            leading: Icon(Icons.archive,
+                color: Theme.of(context).colorScheme.primary),
             title: Text(
               "archive".tr,
-              style: TextStyle(color: Theme.of(context).colorScheme.onBackground),
+              style: TextStyle(color: Theme.of(context).colorScheme.primary),
             ),
             onTap: () => Get.toNamed('/archive'),
-          ),
+          ),*/
           ListTile(
-            leading: Icon(Icons.help_outline, color: Theme.of(context).colorScheme.onBackground),
+            leading: Icon(Icons.help_outline,
+                color: Theme.of(context).colorScheme.primary),
             title: Text(
               "help".tr,
-              style: TextStyle(color: Theme.of(context).colorScheme.onBackground),
+              style: TextStyle(color: Theme.of(context).colorScheme.primary),
             ),
             onTap: () => Get.toNamed('/help'),
           ),
           ListTile(
-            leading: Icon(Icons.contact_mail, color: Theme.of(context).colorScheme.onBackground),
+            leading: Icon(Icons.contact_mail,
+                color: Theme.of(context).colorScheme.primary),
             title: Text(
               "Call Us".tr,
-              style: TextStyle(color: Theme.of(context).colorScheme.onBackground),
+              style: TextStyle(color: Theme.of(context).colorScheme.primary),
             ),
             onTap: () => Get.toNamed('/contact'),
           ),
           ListTile(
-            leading: Icon(Icons.settings, color: Theme.of(context).colorScheme.onBackground),
+            leading: Icon(Icons.settings,
+                color: Theme.of(context).colorScheme.primary),
             title: Text(
               "settings".tr,
-              style: TextStyle(color: Theme.of(context).colorScheme.onBackground),
+              style: TextStyle(color: Theme.of(context).colorScheme.primary),
             ),
             onTap: () => Get.toNamed('/settings'),
           ),
@@ -81,9 +97,14 @@ class MyDrawer extends StatelessWidget {
               leading: Icon(Icons.logout, color: Colors.red),
               title: Text(
                 "logout".tr,
-                style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
+                style:
+                    TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
               ),
-              onTap: () => controller.logout(), // استدعاء دالة تسجيل الخروج
+              onTap: () {
+                final MyDrawerController controller =
+                    Get.find<MyDrawerController>();
+                controller.logout();
+              },
             ),
           ),
         ],

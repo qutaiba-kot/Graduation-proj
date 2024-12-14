@@ -13,7 +13,7 @@ class SettingsView extends GetView<SettingsController> {
       appBar: AppBar(
         title: Text(
           'settings'.tr,
-          style: TextStyle(color: Theme.of(context).colorScheme.onBackground),
+          style: TextStyle(color: Theme.of(context).colorScheme.primary),
         ),
         backgroundColor: Theme.of(context).colorScheme.background,
         centerTitle: true,
@@ -30,22 +30,22 @@ class SettingsView extends GetView<SettingsController> {
             ListTile(
               leading: LanguageSelector() // مكون لتحديد اللغة
             ),
-            Divider(color: Theme.of(context).colorScheme.onBackground.withOpacity(0.3)),
+            Divider(color: Theme.of(context).colorScheme.primary.withOpacity(0.3)),
 
             // قسم تغيير السمة
             ListTile(
               leading:ThemeSwitcher(), // مكون لتبديل السمة
             ),
-            Divider(color: Theme.of(context).colorScheme.onBackground.withOpacity(0.3)),
+            Divider(color: Theme.of(context).colorScheme.primary.withOpacity(0.3)),
 
             // قسم التحكم بالإشعارات
             GetBuilder<SettingsController>(
               builder: (controller) {
                 return ListTile(
-                  leading: Icon(Icons.notifications, color: Theme.of(context).colorScheme.onBackground),
+                  leading: Icon(Icons.notifications, color: Theme.of(context).colorScheme.primary),
                   title: Text(
                     'notifications'.tr,
-                    style: TextStyle(color: Theme.of(context).colorScheme.onBackground),
+                    style: TextStyle(color: Theme.of(context).colorScheme.primary),
                   ),
                  /* trailing: Switch(
                     value: controller.notificationsEnabled.value,
@@ -55,7 +55,7 @@ class SettingsView extends GetView<SettingsController> {
                 );
               },
             ),
-            Divider(color: Theme.of(context).colorScheme.onBackground.withOpacity(0.3)),
+            Divider(color: Theme.of(context).colorScheme.primary.withOpacity(0.3)),
           ],
         ),
       ),
