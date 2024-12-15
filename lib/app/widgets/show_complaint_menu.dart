@@ -2,11 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../assets/hazzard types/hazard_types.dart';
 import '../modules/home/controllers/google_map_controller.dart';
-import '../modules/home/controllers/submitComplaint.dart';
 
 void showComplaintMenu(MapController controller) {
-  final Submitcomplaint controllersubm = Get.find<Submitcomplaint>();
-
   Get.bottomSheet(
     Container(
       decoration: BoxDecoration(
@@ -36,7 +33,7 @@ void showComplaintMenu(MapController controller) {
                 ),
                 onTap: () {
                   Get.back(); // إغلاق القائمة
-                  controllersubm.submitComplaint(hazardType.hazardTypeId);
+                  controller.submitComplaint(hazardType.hazardTypeId);
                 },
               ),
             )

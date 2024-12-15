@@ -1,11 +1,10 @@
 import 'package:get/get.dart';
 import 'package:maps/app/modules/reportation/bindings/reportation_binding.dart';
-import '../modules/archive/bindings/archive_binding.dart';
-import '../modules/archive/views/archive_view.dart';
-import '../modules/auth/bindings/auth_binding.dart';
+import '../modules/auth/bindings/login_binding.dart';
 import '../modules/auth/bindings/otp_email_binding.dart';
 import '../modules/auth/bindings/otp_phone_binding.dart';
 import '../modules/auth/bindings/rest_pass1_binding.dart';
+import '../modules/auth/bindings/signup_binding.dart';
 import '../modules/auth/views/login_view.dart';
 import '../modules/auth/views/otp_email_view.dart';
 import '../modules/auth/views/otp_phone_view.dart';
@@ -33,14 +32,14 @@ class AppPages {
     GetPage(
       name: Routes.LOGIN,
       page: () => LoginView(),
-      binding: AuthBinding(),
+      binding: LoginBinding(),
     ),
 
     // صفحة إنشاء الحساب
     GetPage(
       name: Routes.SIGNUP,
       page: () => SignUpView(),
-      binding: AuthBinding(),
+      binding: SignupBinding(),
     ),
 
     // صفحة OTP الهاتف
@@ -69,13 +68,6 @@ class AppPages {
       name: Routes.REST_PASS1,
       page: () => RestPass1View(),
       binding: RestPass1Binding(),
-    ),
-
-    // صفحة الأرشيف
-    GetPage(
-      name: Routes.ARCHIVE,
-      page: () => const ArchiveView(),
-      binding: ArchiveBinding(),
     ),
 
 

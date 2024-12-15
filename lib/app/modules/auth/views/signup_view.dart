@@ -9,7 +9,8 @@ import 'package:maps/app/global/theme_switcher.dart';
 import 'package:maps/app/modules/auth/controllers/signup_controller.dart';
 
 class SignUpView extends StatelessWidget {
-  final SignUpController controller = Get.put(SignUpController());
+    final SignUpController controller = Get.find<SignUpController>();
+
   final nameController = TextEditingController();
   final emailController = TextEditingController();
   final phoneController = TextEditingController(text: "+962");

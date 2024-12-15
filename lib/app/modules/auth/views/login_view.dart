@@ -11,7 +11,8 @@ import '../../../routes/app_pages.dart';
 import '../controllers/login_controller.dart';
 
 class LoginView extends StatelessWidget {
-  final LoginController controller = Get.put(LoginController());
+  final LoginController controller = Get.find<LoginController>();
+
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
@@ -34,7 +35,11 @@ class LoginView extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(height: getHeight(context, 0.098)),
-            CustomText(text: "login".tr, fontSize: 40 , color:Theme.of(context).colorScheme.primary ,),
+            CustomText(
+              text: "login".tr,
+              fontSize: 40,
+              color: Theme.of(context).colorScheme.primary,
+            ),
             SizedBox(height: getHeight(context, 0.098)),
             Obx(() => CustomTextField(
                   controller: emailController,
@@ -123,7 +128,7 @@ class LoginView extends StatelessWidget {
             SizedBox(height: getHeight(context, 0.04)),
             CustomTextButton(
               text: 'forgot_password'.tr,
-              onPressed: () => {},//Get.toNamed(Routes.REST_PASS1),
+              onPressed: () => {}, //Get.toNamed(Routes.REST_PASS1),
               backgroundColor: Theme.of(context).colorScheme.background,
               textColor: Theme.of(context).colorScheme.primary,
             ),

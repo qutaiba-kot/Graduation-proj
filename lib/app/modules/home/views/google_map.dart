@@ -282,7 +282,6 @@ class GoogleMapView extends GetView<MapController> {
               child: FloatingActionButton(
                 heroTag: "addComplaintButton", // تعيين heroTag فريد
                 onPressed: () {
-                  final MapController controller = Get.find<MapController>();
                   // استدعاء دالة showComplaintMenu
                   showComplaintMenu(controller);
                 },
