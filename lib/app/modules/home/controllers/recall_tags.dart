@@ -65,7 +65,7 @@ class RecallTags extends GetxController {
 
       print("✅ [SUCCESS] Hazards fetched: ${hazardsResponse.length} entries found.");
 
-      if (hazardsResponse == null || hazardsResponse.isEmpty) {
+      if (hazardsResponse == false || hazardsResponse.isEmpty) {
         print("⚠️ [WARNING] No hazards found.");
         return;
       }
@@ -80,10 +80,11 @@ class RecallTags extends GetxController {
           .from('locations')
           .select('location_id, latitude, longitude')
           .filter('location_id', 'in', locationIds);
+          
 
       print("✅ [SUCCESS] Locations fetched: ${locationsResponse.length} entries found.");
 
-      if (locationsResponse == null || locationsResponse.isEmpty) {
+      if (locationsResponse == false || locationsResponse.isEmpty) {
         print("⚠️ [WARNING] No matching locations found.");
         return;
       }

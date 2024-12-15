@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 import 'package:maps/app/modules/reportation/bindings/reportation_binding.dart';
-
 import '../modules/archive/bindings/archive_binding.dart';
 import '../modules/archive/views/archive_view.dart';
 import '../modules/auth/bindings/auth_binding.dart';
@@ -12,16 +11,14 @@ import '../modules/auth/views/otp_email_view.dart';
 import '../modules/auth/views/otp_phone_view.dart';
 import '../modules/auth/views/rest_pass1_view.dart';
 import '../modules/auth/views/signup_view.dart';
-import '../modules/home/bindings/drawer_home_binding.dart';
-import '../modules/home/bindings/home_binding.dart';
+import '../modules/home/bindings/google_map_binding.dart';
+import '../modules/home/views/google_map.dart';
 import '../modules/home/views/home_drawer.dart';
-import '../modules/home/views/home_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
 import '../modules/profile/views/profile_view.dart';
 import '../modules/reportation/views/reportation_view.dart';
 import '../modules/settings/bindings/settings_binding.dart';
 import '../modules/settings/views/settings_view.dart';
-
 part 'app_routes.dart';
 
 class AppPages {
@@ -53,11 +50,11 @@ class AppPages {
       binding: OtpBinding(),
     ),
 
-    // الصفحة الرئيسية
+    // الخريطة
     GetPage(
-      name: Routes.HOME,
-      page: () => HomeView(),
-      binding: HomeBinding(),
+      name: Routes.MAP,
+      page: () => GoogleMapView(),
+      binding: GoogleMapBinding(),
     ),
 
     // صفحة الملف الشخصي
@@ -106,7 +103,6 @@ class AppPages {
     GetPage(
       name: Routes.MY_DRAWER, // تم تصحيح التسمية
       page: () => MyDrawer(),
-      binding: DrawerHomeBinding(),
     ),
   ];
 }

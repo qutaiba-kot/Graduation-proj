@@ -1,20 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:maps/app/const/size.dart';
 import 'package:maps/app/modules/home/views/home_drawer.dart';
 import '../../../widgets/show_complaint_menu.dart';
 import '../controllers/google_map_controller.dart';
-import '../controllers/helpers.dart';
 import '../controllers/recall_tags.dart';
-import '../controllers/submitComplaint.dart';
 
-class GoogleMapView extends StatelessWidget {
-  final MapController controller = Get.find();
-  final RecallTags recallTags = Get.put(RecallTags()); // استدعاء الكلاس
+class GoogleMapView extends GetView<MapController> {
+  final RecallTags recallTags = Get.find<RecallTags>();
 
-  var visibleNav = false.obs;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,50 +20,42 @@ class GoogleMapView extends StatelessWidget {
           children: [
             // خريطة Google
             Obx(() => GoogleMap(
-      initialCameraPosition: controller.currentPosition.value,
-      mapType: MapType.normal,
-      onMapCreated: (GoogleMapController mapController) {
-        controller.onMapCreated(mapController);
-        controller.setMapController(mapController);
-        recallTags.fetchAndDisplayHazards(context).then((_) {
-          if (recallTags.markers.isNotEmpty) {
-            print("Markers to display: ${recallTags.markers}");
-          }
-        });
-      },
-      myLocationEnabled: true,
-      myLocationButtonEnabled: false,
-      markers: controller.markers.map((marker) {
-        return Marker(
-          markerId: marker.markerId,
-          position: marker.position,
-          infoWindow: InfoWindow(
-            title: marker.infoWindow.title,
-            //snippet: marker.infoWindow.snippet,
-            onTap: () {
-              // تنفيذ إجراء عند النقر على عنوان InfoWindow
-              print("🛑بدو العنوان");
-            },
-          ),
-          icon: marker.icon,
-          onTap: () {
-            // ما يحدث عند النقر على Marker
-           // _showMarkerDetails(context, marker); // عرض تفاصيل العلامة
-         controller.confirmStartTracking("");
-          },
-        );
-      }).toSet(),
-      polylines: {controller.routePolyline.value},
-      onTap: (LatLng position) {
-        controller.selectDestination(position);
-      },
-      onCameraMove: (CameraPosition position) {
-        controller.currentPosition.value = position;
-        controller.onCameraMove(position);
-      },
-    )),
-
-
+                  initialCameraPosition: controller.currentPosition.value,
+                  mapType: MapType.normal,
+                  onMapCreated: (GoogleMapController mapController) {
+                    controller.onMapCreated(mapController);
+                    controller.setMapController(mapController);
+                    recallTags.fetchAndDisplayHazards(context).then((_) {
+                      if (recallTags.markers.isNotEmpty) {
+                        print("Markers to display: ${recallTags.markers}");
+                      }
+                    });
+                  },
+                  myLocationEnabled: true,
+                  myLocationButtonEnabled: false,
+                  markers: controller.markers.map((marker) {
+                    return Marker(
+                      markerId: marker.markerId,
+                      position: marker.position,
+                      infoWindow: InfoWindow(
+                        title: marker.infoWindow.title,
+                      ),
+                      icon: marker.icon,
+                      onTap: () {
+                        // ما يحدث عند النقر على Marker
+                        controller.confirmStartTracking("");
+                      },
+                    );
+                  }).toSet(),
+                  polylines: {controller.routePolyline.value},
+                  onTap: (LatLng position) {
+                    controller.selectDestination(position);
+                  },
+                  onCameraMove: (CameraPosition position) {
+                    controller.currentPosition.value = position;
+                    controller.onCameraMove(position);
+                  },
+                )),
             // مربع البحث عن المواقع
             Positioned(
               top: getHeight(context, 0.04),
@@ -295,11 +282,7 @@ class GoogleMapView extends StatelessWidget {
               child: FloatingActionButton(
                 heroTag: "addComplaintButton", // تعيين heroTag فريد
                 onPressed: () {
-                  // الحصول على الكائنات باستخدام GetX
-                  final Submitcomplaint controllersubm =
-                      Get.put(Submitcomplaint());
                   final MapController controller = Get.find<MapController>();
-
                   // استدعاء دالة showComplaintMenu
                   showComplaintMenu(controller);
                 },

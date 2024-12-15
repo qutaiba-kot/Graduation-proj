@@ -53,7 +53,7 @@ class MyApp extends StatelessWidget {
 
   String _getInitialRoute() {
 if (userStorage.isLoggedIn) {
-  return '/home' ;
+  return '/map' ;
 } else {
   return AppPages.INITIAL;
 }

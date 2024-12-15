@@ -1,6 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:bcrypt/bcrypt.dart'; // مكتبة التشفير
 import '../../../data/user_info.dart';
 
 class LoginController extends GetxController {
@@ -31,13 +31,21 @@ class LoginController extends GetxController {
   }
 
   // التحقق من شروط الباسوورد
-  bool validatePassword(String password) {
-    if (password.length < 8) {
-      passwordError.value = "Password must be at least 8 characters.".tr;
-      print("Validation Error: Password too short: $password");
+  bool validatePassword(String password) {print("Validating password...");
+    final hasUppercase = password.contains(RegExp(r'[A-Z]'));
+    final hasDigits = password.contains(RegExp(r'[0-9]'));
+    final hasSpecialCharacters =
+        password.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'));
+    final hasMinLength = password.length >= 8;
+
+    if (!hasUppercase || !hasDigits || !hasSpecialCharacters || !hasMinLength) {
+      passwordError.value =
+          "Password must be at least 8 characters long, contain uppercase letters, numbers, and special characters.";
+      print("Password validation failed: ${passwordError.value}");
       return false;
     }
     passwordError.value = '';
+    print("Password validation passed.");
     return true;
   }
 
@@ -72,7 +80,7 @@ class LoginController extends GetxController {
       print("Data fetched from Supabase: $additionalData");
 
       // التحقق من وجود بيانات المستخدم
-      if (additionalData == null || additionalData.isEmpty) {
+      if (additionalData == false || additionalData.isEmpty) {
         print("❌ No user found with the provided email.");
         throw Exception("Invalid email or password.");
       }
@@ -113,7 +121,14 @@ class LoginController extends GetxController {
 
       // الانتقال إلى الصفحة الرئيسية
       print("Navigating to the home page...");
-      Get.offAllNamed('/home');
+      Get.snackbar(
+          "success".tr,
+          "login".tr,
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.green,
+          colorText: Colors.white,
+        );
+      Get.offAllNamed('/map');
     } catch (e) {
       // التعامل مع الأخطاء
       print("❌ Login Error: $e");

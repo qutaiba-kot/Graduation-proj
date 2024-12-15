@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../../data/user_info.dart';
@@ -97,19 +98,29 @@ class SignUpController extends GetxController {
     try {
       // إرسال البيانات إلى Supabase
       print("Sending user data to Supabase...");
-      final response = await Supabase.instance.client.from('users').insert({
-        'email': email,
-        'password_hash': password, // كلمة المرور غير مشفرة
-        'name': name,
-        'phone': phone,
-        'trusted_score': 100, // يمكن تخصيص هذه القيم
-        'total_reports': 0,
-      }).select().single();
+      final response = await Supabase.instance.client
+          .from('users')
+          .insert({
+            'email': email,
+            'password_hash': password, // كلمة المرور غير مشفرة
+            'name': name,
+            'phone': phone,
+            'trusted_score': 100, // يمكن تخصيص هذه القيم
+            'total_reports': 0,
+          })
+          .select()
+          .maybeSingle();
 
       // التحقق من الاستجابة
       if (response != null) {
         print("User successfully registered. Response: $response");
-
+        Get.snackbar(
+          "success".tr,
+          "signup".tr,
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.green,
+          colorText: Colors.white,
+        );
         // حفظ البيانات باستخدام UserStorageService
         print("Saving user data locally...");
         userStorageService.saveUserData(
@@ -125,7 +136,7 @@ class SignUpController extends GetxController {
 
         // الانتقال إلى الصفحة الرئيسية
         print("Navigating to the home page...");
-        Get.offAllNamed(Routes.HOME);
+        Get.offAllNamed(Routes.MAP);
       } else {
         throw Exception("Unexpected error occurred during sign-up.");
       }

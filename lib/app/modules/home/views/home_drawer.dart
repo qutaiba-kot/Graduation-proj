@@ -4,8 +4,9 @@ import 'package:maps/app/modules/home/controllers/drawer_controller.dart';
 
 import '../../../data/user_info.dart';
 
-class MyDrawer extends StatelessWidget {
-//final MyDrawerController controller = Get.put(MyDrawerController());
+class MyDrawer extends GetWidget {
+  final MyDrawerController controller = Get.find<MyDrawerController>();
+
   final UserStorageService userStorage = UserStorageService();
   @override
   Widget build(BuildContext context) {
@@ -101,8 +102,6 @@ class MyDrawer extends StatelessWidget {
                     TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
               ),
               onTap: () {
-                final MyDrawerController controller =
-                    Get.find<MyDrawerController>();
                 controller.logout();
               },
             ),
