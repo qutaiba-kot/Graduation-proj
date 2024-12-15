@@ -121,7 +121,7 @@ class SignUpController extends GetxController {
           backgroundColor: Colors.green,
           colorText: Colors.white,
         );
-        // حفظ البيانات باستخدام UserStorageService
+        //  حفظ البيانات باستخدام UserStorageService
         print("Saving user data locally...");
         userStorageService.saveUserData(
           email: response['email'],
