@@ -102,7 +102,7 @@ class SignUpController extends GetxController {
           .from('users')
           .insert({
             'email': email,
-            'password_hash': password, // كلمة المرور غير مشفرة
+            'password_hash': password, //hello كلمة المرور غير مشفرة
             'name': name,
             'phone': phone,
             'trusted_score': 100, // يمكن تخصيص هذه القيم
