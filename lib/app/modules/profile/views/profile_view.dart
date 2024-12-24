@@ -22,7 +22,6 @@ class ProfileView extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            // الصورة الشخصية
             Center(
               child: Stack(
                 children: [
@@ -42,7 +41,6 @@ class ProfileView extends StatelessWidget {
                         color: Theme.of(context).colorScheme.primary,
                       ),
                       onPressed: () {
-                        // فتح نافذة اختيار صورة
                       },
                     ),
                   ),
@@ -50,8 +48,6 @@ class ProfileView extends StatelessWidget {
               ),
             ),
             SizedBox(height: 20),
-
-            // اسم المستخدم
             Obx(() => Text(
                   controller.userName.value,
                   style: TextStyle(
@@ -62,8 +58,6 @@ class ProfileView extends StatelessWidget {
                 )),
 
             SizedBox(height: 20),
-
-            // البريد الإلكتروني
             ListTile(
               leading: Icon(Icons.email,
                   color: Theme.of(context).colorScheme.primary),
@@ -77,8 +71,6 @@ class ProfileView extends StatelessWidget {
                         TextStyle(color: Theme.of(context).colorScheme.primary),
                   )),
             ),
-
-            // رقم الهاتف
             ListTile(
               leading: Icon(Icons.phone,
                   color: Theme.of(context).colorScheme.primary),
@@ -92,12 +84,9 @@ class ProfileView extends StatelessWidget {
                         TextStyle(color: Theme.of(context).colorScheme.primary),
                   )),
             ),
-
             SizedBox(height: 20),
-
-            // زر إعادة تعيين كلمة المرور
             ElevatedButton(
-              onPressed: () => Get.toNamed('/rest-pass1'),
+              onPressed: () {},
               style: ElevatedButton.styleFrom(
                 backgroundColor: Theme.of(context).colorScheme.onBackground,
               ),
@@ -107,14 +96,9 @@ class ProfileView extends StatelessWidget {
                     TextStyle(color: Theme.of(context).colorScheme.background),
               ),
             ),
-
             SizedBox(height: 20),
-
-            // زر حذف الحساب
             ElevatedButton(
-              onPressed: ()  {
-              
-              },
+              onPressed: ()  { },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Theme.of(context).colorScheme.error,
               ),

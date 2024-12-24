@@ -3,10 +3,8 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:maps/app/const/size.dart';
 import 'package:maps/app/modules/reportation/controllers/reportation_controller.dart';
-
 import '../../../assets/hazzard types/hazard_types.dart';
 import '../../../global/text_feild.dart';
-
 class ReportationView extends GetView<ReportationController> {
   @override
   Widget build(BuildContext context) {
@@ -31,7 +29,6 @@ class ReportationView extends GetView<ReportationController> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Icon(Icons.report, size: 110,color:Theme.of(context).colorScheme.primary,),
-              // اختيار نوع المشكلة
               Card(
                 color: Theme.of(context).colorScheme.primary,
                 elevation: 3,
@@ -82,10 +79,7 @@ class ReportationView extends GetView<ReportationController> {
                   ),
                 ),
               ),
-
               SizedBox(height: getHeight(context, 0.01)),
-
-              // الوصف النصي
               Card(
                 color: Theme.of(context).colorScheme.primary,
                 elevation: 3,
@@ -108,10 +102,7 @@ class ReportationView extends GetView<ReportationController> {
                   ),
                 ),
               ),
-
               SizedBox(height: getHeight(context, 0.01)),
-
-              // رفع صورة
               Card(
                 color: Theme.of(context).colorScheme.primary,
                 elevation: 3,
@@ -177,10 +168,7 @@ class ReportationView extends GetView<ReportationController> {
                   ),
                 ),
               ),
-
               SizedBox(height: 16),
-
-              // زر تحديد الموقع
               Card(
                 color: Theme.of(context).colorScheme.primary,
                 elevation: 3,
@@ -212,10 +200,7 @@ class ReportationView extends GetView<ReportationController> {
                   ),
                 ),
               ),
-
               SizedBox(height: 32),
-
-              // زر إرسال الشكوى
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(

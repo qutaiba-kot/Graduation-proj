@@ -18,7 +18,6 @@ class GoogleMapView extends GetView<MapController> {
       body: SafeArea(
         child: Stack(
           children: [
-            // خريطة Google
             Obx(() => GoogleMap(
                   initialCameraPosition: controller.currentPosition.value,
                   mapType: MapType.normal,
@@ -42,7 +41,6 @@ class GoogleMapView extends GetView<MapController> {
                       ),
                       icon: marker.icon,
                       onTap: () {
-                        // ما يحدث عند النقر على Marker
                         controller.confirmStartTracking("");
                       },
                     );
@@ -56,7 +54,6 @@ class GoogleMapView extends GetView<MapController> {
                     controller.onCameraMove(position);
                   },
                 )),
-            // مربع البحث عن المواقع
             Positioned(
               top: getHeight(context, 0.04),
               left: getWidth(context, 0.18),
@@ -67,38 +64,38 @@ class GoogleMapView extends GetView<MapController> {
                     decoration: BoxDecoration(
                       color: Theme.of(context)
                           .colorScheme
-                          .primary, // لون خلفية TextField
+                          .primary, 
                       borderRadius:
-                          BorderRadius.circular(8), // لتطبيق الزوايا المستديرة
+                          BorderRadius.circular(8), 
                       boxShadow: [
                         BoxShadow(
                           color: Theme.of(context)
                               .colorScheme
-                              .background, // لون الظل
-                          blurRadius: 1, // درجة التمويه
+                              .background, 
+                          blurRadius: 1, 
                         ),
                       ],
                     ),
                     child: TextField(
                       cursorColor: Theme.of(context)
                           .colorScheme
-                          .background, // لون المؤشر
+                          .background,
                       style: TextStyle(
                         color: Theme.of(context)
                             .colorScheme
-                            .background, // لون النص المكتوب
+                            .background, 
                       ),
                       decoration: InputDecoration(
                         hintText: "Find a location...".tr,
                         hintStyle: TextStyle(
                           color: Theme.of(context)
                               .colorScheme
-                              .background, // لون النص الإرشادي
-                          fontSize: 14, // حجم النص
+                              .background,
+                          fontSize: 14, 
                         ),
                         filled: true,
                         fillColor: Colors
-                            .transparent, // اجعل الخلفية شفافة لأننا نستخدم `Container` للخلفية
+                            .transparent, 
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(8),
                           borderSide: BorderSide.none,
@@ -107,22 +104,20 @@ class GoogleMapView extends GetView<MapController> {
                           Icons.search,
                           color: Theme.of(context)
                               .colorScheme
-                              .background, // لون الأيقونة
+                              .background,
                         ),
                       ),
                       onChanged: (query) {
                         if (query.isNotEmpty) {
                           controller.fetchSearchSuggestions(
-                              query); // جلب اقتراحات البحث
+                              query); 
                         } else {
                           controller.searchSuggestions
-                              .clear(); // مسح الاقتراحات
+                              .clear();
                         }
                       },
                     ),
                   ),
-
-                  // قائمة الاقتراحات
                   Obx(() => controller.searchSuggestions.isNotEmpty
                       ? Container(
                           margin: EdgeInsets.only(top: 8),
@@ -130,13 +125,13 @@ class GoogleMapView extends GetView<MapController> {
                           decoration: BoxDecoration(
                             color: Theme.of(context)
                                 .colorScheme
-                                .primary, // لون خلفية الاقتراحات
+                                .primary,
                             borderRadius: BorderRadius.circular(8),
                             boxShadow: [
                               BoxShadow(
                                 color: Theme.of(context)
                                     .colorScheme
-                                    .background, // لون الظل
+                                    .background,
                                 blurRadius: 1,
                               ),
                             ],
@@ -153,17 +148,17 @@ class GoogleMapView extends GetView<MapController> {
                                   style: TextStyle(
                                     color: Theme.of(context)
                                         .colorScheme
-                                        .background, // لون النص
-                                  ), // لون ونمط النص
+                                        .background, 
+                                  ),
                                 ),
                                 onTap: () async {
                                   final placeId = suggestion['place_id'];
                                   final description = suggestion[
-                                      'description']; // استخراج الوصف
+                                      'description']; 
                                   controller.searchSuggestions
-                                      .clear(); // مسح الاقتراحات
+                                      .clear();
                                   await controller.fetchPlaceDetails(
-                                      placeId); // جلب تفاصيل المكان
+                                      placeId); 
                                   controller.confirmStartTracking(description);
                                 },
                               );
@@ -174,7 +169,6 @@ class GoogleMapView extends GetView<MapController> {
                 ],
               ),
             ),
-            // شريط عرض المسافة والوقت المتبقي
             Positioned(
               top: getHeight(context, 0.79),
               left: getWidth(context, 0.04),
@@ -258,49 +252,40 @@ class GoogleMapView extends GetView<MapController> {
                     )
                   : SizedBox()),
             ),
-
-            // زر تحديث الكاميرا لتتبع المستخدم
             Positioned(
               bottom: 285,
               left: 10,
               child: FloatingActionButton(
-                heroTag: "updateCameraButton", // تعيين heroTag فريد
+                heroTag: "updateCameraButton", 
                 onPressed: () async {
                   await controller
-                      .updateCameraPosition(); // تحديث الكاميرا لتتبع موقع المستخدم
+                      .updateCameraPosition();
                 },
                 backgroundColor: Theme.of(context).colorScheme.primary,
                 child: Icon(Icons.my_location,
                     color: Theme.of(context).colorScheme.background),
               ),
             ),
-
-            // زر إضافة شكوى
             Positioned(
               bottom: 200,
               left: 10,
               child: FloatingActionButton(
-                heroTag: "addComplaintButton", // تعيين heroTag فريد
+                heroTag: "addComplaintButton",
                 onPressed: () {
-                  // استدعاء دالة showComplaintMenu
                   showComplaintMenu(controller);
                 },
-
                 backgroundColor: Theme.of(context).colorScheme.primary,
                 child: Icon(Icons.report,
                     color: Theme.of(context).colorScheme.background),
               ),
             ),
-
-            // زر (MenuButton)
             Positioned(
               top: getHeight(context, 0.04),
               right: getWidth(context, 0.84),
               child: Builder(
                 builder: (context) => FloatingActionButton(
-                  heroTag: "MenuButton", // تعيين heroTag فريد
+                  heroTag: "MenuButton", 
                   onPressed: () {
-                    // فتح الـ Drawer باستخدام Scaffold
                     Scaffold.of(context).openDrawer();
                   },
                   backgroundColor: Theme.of(context).colorScheme.primary,

@@ -11,7 +11,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
   WidgetsFlutterBinding.ensureInitialized();
-  await initSupabase(); // تهيئة التخزين المحلي
+  await initSupabase(); 
   runApp(MyApp());
 }
 
@@ -26,23 +26,23 @@ class MyApp extends StatelessWidget {
       title: 'My App',
       theme: AppTheme.light.copyWith(
         textSelectionTheme: TextSelectionThemeData(
-          cursorColor: Colors.white, // لون المؤشر للوضع النهاري
-          selectionColor: Colors.white.withOpacity(0.3), // لون النص المحدد
-          selectionHandleColor: Colors.white, // لون المقبض
+          cursorColor: Colors.white, 
+          selectionColor: Colors.white.withOpacity(0.3),
+          selectionHandleColor: Colors.white,
         ),
       ),
       darkTheme: AppTheme.dark.copyWith(
         textSelectionTheme: TextSelectionThemeData(
-          cursorColor: Colors.black, // لون المؤشر للوضع الليلي
-          selectionColor: Colors.black.withOpacity(0.3), // لون النص المحدد
-          selectionHandleColor: Colors.black, // لون المقبض
+          cursorColor: Colors.black, 
+          selectionColor: Colors.black.withOpacity(0.3),
+          selectionHandleColor: Colors.black, 
         ),
       ),
-      themeMode: _getThemeMode(), // تحديد الثيم بناءً على التخزين
-      initialRoute: _getInitialRoute(), // تحديد الصفحة الأولية
+      themeMode: _getThemeMode(), 
+      initialRoute: _getInitialRoute(), 
       getPages: AppPages.routes,
       translations: AppTranslations(),
-      locale: Locale(storage.read('lang') ?? 'en'), // اللغة الافتراضية
+      locale: Locale(storage.read('lang') ?? 'en'), 
     );
   }
 

@@ -18,7 +18,7 @@ class SettingsView extends GetView<SettingsController> {
         backgroundColor: Theme.of(context).colorScheme.background,
         centerTitle: true,
         iconTheme: IconThemeData(
-          color: Theme.of(context).colorScheme.onBackground, // لون أيقونات AppBar
+          color: Theme.of(context).colorScheme.onBackground, 
         ),
       ),
       body: SingleChildScrollView(
@@ -26,19 +26,16 @@ class SettingsView extends GetView<SettingsController> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // قسم تغيير اللغة
+     
             ListTile(
-              leading: LanguageSelector() // مكون لتحديد اللغة
+              leading: LanguageSelector()
             ),
             Divider(color: Theme.of(context).colorScheme.primary.withOpacity(0.3)),
 
-            // قسم تغيير السمة
             ListTile(
-              leading:ThemeSwitcher(), // مكون لتبديل السمة
+              leading:ThemeSwitcher(), 
             ),
             Divider(color: Theme.of(context).colorScheme.primary.withOpacity(0.3)),
-
-            // قسم التحكم بالإشعارات
             GetBuilder<SettingsController>(
               builder: (controller) {
                 return ListTile(
@@ -47,11 +44,6 @@ class SettingsView extends GetView<SettingsController> {
                     'notifications'.tr,
                     style: TextStyle(color: Theme.of(context).colorScheme.primary),
                   ),
-                 /* trailing: Switch(
-                    value: controller.notificationsEnabled.value,
-                    onChanged: (value) => controller.toggleNotifications(value),
-                    activeColor: Theme.of(context).colorScheme.primary,
-                  ),*/
                 );
               },
             ),

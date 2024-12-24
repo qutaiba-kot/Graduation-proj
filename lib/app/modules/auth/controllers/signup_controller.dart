@@ -96,16 +96,15 @@ class SignUpController extends GetxController {
     isLoading.value = true;
 
     try {
-      // إرسال البيانات إلى Supabase
       print("Sending user data to Supabase...");
       final response = await Supabase.instance.client
           .from('users')
           .insert({
             'email': email,
-            'password_hash': password, //hello كلمة المرور غير مشفرة
+            'password_hash': password, 
             'name': name,
             'phone': phone,
-            'trusted_score': 100, // يمكن تخصيص هذه القيم
+            'trusted_score': 100,
             'total_reports': 0,
           })
           .select()
@@ -121,7 +120,6 @@ class SignUpController extends GetxController {
           backgroundColor: Colors.green,
           colorText: Colors.white,
         );
-        //  حفظ البيانات باستخدام UserStorageService
         print("Saving user data locally...");
         userStorageService.saveUserData(
           email: response['email'],
@@ -133,15 +131,12 @@ class SignUpController extends GetxController {
           isLoggedIn: true,
         );
         print("User data saved locally.");
-
-        // الانتقال إلى الصفحة الرئيسية
         print("Navigating to the home page...");
         Get.offAllNamed(Routes.MAP);
       } else {
         throw Exception("Unexpected error occurred during sign-up.");
       }
     } catch (e) {
-      // تتبع الأخطاء
       print("Error occurred during sign-up: ${e.toString()}");
       Get.snackbar(
         "Sign Up Error",
@@ -149,7 +144,6 @@ class SignUpController extends GetxController {
         snackPosition: SnackPosition.BOTTOM,
       );
     } finally {
-      // تتبع نهاية العملية
       print("Sign-up process completed.");
       isLoading.value = false;
     }

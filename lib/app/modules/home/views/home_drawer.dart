@@ -14,7 +14,6 @@ class MyDrawer extends GetWidget {
       backgroundColor: Theme.of(context).colorScheme.background,
       child: Column(
         children: [
-          // معلومات المستخدم في الأعلى
           UserAccountsDrawerHeader(
             accountName: Text(
               ' ${userStorage.userId ?? "unavailable".tr}',
@@ -35,7 +34,6 @@ class MyDrawer extends GetWidget {
               color: Theme.of(context).colorScheme.background,
             ),
           ),
-          // العناصر الرئيسية
           ListTile(
             leading: Icon(Icons.person,
                 color: Theme.of(context).colorScheme.primary),
@@ -82,7 +80,6 @@ class MyDrawer extends GetWidget {
             onTap: () => Get.toNamed('/settings'),
           ),
           Spacer(),
-          // زر تسجيل الخروج
           Padding(
             padding: const EdgeInsets.only(bottom: 16.0),
             child: ListTile(

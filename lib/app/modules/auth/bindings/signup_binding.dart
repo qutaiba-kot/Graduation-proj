@@ -5,7 +5,7 @@ class SignupBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut<SignUpController>(
-      () => SignUpController(), // استخدام اسم الكلاس الصحيح
+      () => SignUpController(), 
     );
   }
 }
