@@ -13,6 +13,7 @@ import '../../../global/ConfirmTrackingWidget.dart';
 import 'constants.dart';
 import 'helpers.dart';
 import 'recall_tags.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class MapController extends GetxController {
   GoogleMapController? _googleMapController;
@@ -25,7 +26,8 @@ class MapController extends GetxController {
   final Rx<LatLng?> selectedDestination = Rx<LatLng?>(null);
   final Rx<String> remainingDistance = ''.obs;
   final Rx<String> remainingDuration = ''.obs;
-  final RxList<Map<String, dynamic>> searchSuggestions = <Map<String, dynamic>>[].obs;
+  final RxList<Map<String, dynamic>> searchSuggestions =
+      <Map<String, dynamic>>[].obs;
   StreamSubscription<Position>? positionStream;
   final isDarkMode = false.obs;
   GoogleMapController? mapController;
@@ -45,6 +47,7 @@ class MapController extends GetxController {
     // تحميل الوضع الحالي من التخزين المحلي
     isDarkMode.value = storage.read('isDarkMode') ?? false;
   }
+
   Future<void> getInitialPosition() async {
     try {
       print("🔍 Checking location service...");
@@ -89,18 +92,19 @@ class MapController extends GetxController {
     }
   }
 
-
   void onMapCreated(GoogleMapController controller) {
     mapController = controller;
     print("✅ MapController is now assigned.");
     // استدعاء تحديث الموقع بعد تعيين الـ controller
     updateCameraPosition();
   }
+
   void setMapController(GoogleMapController controller) {
     print("🗺️ [INFO] Setting GoogleMapController...");
     _googleMapController = controller;
     loadAndApplyMapStyle();
   }
+
   Future<void> loadAndApplyMapStyle() async {
     if (_googleMapController == null) {
       print(
@@ -123,6 +127,7 @@ class MapController extends GetxController {
       print("❌ [ERROR] Failed to apply map style: $e");
     }
   }
+
   Future<Map<String, dynamic>> loadMapStyles() async {
     print("📂 [INFO] Loading map styles from JSON file...");
     try {
@@ -135,6 +140,7 @@ class MapController extends GetxController {
       return {};
     }
   }
+
   String getMapStyle(Map<String, dynamic> mapStyles, bool isDarkMode) {
     print(
         "🎛️ [INFO] Selecting map style for ${isDarkMode ? "Night" : "Day"} mode.");
@@ -164,6 +170,7 @@ class MapController extends GetxController {
       print("❌ حدث خطأ أثناء جلب الاقتراحات: $e");
     }
   }
+
   void selectDestination(LatLng destination) {
     selectedDestination.value = destination;
     markers.add(Marker(
@@ -172,6 +179,7 @@ class MapController extends GetxController {
       infoWindow: InfoWindow(title: "الوجهة المختارة"),
     ));
   }
+
   Future<void> fetchPlaceDetails(String placeId) async {
     try {
       final url =
@@ -196,6 +204,7 @@ class MapController extends GetxController {
       print("❌ حدث خطأ أثناء جلب تفاصيل المكان: $e");
     }
   }
+
   void confirmStartTracking(String description) {
     // التحقق مما إذا كان هناك تتبع نشط
     if (positionStream != null) {
@@ -204,7 +213,7 @@ class MapController extends GetxController {
         "الرجاء إنهاء الرحلة الحالية قبل بدء رحلة جديدة.".tr,
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: Colors.red,
-        colorText: Colors.white,
+        colorText:Get.theme.colorScheme.background,
       );
       return;
     }
@@ -228,6 +237,7 @@ class MapController extends GetxController {
       ),
     );
   }
+
   Future<void> getDirections(LatLng start, LatLng destination) async {
     try {
       final url =
@@ -256,10 +266,11 @@ class MapController extends GetxController {
         "An error occurred while getting directions:$e".tr,
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: Colors.red,
-        colorText: Colors.white,
+        colorText: Get.theme.colorScheme.background,
       );
     }
   }
+
   void startTracking() {
     if (positionStream != null) {
       print("⚠️ Tracking is already active.");
@@ -268,7 +279,7 @@ class MapController extends GetxController {
     positionStream = Geolocator.getPositionStream(
       locationSettings: LocationSettings(
         accuracy: LocationAccuracy.high,
-        distanceFilter: 10, // تحديث كل 10 أمتار
+        distanceFilter: 3, // تحديث كل 10 أمتار
       ),
     ).listen((Position position) {
       updateRouteProgress(position); // تحديث المسافة والزمن المتبقي
@@ -277,13 +288,71 @@ class MapController extends GetxController {
     });
     print("🚀 Tracking started.");
   }
+
+  // قائمة الـ markers (كل Marker لديه إحداثياته)
+//List<LatLng> marker = recallTags.markerCoordinates ;
   void updateRouteProgress(Position position) async {
     if (routePolyline.value.points.isEmpty ||
         selectedDestination.value == null) {
       return;
     }
+
     // الموقع الحالي للمستخدم
     LatLng currentPosition = LatLng(position.latitude, position.longitude);
+
+    // البحث عن أقرب marker والتحقق من المسافة
+    for (LatLng markerPosition in recallTags.markerCoordinates) {
+      double distanceToMarker = Geolocator.distanceBetween(
+        currentPosition.latitude,
+        currentPosition.longitude,
+        markerPosition.latitude,
+        markerPosition.longitude,
+      );
+
+      // إذا كان المستخدم قريبًا من أحد الـ markers (مثلاً أقل من 50 متر)
+      if (distanceToMarker <= 10) {
+        // عرض تحذير أو تنبيه عند الاقتراب من marker
+        Get.snackbar(
+          "Please pay attention".tr,
+          "You are close to a note on the way ahead of you!".tr,
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.yellow,
+          colorText:Get.theme.colorScheme.background,
+        );
+
+        try {
+          // استرجاع اللغة من GetStorage
+          final language = GetStorage().read('lang') ??
+              'ar'; // افتراض اللغة العربية إذا لم تكن موجودة
+          print('Detected language: $language'); // تتبع اللغة المستخلصة
+
+          // تحديد مسار الملف الصوتي بناءً على اللغة
+          final assetPath = language == 'en'
+              ? "lib/app/assets/sounds/alert_en.mp3"
+              : "lib/app/assets/sounds/alert_ar.mp3";
+          print('Asset path for sound: $assetPath'); // تتبع مسار الملف الصوتي
+
+          // تهيئة AudioCache
+          print('Initializing AudioCache...');
+          AudioCache.instance = AudioCache(prefix: "");
+          print('AudioCache initialized successfully.');
+
+          // إنشاء instance من AudioPlayer
+          print('Creating AudioPlayer instance...');
+          final player = AudioPlayer();
+          print('AudioPlayer instance created successfully.');
+
+          // محاولة تشغيل الصوت
+          print('Attempting to play sound from: $assetPath');
+          await player.play(AssetSource(assetPath));
+          print('Sound played successfully.');
+        } catch (e) {
+          print(
+              'Error occurred while playing sound: $e'); // طباعة الخطأ إذا حدث
+        }
+      }
+    }
+
     // إيجاد أقرب نقطة على المسار
     double minDistance = double.infinity;
     int closestIndex = 0;
@@ -299,6 +368,7 @@ class MapController extends GetxController {
         closestIndex = i;
       }
     }
+
     // تحديث المسافة المتبقية
     double totalRemainingDistance = 0;
     for (int i = closestIndex; i < routePolyline.value.points.length - 1; i++) {
@@ -309,36 +379,40 @@ class MapController extends GetxController {
         routePolyline.value.points[i + 1].longitude,
       );
     }
+
     remainingDistance.value =
         "${(totalRemainingDistance / 1000).toStringAsFixed(2)} km";
+
     // عرض رسالة عند الوصول
-    if (totalRemainingDistance <= 5) {
+    if (totalRemainingDistance <= 1) {
       // إذا كانت المسافة أقل من 5 أمتار
       Get.snackbar(
         "Congratulations!".tr,
         "You have reached your destination.".tr,
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: Colors.green,
-        colorText: Colors.white,
+        colorText: Get.theme.colorScheme.background,
       );
       stopNavigation(); // إيقاف التوجيه
     }
+
     // حساب الزمن المتبقي بناءً على السرعة
     double averageSpeed = 40.0; // سرعة المستخدم بالكيلومتر/ساعة
     double estimatedTime =
         totalRemainingDistance / (averageSpeed * 1000 / 3600);
     remainingDuration.value = "${estimatedTime.toStringAsFixed(1)} mins";
+
     // تحديث النقاط المتبقية على المسار
     List<LatLng> remainingPoints =
         routePolyline.value.points.sublist(closestIndex);
     routePolyline.value =
         routePolyline.value.copyWith(pointsParam: remainingPoints);
+
     // تحديث واجهة المستخدم
     routePolyline.refresh();
     remainingDistance.refresh();
     remainingDuration.refresh();
   }
-
 
   void updateCameraWithBearing(Position position) {
     final newCameraPosition = CameraPosition(
@@ -351,7 +425,8 @@ class MapController extends GetxController {
         ?.animateCamera(CameraUpdate.newCameraPosition(newCameraPosition));
     checkIfOffRoute(position);
   }
-Future<void> updateCameraPosition() async {
+
+  Future<void> updateCameraPosition() async {
     if (mapController == null) {
       print("⏳ Waiting for mapController to be assigned...");
       await Future.delayed(Duration(milliseconds: 500)); // انتظر 500 مللي ثانية
@@ -372,7 +447,8 @@ Future<void> updateCameraPosition() async {
     ));
     print("✅ Camera position updated successfully.");
   }
-void checkIfOffRoute(Position position) async {
+
+  void checkIfOffRoute(Position position) async {
     double distanceToNearestPoint = Helpers.calculateDistanceToPolyline(
       position.latitude,
       position.longitude,
@@ -389,6 +465,7 @@ void checkIfOffRoute(Position position) async {
       }
     }
   }
+
   void onCameraMove(CameraPosition position) {
     // تحديث موقع الكاميرا
     currentPosition.value = position;
@@ -400,6 +477,7 @@ void checkIfOffRoute(Position position) async {
       currentZoom = position.zoom; // تخزين الزوم الحالي
     }
   }
+
   void updateMarkersVisibility(double zoomLevel) {
     if (zoomLevel >= 16) {
       // عرض جميع العلامات
@@ -413,8 +491,6 @@ void checkIfOffRoute(Position position) async {
     }
   }
 
-
-
   void stopTracking() {
     if (positionStream != null) {
       positionStream?.cancel(); // إلغاء الاشتراك في تدفق الموقع
@@ -424,6 +500,7 @@ void checkIfOffRoute(Position position) async {
       print("⚠️ No active tracking to stop.");
     }
   }
+
   void clearRoute() {
     // إعادة تعيين قيمة Polyline إلى قائمة فارغة
     routePolyline.value = Polyline(
@@ -436,6 +513,7 @@ void checkIfOffRoute(Position position) async {
     routePolyline.refresh();
     print("🗑️ Route cleared successfully.");
   }
+
   void cancelDestination() {
     if (selectedDestination.value != null) {
       selectedDestination.value = null;
@@ -448,6 +526,7 @@ void checkIfOffRoute(Position position) async {
       print("⚠️ No destination to cancel.");
     }
   }
+
   void stopNavigation() {
     stopTracking(); // إيقاف التتبع
     clearRoute(); // إزالة المسار
@@ -455,9 +534,11 @@ void checkIfOffRoute(Position position) async {
     togglePositionedVisibility(false);
     print("🛑 Navigation stopped.");
   }
+
   void togglePositionedVisibility(bool isVisible) {
     isPositionedVisible.value = isVisible; // تحديث الحالة
   }
+
   void onClose() {
     stopTracking();
     super.onClose();
@@ -524,7 +605,7 @@ void checkIfOffRoute(Position position) async {
         "Complaint sent successfully".tr,
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: Get.theme.colorScheme.primary,
-        colorText: Colors.white,
+        colorText: Get.theme.colorScheme.background,
       );
     } catch (e) {
       print("❌ Error: $e");
@@ -533,7 +614,7 @@ void checkIfOffRoute(Position position) async {
         "An error occurred while submitting the complaint:".tr,
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: Colors.red,
-        colorText: Colors.white,
+        colorText:Get.theme.colorScheme.background,
       );
     }
   }

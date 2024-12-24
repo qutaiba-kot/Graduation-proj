@@ -93,4 +93,6 @@ const Map<String, String> en = {
   "Account deleted successfully": "Account deleted successfully",
   "An error occurred while getting directions:":
       "An error occurred while getting directions:",
+  "Please pay attention": "Please pay attention",
+  "You are close to a note on the way ahead of you!" : "You are close to a note on the way ahead of you!",
 };

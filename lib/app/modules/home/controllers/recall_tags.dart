@@ -8,13 +8,14 @@ import '../../../assets/hazzard types/hazard_types.dart';
 class RecallTags extends GetxController {
   final SupabaseClient _client = Supabase.instance.client;
   final markers = <Marker>{}.obs; // قائمة الـ Markers لعرضها على الخريطة
+  final List<LatLng> markerCoordinates = []; // قائمة لتخزين إحداثيات الـ Markers
 
   // تحويل أيقونة Flutter إلى BitmapDescriptor
   Future<BitmapDescriptor> getBitmapDescriptorFromIconData(
       IconData iconData, Color backgroundColor, Color iconColor) async {
     final pictureRecorder = ui.PictureRecorder();
     final canvas = Canvas(pictureRecorder);
-    const size =150; // حجم الأيقونة
+    const size = 150; // حجم الأيقونة
 
     final paint = Paint()..color = backgroundColor;
     final textPainter = TextPainter(
@@ -80,7 +81,7 @@ class RecallTags extends GetxController {
           .from('locations')
           .select('location_id, latitude, longitude')
           .filter('location_id', 'in', locationIds);
-          
+        
 
       print("✅ [SUCCESS] Locations fetched: ${locationsResponse.length} entries found.");
 
@@ -128,6 +129,10 @@ class RecallTags extends GetxController {
               ),
             );
             markers.add(marker);
+            
+            // إضافة إحداثية الـ Marker إلى قائمة الإحداثيات
+            markerCoordinates.add(LatLng(location['latitude'], location['longitude']));
+
             print("✅ [MARKER ADDED] Marker for Location ID ${hazard['location_id']} added.");
           } else {
             print("⚠️ [WARNING] No matching hazard type found for ID ${hazard['hazard_type_id']}.");

@@ -69,13 +69,12 @@ class ProfileView extends StatelessWidget {
                   color: Theme.of(context).colorScheme.primary),
               title: Text(
                 "email".tr,
-                style:
-                    TextStyle(color: Theme.of(context).colorScheme.primary),
+                style: TextStyle(color: Theme.of(context).colorScheme.primary),
               ),
               subtitle: Obx(() => Text(
                     controller.email.value,
-                    style: TextStyle(
-                        color: Theme.of(context).colorScheme.primary),
+                    style:
+                        TextStyle(color: Theme.of(context).colorScheme.primary),
                   )),
             ),
 
@@ -85,13 +84,12 @@ class ProfileView extends StatelessWidget {
                   color: Theme.of(context).colorScheme.primary),
               title: Text(
                 "phone".tr,
-                style:
-                    TextStyle(color: Theme.of(context).colorScheme.primary),
+                style: TextStyle(color: Theme.of(context).colorScheme.primary),
               ),
               subtitle: Obx(() => Text(
                     controller.phoneNumber.value,
-                    style: TextStyle(
-                        color: Theme.of(context).colorScheme.primary),
+                    style:
+                        TextStyle(color: Theme.of(context).colorScheme.primary),
                   )),
             ),
 
@@ -105,7 +103,8 @@ class ProfileView extends StatelessWidget {
               ),
               child: Text(
                 "reset_password".tr,
-                style: TextStyle(color: Theme.of(context).colorScheme.background),
+                style:
+                    TextStyle(color: Theme.of(context).colorScheme.background),
               ),
             ),
 
@@ -113,15 +112,16 @@ class ProfileView extends StatelessWidget {
 
             // زر حذف الحساب
             ElevatedButton(
-              onPressed: () {
-                // منطق حذف الحساب
+              onPressed: ()  {
+              
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Theme.of(context).colorScheme.error,
               ),
               child: Text(
                 "delete_account".tr,
-                style: TextStyle(color: Theme.of(context).colorScheme.background),
+                style:
+                    TextStyle(color: Theme.of(context).colorScheme.background),
               ),
             ),
           ],

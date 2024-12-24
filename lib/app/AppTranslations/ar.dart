@@ -80,4 +80,6 @@ const Map<String, String> ar = {
   "Complaint sent successfully": "تم إرسال الشكوى بنجاح",
   "Account": "الحساب",
   "Account deleted successfully": "تم حذف الحساب بنجاح",
+  "Please pay attention": "يرجى الانتباه",
+  "You are close to a note on the way ahead of you!" : "انت قريب على ملاحظة في الطريق امامك",
 };
