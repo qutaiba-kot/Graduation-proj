@@ -16,7 +16,7 @@ class MyDrawer extends GetWidget {
         children: [
           UserAccountsDrawerHeader(
             accountName: Text(
-              ' ${userStorage.userId ?? "unavailable".tr}',
+              ' ${userStorage.name ?? "unavailable".tr}',
               style: TextStyle(
                 color: Theme.of(context).colorScheme.primary,
               ),

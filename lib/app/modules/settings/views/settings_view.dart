@@ -36,19 +36,7 @@ class SettingsView extends GetView<SettingsController> {
               leading:ThemeSwitcher(), 
             ),
             Divider(color: Theme.of(context).colorScheme.primary.withOpacity(0.3)),
-            GetBuilder<SettingsController>(
-              builder: (controller) {
-                return ListTile(
-                  leading: Icon(Icons.notifications, color: Theme.of(context).colorScheme.primary),
-                  title: Text(
-                    'notifications'.tr,
-                    style: TextStyle(color: Theme.of(context).colorScheme.primary),
-                  ),
-                );
-              },
-            ),
-            Divider(color: Theme.of(context).colorScheme.primary.withOpacity(0.3)),
-          ],
+           ],
         ),
       ),
     );
