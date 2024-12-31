@@ -95,4 +95,10 @@ const Map<String, String> en = {
       "An error occurred while getting directions:",
   "Please pay attention": "Please pay attention",
   "You are close to a note on the way ahead of you!" : "You are close to a note on the way ahead of you!",
+  "For any comments or problems please contact" : "For any comments or problems please contact",
+"Score" : "My score",
+"My total reports" : "My total reports",
+"user id" : "User ID",
+"This feature will be added soon": "This feature will be added soon",
+
 };

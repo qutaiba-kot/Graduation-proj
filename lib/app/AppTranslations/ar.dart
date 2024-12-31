@@ -82,4 +82,9 @@ const Map<String, String> ar = {
   "Account deleted successfully": "تم حذف الحساب بنجاح",
   "Please pay attention": "يرجى الانتباه",
   "You are close to a note on the way ahead of you!" : "انت قريب على ملاحظة في الطريق امامك",
+  "For any comments or problems please contact" : "لأي ملاحظات او مشاكل  يرجى الاتصال على",
+"Score" : "تقييمي",
+"My total reports" : "الشكاوي الخاصة بي",
+"user id" : "الرقم التعريفي",
+"This feature will be added soon": "سيتم اضافة هذه الخاصية قريبا",
 };

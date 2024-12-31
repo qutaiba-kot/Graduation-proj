@@ -25,13 +25,12 @@ class ProfileView extends StatelessWidget {
             Center(
               child: Stack(
                 children: [
-                  Obx(() => CircleAvatar(
-                        radius: 50,
-                        backgroundImage: controller.profileImage.value == null
-                            ? AssetImage("lib/app/assets/images/OIP.jpeg")
-                                as ImageProvider
-                            : FileImage(controller.profileImage.value!),
-                      )),
+                  Obx(
+                    () => CircleAvatar(
+                      radius: 50,
+                      backgroundImage: controller.getProfileImage(),
+                    ),
+                  ),
                   Positioned(
                     bottom: 0,
                     right: 0,
@@ -40,24 +39,25 @@ class ProfileView extends StatelessWidget {
                         Icons.camera_alt,
                         color: Theme.of(context).colorScheme.primary,
                       ),
-                      onPressed: () {
-                      },
+                      onPressed: () {Get.snackbar(
+                  "This feature will be added soon".tr,
+                  "",
+                  snackPosition: SnackPosition.BOTTOM,
+                );},
                     ),
                   ),
                 ],
               ),
             ),
             SizedBox(height: 20),
-            Obx(() => Text(
-                  controller.userName.value,
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
-                )),
-
-            SizedBox(height: 20),
+            Text(
+              ' ${controller.userStorage.name ?? "unavailable".tr}',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: Theme.of(context).colorScheme.primary,
+              ),
+            ),
             ListTile(
               leading: Icon(Icons.email,
                   color: Theme.of(context).colorScheme.primary),
@@ -65,11 +65,10 @@ class ProfileView extends StatelessWidget {
                 "email".tr,
                 style: TextStyle(color: Theme.of(context).colorScheme.primary),
               ),
-              subtitle: Obx(() => Text(
-                    controller.email.value,
-                    style:
-                        TextStyle(color: Theme.of(context).colorScheme.primary),
-                  )),
+              subtitle: Text(
+                ' ${controller.userStorage.email ?? "unavailable".tr}',
+                style: TextStyle(color: Theme.of(context).colorScheme.primary),
+              ),
             ),
             ListTile(
               leading: Icon(Icons.phone,
@@ -78,15 +77,55 @@ class ProfileView extends StatelessWidget {
                 "phone".tr,
                 style: TextStyle(color: Theme.of(context).colorScheme.primary),
               ),
-              subtitle: Obx(() => Text(
-                    controller.phoneNumber.value,
-                    style:
-                        TextStyle(color: Theme.of(context).colorScheme.primary),
-                  )),
+              subtitle: Text(
+                ' ${controller.userStorage.phone ?? "unavailable".tr}',
+                style: TextStyle(color: Theme.of(context).colorScheme.primary),
+              ),
+            ),
+            ListTile(
+              leading: Icon(Icons.check,
+                  color: Theme.of(context).colorScheme.primary),
+              title: Text(
+                "Score".tr,
+                style: TextStyle(color: Theme.of(context).colorScheme.primary),
+              ),
+              subtitle: Text(
+                ' ${controller.userStorage.trustedScore ?? "unavailable".tr}' +
+                    "%",
+                style: TextStyle(color: Theme.of(context).colorScheme.primary),
+              ),
+            ),
+            ListTile(
+              leading: Icon(Icons.report,
+                  color: Theme.of(context).colorScheme.primary),
+              title: Text(
+                "My total reports".tr,
+                style: TextStyle(color: Theme.of(context).colorScheme.primary),
+              ),
+              subtitle: Text(
+                ' ${controller.userStorage.totalReports ?? "unavailable".tr}',
+                style: TextStyle(color: Theme.of(context).colorScheme.primary),
+              ),
+            ),
+            ListTile(
+              leading: Icon(Icons.numbers,
+                  color: Theme.of(context).colorScheme.primary),
+              title: Text(
+                "user id".tr,
+                style: TextStyle(color: Theme.of(context).colorScheme.primary),
+              ),
+              subtitle: Text(
+                ' ${controller.userStorage.userId ?? "unavailable".tr}',
+                style: TextStyle(color: Theme.of(context).colorScheme.primary),
+              ),
             ),
             SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {Get.snackbar(
+                  "This feature will be added soon".tr,
+                  "",
+                  snackPosition: SnackPosition.BOTTOM,
+                );},
               style: ElevatedButton.styleFrom(
                 backgroundColor: Theme.of(context).colorScheme.onBackground,
               ),
@@ -98,7 +137,13 @@ class ProfileView extends StatelessWidget {
             ),
             SizedBox(height: 20),
             ElevatedButton(
-              onPressed: ()  { },
+              onPressed: () {
+                Get.snackbar(
+                  "This feature will be added soon".tr,
+                  "",
+                  snackPosition: SnackPosition.BOTTOM,
+                );
+              },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Theme.of(context).colorScheme.error,
               ),

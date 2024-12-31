@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:maps/app/const/size.dart';
 import 'package:maps/app/modules/home/views/home_drawer.dart';
@@ -9,7 +10,7 @@ import '../controllers/recall_tags.dart';
 
 class GoogleMapView extends GetView<MapController> {
   final RecallTags recallTags = Get.find<RecallTags>();
-
+  bool language = GetStorage().read('lang') == 'ar';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,64 +57,50 @@ class GoogleMapView extends GetView<MapController> {
                 )),
             Positioned(
               top: getHeight(context, 0.04),
-              left: getWidth(context, 0.18),
-              right: getWidth(context, 0.02),
+              left:
+                  language ? getWidth(context, 0.02) : getWidth(context, 0.18),
+              right:
+                  language ? getWidth(context, 0.18) : getWidth(context, 0.02),
               child: Column(
                 children: [
                   Container(
                     decoration: BoxDecoration(
-                      color: Theme.of(context)
-                          .colorScheme
-                          .primary, 
-                      borderRadius:
-                          BorderRadius.circular(8), 
+                      color: Theme.of(context).colorScheme.primary,
+                      borderRadius: BorderRadius.circular(8),
                       boxShadow: [
                         BoxShadow(
-                          color: Theme.of(context)
-                              .colorScheme
-                              .background, 
-                          blurRadius: 1, 
+                          color: Theme.of(context).colorScheme.background,
+                          blurRadius: 1,
                         ),
                       ],
                     ),
                     child: TextField(
-                      cursorColor: Theme.of(context)
-                          .colorScheme
-                          .background,
+                      cursorColor: Theme.of(context).colorScheme.background,
                       style: TextStyle(
-                        color: Theme.of(context)
-                            .colorScheme
-                            .background, 
+                        color: Theme.of(context).colorScheme.background,
                       ),
                       decoration: InputDecoration(
                         hintText: "Find a location...".tr,
                         hintStyle: TextStyle(
-                          color: Theme.of(context)
-                              .colorScheme
-                              .background,
-                          fontSize: 14, 
+                          color: Theme.of(context).colorScheme.background,
+                          fontSize: 14,
                         ),
                         filled: true,
-                        fillColor: Colors
-                            .transparent, 
+                        fillColor: Colors.transparent,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(8),
                           borderSide: BorderSide.none,
                         ),
                         prefixIcon: Icon(
                           Icons.search,
-                          color: Theme.of(context)
-                              .colorScheme
-                              .background,
+                          color: Theme.of(context).colorScheme.background,
                         ),
                       ),
                       onChanged: (query) {
                         if (query.isNotEmpty) {
-                          controller.fetchSearchSuggestions(
-                              query); 
+                          controller.fetchSearchSuggestions(query);
                         } else {
-                          controller.searchSuggestions
-                              .clear();
+                          controller.searchSuggestions.clear();
                         }
                       },
                     ),
@@ -123,15 +110,11 @@ class GoogleMapView extends GetView<MapController> {
                           margin: EdgeInsets.only(top: 8),
                           padding: EdgeInsets.all(8),
                           decoration: BoxDecoration(
-                            color: Theme.of(context)
-                                .colorScheme
-                                .primary,
+                            color: Theme.of(context).colorScheme.primary,
                             borderRadius: BorderRadius.circular(8),
                             boxShadow: [
                               BoxShadow(
-                                color: Theme.of(context)
-                                    .colorScheme
-                                    .background,
+                                color: Theme.of(context).colorScheme.background,
                                 blurRadius: 1,
                               ),
                             ],
@@ -148,17 +131,14 @@ class GoogleMapView extends GetView<MapController> {
                                   style: TextStyle(
                                     color: Theme.of(context)
                                         .colorScheme
-                                        .background, 
+                                        .background,
                                   ),
                                 ),
                                 onTap: () async {
                                   final placeId = suggestion['place_id'];
-                                  final description = suggestion[
-                                      'description']; 
-                                  controller.searchSuggestions
-                                      .clear();
-                                  await controller.fetchPlaceDetails(
-                                      placeId); 
+                                  final description = suggestion['description'];
+                                  controller.searchSuggestions.clear();
+                                  await controller.fetchPlaceDetails(placeId);
                                   controller.confirmStartTracking(description);
                                 },
                               );
@@ -254,12 +234,12 @@ class GoogleMapView extends GetView<MapController> {
             ),
             Positioned(
               bottom: 285,
-              left: 10,
+              left: language ? getWidth(context, 0.83) : getWidth(context, 0.02),
+              right: language ? getWidth(context, 0.02) : getWidth(context, 0.83),
               child: FloatingActionButton(
-                heroTag: "updateCameraButton", 
+                heroTag: "updateCameraButton",
                 onPressed: () async {
-                  await controller
-                      .updateCameraPosition();
+                  await controller.updateCameraPosition();
                 },
                 backgroundColor: Theme.of(context).colorScheme.primary,
                 child: Icon(Icons.my_location,
@@ -268,7 +248,8 @@ class GoogleMapView extends GetView<MapController> {
             ),
             Positioned(
               bottom: 200,
-              left: 10,
+              left: language ? getWidth(context, 0.83) : getWidth(context, 0.02),
+              right: language ? getWidth(context, 0.02) : getWidth(context, 0.83),
               child: FloatingActionButton(
                 heroTag: "addComplaintButton",
                 onPressed: () {
@@ -281,10 +262,11 @@ class GoogleMapView extends GetView<MapController> {
             ),
             Positioned(
               top: getHeight(context, 0.04),
-              right: getWidth(context, 0.84),
+              left: language ? 345 : 10,
+              right: language ? 10 : 345,
               child: Builder(
                 builder: (context) => FloatingActionButton(
-                  heroTag: "MenuButton", 
+                  heroTag: "MenuButton",
                   onPressed: () {
                     Scaffold.of(context).openDrawer();
                   },

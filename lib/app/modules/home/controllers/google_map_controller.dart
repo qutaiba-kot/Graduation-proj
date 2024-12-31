@@ -18,6 +18,7 @@ import 'package:audioplayers/audioplayers.dart';
 class MapController extends GetxController {
   GoogleMapController? _googleMapController;
   final storage = GetStorage();
+
   final Rx<Polyline> routePolyline = Polyline(
     polylineId: PolylineId("route"),
     color: Colors.blue,
@@ -213,7 +214,7 @@ class MapController extends GetxController {
         "الرجاء إنهاء الرحلة الحالية قبل بدء رحلة جديدة.".tr,
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: Colors.red,
-        colorText:Get.theme.colorScheme.background,
+        colorText: Get.theme.colorScheme.background,
       );
       return;
     }
@@ -289,8 +290,6 @@ class MapController extends GetxController {
     print("🚀 Tracking started.");
   }
 
-  // قائمة الـ markers (كل Marker لديه إحداثياته)
-//List<LatLng> marker = recallTags.markerCoordinates ;
   void updateRouteProgress(Position position) async {
     if (routePolyline.value.points.isEmpty ||
         selectedDestination.value == null) {
@@ -310,14 +309,14 @@ class MapController extends GetxController {
       );
 
       // إذا كان المستخدم قريبًا من أحد الـ markers (مثلاً أقل من 50 متر)
-      if (distanceToMarker <= 10) {
+      if (distanceToMarker <= 30 && distanceToMarker >= 20) {
         // عرض تحذير أو تنبيه عند الاقتراب من marker
         Get.snackbar(
           "Please pay attention".tr,
           "You are close to a note on the way ahead of you!".tr,
           snackPosition: SnackPosition.BOTTOM,
           backgroundColor: Colors.yellow,
-          colorText:Get.theme.colorScheme.background,
+          colorText: Get.theme.colorScheme.background,
         );
 
         try {
@@ -614,7 +613,7 @@ class MapController extends GetxController {
         "An error occurred while submitting the complaint:".tr,
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: Colors.red,
-        colorText:Get.theme.colorScheme.background,
+        colorText: Get.theme.colorScheme.background,
       );
     }
   }

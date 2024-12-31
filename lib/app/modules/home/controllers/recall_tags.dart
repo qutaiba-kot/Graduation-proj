@@ -9,7 +9,6 @@ class RecallTags extends GetxController {
   final SupabaseClient _client = Supabase.instance.client;
   final markers = <Marker>{}.obs; // قائمة الـ Markers لعرضها على الخريطة
   final List<LatLng> markerCoordinates = []; // قائمة لتخزين إحداثيات الـ Markers
-
   // تحويل أيقونة Flutter إلى BitmapDescriptor
   Future<BitmapDescriptor> getBitmapDescriptorFromIconData(
       IconData iconData, Color backgroundColor, Color iconColor) async {
@@ -51,7 +50,6 @@ class RecallTags extends GetxController {
     final image = await picture.toImage(size.toInt(), size.toInt());
     final byteData = await image.toByteData(format: ui.ImageByteFormat.png);
     final buffer = byteData!.buffer.asUint8List();
-
     return BitmapDescriptor.fromBytes(buffer);
   }
 

@@ -53,22 +53,31 @@ class MyDrawer extends GetWidget {
             onTap: () => Get.toNamed('/reportation'),
           ),
           ListTile(
+            leading: Icon(Icons.archive,
+                color: Theme.of(context).colorScheme.primary),
+            title: Text(
+              "My total reports".tr,
+              style: TextStyle(color: Theme.of(context).colorScheme.primary),
+            ),
+            onTap: () => {Get.snackbar(
+                  "This feature will be added soon".tr,
+                  "",
+                  snackPosition: SnackPosition.BOTTOM,
+                )},
+          ),
+          ListTile(
             leading: Icon(Icons.help_outline,
                 color: Theme.of(context).colorScheme.primary),
             title: Text(
-              "help".tr,
+              "help".tr + " ؟ " + "Call Us".tr,
               style: TextStyle(color: Theme.of(context).colorScheme.primary),
             ),
-            onTap: () => Get.toNamed('/help'),
-          ),
-          ListTile(
-            leading: Icon(Icons.contact_mail,
-                color: Theme.of(context).colorScheme.primary),
-            title: Text(
-              "Call Us".tr,
-              style: TextStyle(color: Theme.of(context).colorScheme.primary),
-            ),
-            onTap: () => Get.toNamed('/contact'),
+            onTap: () => Get.snackbar(
+                "For any comments or problems please contact".tr,
+                "+962786233247",
+                colorText: Theme.of(context).colorScheme.background,
+                snackPosition: SnackPosition.BOTTOM,
+                backgroundColor: Theme.of(context).colorScheme.primary),
           ),
           ListTile(
             leading: Icon(Icons.settings,
