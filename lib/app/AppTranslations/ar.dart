@@ -57,8 +57,6 @@ const Map<String, String> ar = {
   'latitude': 'خط العرض',
   'longitude': 'خط الطول',
   'unavailable': 'غير متوفر',
-  'the time': 'الوقت',
-  'Distance': 'المسافة',
   "Find a location...": "ابحث عن موقع.....",
   "confirm_tracking.title": "هل تريد البدء في التنقل إلى الوجهة التالية؟",
   "confirm_tracking.confirm_button": "ابدأ التنقل",
@@ -114,4 +112,7 @@ const Map<String, String> ar = {
       "ان الايميل او رقم الهاتف مستعملين من قبل",
   "OK": "حسنا",
   "The password or email has an error" : "كلمة السر او الايميل يوجد بهم خطأ",
+" min" : " د",
+"hrs" : " س ",
+"Km" : " Km",
 };

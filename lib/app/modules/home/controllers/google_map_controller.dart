@@ -44,7 +44,7 @@ class MapController extends GetxController {
   void onInit() {
     super.onInit();
     print("🚀 App Initialized. Starting to fetch the initial position.");
-    getInitialPosition(); 
+    getInitialPosition();
     isDarkMode.value = storage.read('isDarkMode') ?? false;
   }
 
@@ -85,7 +85,7 @@ class MapController extends GetxController {
     } catch (e) {
       print("❌ Error occurred while fetching location: $e");
       currentPosition.value = CameraPosition(
-        target: LatLng(31.963158, 35.930359), 
+        target: LatLng(31.963158, 35.930359),
         zoom: 15,
       );
       print("ℹ️ Default position (Amman) is set.");
@@ -217,14 +217,14 @@ class MapController extends GetxController {
     }
     Get.bottomSheet(
       ConfirmTrackingWidget(
-        description: description, 
+        description: description,
         onConfirm: () {
-          startTracking(); 
-          Get.back(); 
+          startTracking();
+          Get.back();
           togglePositionedVisibility(true);
         },
         onCancel: () {
-          Get.back(); 
+          Get.back();
         },
       ),
       isDismissible: true,
@@ -266,26 +266,7 @@ class MapController extends GetxController {
       );
     }
   }
-
-  void startTracking() {
-    if (positionStream != null) {
-      print("⚠️ Tracking is already active.");
-      return;
-    }
-    positionStream = Geolocator.getPositionStream(
-      locationSettings: LocationSettings(
-        accuracy: LocationAccuracy.high,
-        distanceFilter: 3, 
-      ),
-    ).listen((Position position) {
-      updateRouteProgress(position); 
-      checkIfOffRoute(position); 
-      updateCameraWithBearing(position); 
-    });
-    print("🚀 Tracking started.");
-  }
-
-  void updateRouteProgress(Position position) async {
+   void updateRouteProgress(Position position) async {
     if (routePolyline.value.points.isEmpty ||
         selectedDestination.value == null) {
       return;
@@ -309,30 +290,16 @@ class MapController extends GetxController {
           backgroundColor: Colors.yellow,
           colorText: Get.theme.colorScheme.background,
         );
-
         try {
-          final language = GetStorage().read('lang') ??
-              'ar'; 
-          print('Detected language: $language');
+          final language = GetStorage().read('lang') ?? 'ar';
           final assetPath = language == 'en'
               ? "lib/app/assets/sounds/alert_en.mp3"
               : "lib/app/assets/sounds/alert_ar.mp3";
-          print('Asset path for sound: $assetPath');
-
-          print('Initializing AudioCache...');
           AudioCache.instance = AudioCache(prefix: "");
-          print('AudioCache initialized successfully.');
-
-          print('Creating AudioPlayer instance...');
           final player = AudioPlayer();
-          print('AudioPlayer instance created successfully.');
-
-          print('Attempting to play sound from: $assetPath');
           await player.play(AssetSource(assetPath));
-          print('Sound played successfully.');
         } catch (e) {
-          print(
-              'Error occurred while playing sound: $e'); 
+          print('Error occurred while playing sound: $e');
         }
       }
     }
@@ -363,7 +330,7 @@ class MapController extends GetxController {
     }
 
     remainingDistance.value =
-        "${(totalRemainingDistance / 1000).toStringAsFixed(2)} km";
+        "${(totalRemainingDistance / 1000).toStringAsFixed(2)}"+"Km".tr;
 
     if (totalRemainingDistance <= 1) {
       Get.snackbar(
@@ -373,13 +340,24 @@ class MapController extends GetxController {
         backgroundColor: Colors.green,
         colorText: Get.theme.colorScheme.background,
       );
-      stopNavigation(); 
+      stopNavigation();
     }
 
     double averageSpeed = 40.0;
-    double estimatedTime =
-        totalRemainingDistance / (averageSpeed * 1000 / 3600);
-    remainingDuration.value = "${estimatedTime.toStringAsFixed(1)} mins";
+double estimatedTime = totalRemainingDistance / (averageSpeed / 3.6);
+
+int hours = estimatedTime ~/ 3600; // عدد الساعات
+int minutes = (estimatedTime % 3600) ~/ 60; // عدد الدقائق المتبقية
+
+if (hours > 0) {
+  // إذا كان الوقت أكثر من ساعة
+  remainingDuration.value = "${hours}" +"hrs".tr+ "${minutes}"+" min".tr;
+} else {
+  // إذا كان الوقت أقل من ساعة
+  remainingDuration.value = "${minutes}"+" min".tr;
+}
+
+print("The estimated time is: ${remainingDuration.value}");
 
     List<LatLng> remainingPoints =
         routePolyline.value.points.sublist(closestIndex);
@@ -391,6 +369,26 @@ class MapController extends GetxController {
     remainingDuration.refresh();
   }
 
+
+  void startTracking() {
+    if (positionStream != null) {
+      print("⚠️ Tracking is already active.");
+      return;
+    }
+    positionStream = Geolocator.getPositionStream(
+      locationSettings: LocationSettings(
+        accuracy: LocationAccuracy.high,
+        distanceFilter: 3,
+      ),
+    ).listen((Position position) {
+      updateRouteProgress(position);
+      checkIfOffRoute(position);
+      updateCameraWithBearing(position);
+    });
+    print("🚀 Tracking started.");
+  }
+
+ 
   void updateCameraWithBearing(Position position) {
     final newCameraPosition = CameraPosition(
       target: LatLng(position.latitude, position.longitude),
@@ -406,7 +404,7 @@ class MapController extends GetxController {
   Future<void> updateCameraPosition() async {
     if (mapController == null) {
       print("⏳ Waiting for mapController to be assigned...");
-      await Future.delayed(Duration(milliseconds: 500)); 
+      await Future.delayed(Duration(milliseconds: 500));
       updateCameraPosition();
       return;
     }
@@ -446,26 +444,26 @@ class MapController extends GetxController {
     currentPosition.value = position;
     if ((position.zoom - currentZoom).abs() >= 1.0) {
       updateMarkersVisibility(position.zoom);
-      currentZoom = position.zoom; 
+      currentZoom = position.zoom;
     }
   }
 
   void updateMarkersVisibility(double zoomLevel) {
     if (zoomLevel >= 16) {
       if (markers.length != recallTags.markers.length) {
-        markers.assignAll(recallTags.markers); 
+        markers.assignAll(recallTags.markers);
       }
     } else {
       if (markers.isNotEmpty) {
-        markers.clear(); 
+        markers.clear();
       }
     }
   }
 
   void stopTracking() {
     if (positionStream != null) {
-      positionStream?.cancel(); 
-      positionStream = null; 
+      positionStream?.cancel();
+      positionStream = null;
       print("🚫 Tracking stopped successfully.");
     } else {
       print("⚠️ No active tracking to stop.");
@@ -475,9 +473,9 @@ class MapController extends GetxController {
   void clearRoute() {
     routePolyline.value = Polyline(
       polylineId: PolylineId("route"),
-      color: Colors.transparent, 
+      color: Colors.transparent,
       width: 0,
-      points: [], 
+      points: [],
     );
     routePolyline.refresh();
     print("🗑️ Route cleared successfully.");
@@ -488,7 +486,7 @@ class MapController extends GetxController {
       selectedDestination.value = null;
       markers.removeWhere((marker) => marker.markerId.value == "destination");
       markers.refresh();
-      updateCameraPosition(); 
+      updateCameraPosition();
       print("🚫 Destination canceled, marker removed, and camera reset.");
     } else {
       print("⚠️ No destination to cancel.");
@@ -497,14 +495,14 @@ class MapController extends GetxController {
 
   void stopNavigation() {
     stopTracking();
-    clearRoute(); 
+    clearRoute();
     cancelDestination();
     togglePositionedVisibility(false);
     print("🛑 Navigation stopped.");
   }
 
   void togglePositionedVisibility(bool isVisible) {
-    isPositionedVisible.value = isVisible; 
+    isPositionedVisible.value = isVisible;
   }
 
   void onClose() {
@@ -533,7 +531,7 @@ class MapController extends GetxController {
             'longitude': longitude,
           })
           .select()
-          .maybeSingle(); 
+          .maybeSingle();
 
       if (locationResult == null) {
         throw Exception("Location insertion failed - no response received");

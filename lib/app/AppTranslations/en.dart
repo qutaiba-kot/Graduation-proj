@@ -56,8 +56,6 @@ const Map<String, String> en = {
   'latitude': 'Latitude',
   'longitude': 'Longitude',
   'unavailable': 'unavailable',
-  'the time': 'The time',
-  'Distance': 'Distance',
   "Find a location...": "Find a location...",
   "confirm_tracking.title":
       "Do you want to start navigation to the next destination?",
@@ -117,5 +115,7 @@ const Map<String, String> en = {
       "The email or phone number is used before",
   "OK": "OK",
     "The password or email has an error" : "The password or email has an error",
-
+" min" : " Min",
+"hrs" : " Hrs ",
+"Km" : " Km",
 };

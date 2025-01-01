@@ -171,12 +171,10 @@ class GoogleMapView extends GetView<MapController> {
                       ],
                     ),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [                        
                         Flexible(
                           child: Text(
-                            "Distance".tr +
-                                " : " +
                                 controller.remainingDistance.value,
                             style: TextStyle(
                               fontSize: getWidth(context, 0.035),
@@ -212,8 +210,6 @@ class GoogleMapView extends GetView<MapController> {
                         ),
                         Flexible(
                           child: Text(
-                            "The time".tr +
-                                " : " +
                                 controller.remainingDuration.value,
                             style: TextStyle(
                               fontSize: getWidth(context, 0.035),
