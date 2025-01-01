@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 class CustomTextButton extends StatelessWidget {
-  final String text; // النص الذي يظهر داخل الزر
-  final Color textColor; // لون النص داخل الزر
-  final double fontSize; // حجم النص داخل الزر
-  final FontWeight fontWeight; // سمك النص داخل الزر
-  final VoidCallback onPressed; // الدالة التي يتم استدعاؤها عند الضغط على الزر
-  final Color backgroundColor; // لون خلفية الزر
+  final String text; 
+  final Color textColor; 
+  final double fontSize;
+  final FontWeight fontWeight; 
+  final VoidCallback onPressed; 
+  final Color backgroundColor;
 
   const CustomTextButton({
     Key? key,

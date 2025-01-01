@@ -42,7 +42,6 @@ class SignUpView extends StatelessWidget {
             ),
             SizedBox(height: getHeight(context, 0.05)),
 
-            // Name Field
             Obx(() => CustomTextField(
                   controller: nameController,
                   hintText: "name".tr,
@@ -69,7 +68,6 @@ class SignUpView extends StatelessWidget {
 
             SizedBox(height: getHeight(context, 0.02)),
 
-            // Email Field
             Obx(() => CustomTextField(
                   controller: emailController,
                   hintText: "email".tr,
@@ -96,11 +94,10 @@ class SignUpView extends StatelessWidget {
 
             SizedBox(height: getHeight(context, 0.02)),
 
-            // Phone Field
             Obx(
               () => CustomTextField(
                 controller: phoneController,
-                hintText: "name".tr, // إزالة hintText واعتماد labelText
+                hintText: "name".tr, 
                 backgroundColor: Theme.of(context).colorScheme.primary,
                 hintStyle: TextStyle(
                   color:
@@ -113,13 +110,12 @@ class SignUpView extends StatelessWidget {
                   Icons.phone,
                   color: Theme.of(context).colorScheme.background,
                 ),
-                textDirection: TextDirection.ltr, // لضمان اتجاه النص
+                textDirection: TextDirection.ltr, 
                 errorText: controller.phoneError.value.isNotEmpty
                     ? controller.phoneError.value
                     : null,
                 keyboardType: TextInputType.phone,
                 onChanged: (value) {
-                  // ضمان أن النص يبدأ بـ +962
                   if (!value.startsWith("+962")) {
                     final cursorPosition = phoneController.selection.baseOffset;
                     phoneController.text = "+962";
@@ -128,7 +124,6 @@ class SignUpView extends StatelessWidget {
                           offset: cursorPosition > 4 ? cursorPosition : 4),
                     );
                   } else if (value.length > 13) {
-                    // منع إدخال أكثر من 9 أرقام بعد +962
                     phoneController.text = value.substring(0, 13);
                     phoneController.selection = TextSelection.fromPosition(
                       TextPosition(offset: phoneController.text.length),
@@ -141,7 +136,6 @@ class SignUpView extends StatelessWidget {
 
             SizedBox(height: getHeight(context, 0.02)),
 
-            // Password Field
             Obx(() => CustomTextField(
                   controller: passwordController,
                   hintText: "password".tr,
@@ -176,7 +170,6 @@ class SignUpView extends StatelessWidget {
 
             SizedBox(height: getHeight(context, 0.03)),
 
-            // Sign Up Button
             Obx(() => controller.isLoading.value
                 ? CircularProgressIndicator()
                 : CustomButton(
@@ -209,7 +202,6 @@ class SignUpView extends StatelessWidget {
 
             SizedBox(height: getHeight(context, 0.02)),
 
-            // Navigate to Login
             CustomTextButton(
               text: 'Already have an account? Login'.tr,
               onPressed: () => Get.offAllNamed('/login'),

@@ -8,25 +8,19 @@ class ThemeSwitcher extends StatefulWidget {
 }
 
 class _ThemeSwitcherState extends State<ThemeSwitcher> {
-  late bool isDarkMode; // متغير لحفظ حالة الثيم
+  late bool isDarkMode;
 
   @override
   void initState() {
     super.initState();
-    // قراءة حالة الثيم من GetStorage
     isDarkMode = GetStorage().read('isDarkMode') ?? false;
   }
 
   void toggleTheme() {
-    // تبديل الثيم
     setState(() {
       isDarkMode = !isDarkMode;
     });
-
-    // تغيير الثيم باستخدام Get
     Get.changeThemeMode(isDarkMode ? ThemeMode.dark : ThemeMode.light);
-
-    // تخزين حالة الثيم
     GetStorage().write('isDarkMode', isDarkMode);
   }
 

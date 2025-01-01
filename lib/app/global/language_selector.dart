@@ -12,25 +12,25 @@ class LanguageSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height:  getHeight(context, 0.05), // التحكم في الارتفاع
+      height:  getHeight(context, 0.05),
       padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 8.0),
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.primary, // لون خلفية لطيف
-        borderRadius: BorderRadius.circular(10.0), // زوايا مستديرة
-        border: Border.all(color: Theme.of(context).colorScheme.primary, width: 1.5), // حدود خارجية
+        color: Theme.of(context).colorScheme.primary, 
+        borderRadius: BorderRadius.circular(10.0),
+        border: Border.all(color: Theme.of(context).colorScheme.primary, width: 1.5), 
       ),
       child: DropdownButton<String>(
         value: Get.locale?.languageCode,
-        dropdownColor: Theme.of(context).colorScheme.primary, // خلفية العناصر عند فتح القائمة
-        underline: SizedBox(), // إزالة الخط السفلي الافتراضي
-        icon: Icon(Icons.language, color: Theme.of(context).colorScheme.background), // أيقونة للقائمة
-        style: TextStyle(color: Theme.of(context).colorScheme.background, fontSize: 16.0), // تنسيق النص
+        dropdownColor: Theme.of(context).colorScheme.primary, 
+        underline: SizedBox(), 
+        icon: Icon(Icons.language, color: Theme.of(context).colorScheme.background), 
+        style: TextStyle(color: Theme.of(context).colorScheme.background, fontSize: 16.0),
         items: [
           DropdownMenuItem(
             value: 'en',
             child: Text(
               'English',
-              style: TextStyle(color:Theme.of(context).colorScheme.background), // لون نص العنصر
+              style: TextStyle(color:Theme.of(context).colorScheme.background), 
             ),
           ),
           DropdownMenuItem(

@@ -23,12 +23,12 @@ class CustomButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
-          backgroundColor: color, // لون الزر
+          backgroundColor: color, 
           padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         ),
         child: Text(
           text,
-          style: TextStyle(color: textColor), // لون النص داخل الزر
+          style: TextStyle(color: textColor), 
         ),
       ),
     );

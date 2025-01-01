@@ -128,7 +128,7 @@ class LoginView extends StatelessWidget {
             SizedBox(height: getHeight(context, 0.04)),
             CustomTextButton(
               text: 'forgot_password'.tr,
-              onPressed: () => {}, //Get.toNamed(Routes.REST_PASS1),
+              onPressed: () => {}, 
               backgroundColor: Theme.of(context).colorScheme.background,
               textColor: Theme.of(context).colorScheme.primary,
             ),

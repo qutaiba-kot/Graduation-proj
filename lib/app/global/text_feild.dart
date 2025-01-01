@@ -9,7 +9,7 @@ class CustomTextField extends StatelessWidget {
   final Color? borderColor;
   final Color? focusedBorderColor;
   final Color? labelColor;
-  final Color? cursorColor; // اللون المخصص لمؤشر الكتابة
+  final Color? cursorColor;
   final double borderRadius;
   final double fontSize;
   final FontWeight fontWeight;
@@ -39,7 +39,7 @@ class CustomTextField extends StatelessWidget {
     this.borderColor,
     this.focusedBorderColor,
     this.labelColor,
-    this.cursorColor, // تمرير اللون المخصص للمؤشر
+    this.cursorColor,
     this.borderRadius = 8.0,
     this.fontSize = 16.0,
     this.fontWeight = FontWeight.normal,
@@ -62,7 +62,6 @@ class CustomTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // استخدم ThemeData للحصول على الألوان الافتراضية
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
 
@@ -77,9 +76,9 @@ class CustomTextField extends StatelessWidget {
       maxLines: maxLines,
       readOnly: readOnly,
       onTap: onTap,
-      cursorColor: cursorColor ?? colorScheme.primary, // لون المؤشر
+      cursorColor: cursorColor ?? colorScheme.primary, 
       style: TextStyle(
-        color: textColor ?? colorScheme.background, // لون النص داخل الحقل
+        color: textColor ?? colorScheme.background, 
         fontSize: fontSize,
         fontWeight: fontWeight,
       ),
@@ -88,40 +87,39 @@ class CustomTextField extends StatelessWidget {
         errorText: errorText,
         hintStyle: hintStyle ??
             TextStyle(
-              color: labelColor ?? colorScheme.background, // لون التلميح
+              color: labelColor ?? colorScheme.background,
               fontSize: fontSize,
             ),
         errorStyle: errorStyle ??
             TextStyle(
-              color: colorScheme.error, // لون النص الخاص بالخطأ
+              color: colorScheme.error,
               fontSize: fontSize - 2,
             ),
         labelStyle: labelStyle ??
             TextStyle(
-              color: labelColor ?? colorScheme.background, // لون النص التوضيحي
+              color: labelColor ?? colorScheme.background, 
               fontSize: fontSize,
               fontWeight: fontWeight,
             ),
         filled: true,
-        fillColor: backgroundColor ?? colorScheme.onBackground, // لون الخلفية
+        fillColor: backgroundColor ?? colorScheme.onBackground, 
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(borderRadius),
-          borderSide: BorderSide(color: borderColor ?? colorScheme.background), // لون الحدود
+          borderSide: BorderSide(color: borderColor ?? colorScheme.background), 
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(borderRadius),
-          borderSide: BorderSide(color: borderColor ?? colorScheme.onBackground), // لون الحدود عند التمكين
+          borderSide: BorderSide(color: borderColor ?? colorScheme.onBackground), 
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(borderRadius),
           borderSide: BorderSide(
-            color: focusedBorderColor ?? colorScheme.onBackground, // لون الحدود عند التركيز
-            width: 2.0,
+            color: focusedBorderColor ?? colorScheme.onBackground, 
           ),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(borderRadius),
-          borderSide: BorderSide(color: colorScheme.error), // لون الحدود عند وجود خطأ
+          borderSide: BorderSide(color: colorScheme.error),
         ),
         prefixIcon: prefixIcon,
         suffixIcon: suffixIcon != null
@@ -130,7 +128,7 @@ class CustomTextField extends StatelessWidget {
                 child: suffixIcon,
               )
             : null,
-        counterText: "", // إخفاء عداد الأحرف
+        counterText: "", 
       ),
     );
   }

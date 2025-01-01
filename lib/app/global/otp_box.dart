@@ -4,14 +4,14 @@ import 'package:maps/app/const/size.dart';
 Widget buildOtpBox(
   BuildContext context,
   TextEditingController controller, {
-  Color hintColor = Colors.grey, // لون النص التلميحي
+  Color hintColor = Colors.grey, 
 }) {
   return Container(
     width: getWidth(context, 0.12),
     height: getWidth(context, 0.12),
     alignment: Alignment.center,
     decoration: BoxDecoration(
-      color:  Theme.of(context).colorScheme.onBackground, // لون الخلفية
+      color:  Theme.of(context).colorScheme.onBackground,
       borderRadius: BorderRadius.circular(8),
     ),
     child: TextField(
@@ -19,13 +19,13 @@ Widget buildOtpBox(
       maxLength: 1,
       textAlign: TextAlign.center,
       keyboardType: TextInputType.number,
-      style: TextStyle(color:  Theme.of(context).colorScheme.background, fontSize: 18), // لون النص وحجمه
+      style: TextStyle(color:  Theme.of(context).colorScheme.background, fontSize: 18), 
       decoration: InputDecoration(
         filled: true,
-        fillColor: Theme.of(context).colorScheme.onBackground, // لون الخلفية
-        counterText: "", // لإخفاء العداد
-        hintText: "*", // رمز تلميحي
-        hintStyle: TextStyle(color:  Theme.of(context).colorScheme.secondary), // لون النص التلميحي
+        fillColor: Theme.of(context).colorScheme.onBackground, 
+        counterText: "",
+        hintText: "*", 
+        hintStyle: TextStyle(color:  Theme.of(context).colorScheme.secondary),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
           borderSide: BorderSide(color: Theme.of(context).colorScheme.onBackground, width: 1.5),
@@ -41,7 +41,7 @@ Widget buildOtpBox(
       ),
       onChanged: (value) {
         if (value.isNotEmpty) {
-          FocusScope.of(context).nextFocus(); // الانتقال إلى الحقل التالي تلقائيًا
+          FocusScope.of(context).nextFocus(); 
         }
       },
     ),

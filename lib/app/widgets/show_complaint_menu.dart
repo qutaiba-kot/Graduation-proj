@@ -32,7 +32,7 @@ void showComplaintMenu(MapController controller) {
                   ),
                 ),
                 onTap: () {
-                  Get.back(); // إغلاق القائمة
+                  Get.back(); 
                   controller.submitComplaint(hazardType.hazardTypeId);
                 },
               ),

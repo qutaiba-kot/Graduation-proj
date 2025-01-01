@@ -3,7 +3,6 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 
 class Helpers {
-  /// فك تشفير خط الاتجاهات (Polyline)
   static List<LatLng> decodePolyline(String polyline) {
     if (polyline.isEmpty) {
       print("Polyline string is empty.");
@@ -41,7 +40,6 @@ class Helpers {
     return points;
   }
 
-  /// حساب أقرب نقطة من المستخدم إلى مسار معين
   static double calculateDistanceToPolyline(
       double lat, double lng, List<LatLng> polylinePoints) {
     if (polylinePoints.isEmpty) {
@@ -68,7 +66,6 @@ class Helpers {
     return minDistance;
   }
 
-  /// حساب المسافة بين نقطة وخط مستقيم بين نقطتين
   static double _pointToSegmentDistance(LatLng point, LatLng start, LatLng end) {
     double px = point.latitude;
     double py = point.longitude;
@@ -95,7 +92,6 @@ class Helpers {
     return Geolocator.distanceBetween(px, py, projX, projY);
   }
 
-  /// حساب نطاق (Bounds) يحتوي على جميع العلامات
   static LatLngBounds calculateLatLngBounds(Set<Marker> markers) {
     if (markers.isEmpty) {
       throw Exception("Markers set is empty.");

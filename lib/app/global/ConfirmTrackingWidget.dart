@@ -4,27 +4,27 @@ import 'package:get/get.dart';
 class ConfirmTrackingWidget extends StatelessWidget {
   final VoidCallback onConfirm;
   final VoidCallback onCancel;
-  final String description; // إضافة الوصف
+  final String description; 
 
   const ConfirmTrackingWidget({
     Key? key,
     required this.onConfirm,
     required this.onCancel,
-    required this.description, // استلام الوصف
+    required this.description, 
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.background, // خلفية المربع
+        color: Theme.of(context).colorScheme.background,
         borderRadius:
-            BorderRadius.vertical(top: Radius.circular(25)), // حواف منحنية
+            BorderRadius.vertical(top: Radius.circular(25)),
         boxShadow: [
           BoxShadow(
             color: Theme.of(context).colorScheme.onBackground.withOpacity(0.2),
             blurRadius: 10,
-            offset: Offset(0, -3), // الظل يظهر فوق المربع
+            offset: Offset(0, -3), 
           ),
         ],
       ),
@@ -52,7 +52,7 @@ class ConfirmTrackingWidget extends StatelessWidget {
           ),
           SizedBox(height: 10),
           Text(
-            description, // عرض الوصف
+            description,
             style: TextStyle(
               fontSize: 16,
               color: Theme.of(context).colorScheme.primary,

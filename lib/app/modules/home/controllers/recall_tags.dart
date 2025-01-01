@@ -7,28 +7,25 @@ import '../../../assets/hazzard types/hazard_types.dart';
 
 class RecallTags extends GetxController {
   final SupabaseClient _client = Supabase.instance.client;
-  final markers = <Marker>{}.obs; // قائمة الـ Markers لعرضها على الخريطة
-  final List<LatLng> markerCoordinates = []; // قائمة لتخزين إحداثيات الـ Markers
-  // تحويل أيقونة Flutter إلى BitmapDescriptor
+  final markers = <Marker>{}.obs; 
+  final List<LatLng> markerCoordinates = []; 
   Future<BitmapDescriptor> getBitmapDescriptorFromIconData(
       IconData iconData, Color backgroundColor, Color iconColor) async {
     final pictureRecorder = ui.PictureRecorder();
     final canvas = Canvas(pictureRecorder);
-    const size = 150; // حجم الأيقونة
+    const size = 150; 
 
     final paint = Paint()..color = backgroundColor;
     final textPainter = TextPainter(
       textDirection: TextDirection.ltr,
     );
 
-    // رسم دائرة للخلفية
     canvas.drawCircle(
       Offset(size / 2, size / 2),
       size / 2,
       paint,
     );
 
-    // رسم الأيقونة في منتصف الدائرة
     textPainter.text = TextSpan(
       text: String.fromCharCode(iconData.codePoint),
       style: TextStyle(
@@ -53,7 +50,6 @@ class RecallTags extends GetxController {
     return BitmapDescriptor.fromBytes(buffer);
   }
 
-  // الدالة الرئيسية لجلب البيانات وإضافتها كـ Markers
   Future<void> fetchAndDisplayHazards(BuildContext context) async {
     try {
       print("🚀 [START] Fetching hazards data from 'hazards' table...");
@@ -106,11 +102,9 @@ class RecallTags extends GetxController {
           final hazardType = HazardTypeService.getHazardTypeById(hazard['hazard_type_id']);
 
           if (hazardType != null) {
-            // استخدام ألوان من الثيم
             final backgroundColor = Theme.of(context).colorScheme.background;
             final iconColor = Theme.of(context).colorScheme.onBackground;
 
-            // تحويل الأيقونة إلى BitmapDescriptor
             final customIcon = await getBitmapDescriptorFromIconData(
               hazardType.icon,
               backgroundColor,
@@ -128,7 +122,6 @@ class RecallTags extends GetxController {
             );
             markers.add(marker);
             
-            // إضافة إحداثية الـ Marker إلى قائمة الإحداثيات
             markerCoordinates.add(LatLng(location['latitude'], location['longitude']));
 
             print("✅ [MARKER ADDED] Marker for Location ID ${hazard['location_id']} added.");

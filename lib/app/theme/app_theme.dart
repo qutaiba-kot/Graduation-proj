@@ -61,7 +61,6 @@ abstract class AppTheme {
 
   static AppBarTheme _appBarTheme() {
     return const AppBarTheme(
-      // backgroundColor: AppColors.background,
       elevation: 0,
       systemOverlayStyle: SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,

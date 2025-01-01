@@ -16,20 +16,15 @@ class AppStyle {
     final screenHeight = MediaQuery.of(Get.context!).size.height;
     final screenRatio = screenWidth / screenHeight;
 
-    // Define your desired breakpoints and corresponding font sizes
     if (screenRatio < 0.6) {
-      // Smallest screen ratio
       return baseFontSize * 1.2;
     } else if (screenRatio < 0.8) {
-      // Medium screen ratio
       return baseFontSize * 1.4;
     } else {
-      // Larger screen ratio
       return baseFontSize * 1.6;
     }
   }
 
-  //****************************** Head **************************/
   static TextStyle headLine1 = _fontType(
     fontSize: _getResponsiveFontSize(24.0),
     fontWeight: FontWeight.bold,
@@ -47,7 +42,6 @@ class AppStyle {
   static TextStyle headLine6 =
       _fontType(fontSize: _getResponsiveFontSize(12.0));
 
-  // ************************** SubTitle **********************************
   static TextStyle subTitle1 = _fontType(
     fontSize: _getResponsiveFontSize(18.0),
     color: Colors.grey,
@@ -69,7 +63,6 @@ class AppStyle {
     color: Colors.grey,
   );
 
-  // ************************** Body Text **********************************
   static TextStyle bodyText1 = _fontType(
     fontSize: _getResponsiveFontSize(16.0),
     fontWeight: FontWeight.bold,
@@ -90,7 +83,6 @@ class AppStyle {
     fontSize: _getResponsiveFontSize(8.0),
   );
 
-  // ************************** Button **********************************
   static TextStyle button = _fontType(fontSize: _getResponsiveFontSize(16.0));
   static TextStyle smallButton = _fontType(
     fontSize: _getResponsiveFontSize(12.0),

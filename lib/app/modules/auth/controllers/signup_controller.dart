@@ -110,7 +110,6 @@ class SignUpController extends GetxController {
           .select()
           .maybeSingle();
 
-      // التحقق من الاستجابة
       if (response != null) {
         print("User successfully registered. Response: $response");
         Get.snackbar(

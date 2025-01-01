@@ -37,15 +37,14 @@ class MapController extends GetxController {
   var isPositionedVisible = false.obs;
   final RxSet<Marker> markers = <Marker>{}.obs;
   final Rx<CameraPosition> currentPosition = CameraPosition(
-    target: LatLng(31.963158, 35.930359), // الموقع الافتراضي: عمان
+    target: LatLng(31.963158, 35.930359),
     zoom: 15,
   ).obs;
   @override
   void onInit() {
     super.onInit();
     print("🚀 App Initialized. Starting to fetch the initial position.");
-    getInitialPosition(); // استدعاء الموقع الابتدائي عند بدء التطبيق
-    // تحميل الوضع الحالي من التخزين المحلي
+    getInitialPosition(); 
     isDarkMode.value = storage.read('isDarkMode') ?? false;
   }
 
@@ -82,11 +81,11 @@ class MapController extends GetxController {
       print(
           "✅ Current position fetched: ${position.latitude}, ${position.longitude}");
 
-      updateCameraPosition(); // تحديث الكاميرا بعد تعيين الموقع
+      updateCameraPosition();
     } catch (e) {
       print("❌ Error occurred while fetching location: $e");
       currentPosition.value = CameraPosition(
-        target: LatLng(31.963158, 35.930359), // عمان
+        target: LatLng(31.963158, 35.930359), 
         zoom: 15,
       );
       print("ℹ️ Default position (Amman) is set.");
@@ -96,7 +95,6 @@ class MapController extends GetxController {
   void onMapCreated(GoogleMapController controller) {
     mapController = controller;
     print("✅ MapController is now assigned.");
-    // استدعاء تحديث الموقع بعد تعيين الـ controller
     updateCameraPosition();
   }
 
@@ -207,7 +205,6 @@ class MapController extends GetxController {
   }
 
   void confirmStartTracking(String description) {
-    // التحقق مما إذا كان هناك تتبع نشط
     if (positionStream != null) {
       Get.snackbar(
         "رحلة نشطة".tr,
@@ -218,18 +215,16 @@ class MapController extends GetxController {
       );
       return;
     }
-
-    // عرض BottomSheet لتأكيد بدء التنقل
     Get.bottomSheet(
       ConfirmTrackingWidget(
-        description: description, // تمرير الوصف
+        description: description, 
         onConfirm: () {
-          startTracking(); // استدعاء وظيفة بدء التنقل
-          Get.back(); // إغلاق BottomSheet
+          startTracking(); 
+          Get.back(); 
           togglePositionedVisibility(true);
         },
         onCancel: () {
-          Get.back(); // إغلاق BottomSheet
+          Get.back(); 
         },
       ),
       isDismissible: true,
@@ -280,12 +275,12 @@ class MapController extends GetxController {
     positionStream = Geolocator.getPositionStream(
       locationSettings: LocationSettings(
         accuracy: LocationAccuracy.high,
-        distanceFilter: 3, // تحديث كل 10 أمتار
+        distanceFilter: 3, 
       ),
     ).listen((Position position) {
-      updateRouteProgress(position); // تحديث المسافة والزمن المتبقي
-      checkIfOffRoute(position); // التحقق إذا خرج المستخدم عن المسار
-      updateCameraWithBearing(position); // تحديث الكاميرا
+      updateRouteProgress(position); 
+      checkIfOffRoute(position); 
+      updateCameraWithBearing(position); 
     });
     print("🚀 Tracking started.");
   }
@@ -296,10 +291,8 @@ class MapController extends GetxController {
       return;
     }
 
-    // الموقع الحالي للمستخدم
     LatLng currentPosition = LatLng(position.latitude, position.longitude);
 
-    // البحث عن أقرب marker والتحقق من المسافة
     for (LatLng markerPosition in recallTags.markerCoordinates) {
       double distanceToMarker = Geolocator.distanceBetween(
         currentPosition.latitude,
@@ -308,9 +301,7 @@ class MapController extends GetxController {
         markerPosition.longitude,
       );
 
-      // إذا كان المستخدم قريبًا من أحد الـ markers (مثلاً أقل من 50 متر)
       if (distanceToMarker <= 30 && distanceToMarker >= 20) {
-        // عرض تحذير أو تنبيه عند الاقتراب من marker
         Get.snackbar(
           "Please pay attention".tr,
           "You are close to a note on the way ahead of you!".tr,
@@ -320,39 +311,32 @@ class MapController extends GetxController {
         );
 
         try {
-          // استرجاع اللغة من GetStorage
           final language = GetStorage().read('lang') ??
-              'ar'; // افتراض اللغة العربية إذا لم تكن موجودة
-          print('Detected language: $language'); // تتبع اللغة المستخلصة
-
-          // تحديد مسار الملف الصوتي بناءً على اللغة
+              'ar'; 
+          print('Detected language: $language');
           final assetPath = language == 'en'
               ? "lib/app/assets/sounds/alert_en.mp3"
               : "lib/app/assets/sounds/alert_ar.mp3";
-          print('Asset path for sound: $assetPath'); // تتبع مسار الملف الصوتي
+          print('Asset path for sound: $assetPath');
 
-          // تهيئة AudioCache
           print('Initializing AudioCache...');
           AudioCache.instance = AudioCache(prefix: "");
           print('AudioCache initialized successfully.');
 
-          // إنشاء instance من AudioPlayer
           print('Creating AudioPlayer instance...');
           final player = AudioPlayer();
           print('AudioPlayer instance created successfully.');
 
-          // محاولة تشغيل الصوت
           print('Attempting to play sound from: $assetPath');
           await player.play(AssetSource(assetPath));
           print('Sound played successfully.');
         } catch (e) {
           print(
-              'Error occurred while playing sound: $e'); // طباعة الخطأ إذا حدث
+              'Error occurred while playing sound: $e'); 
         }
       }
     }
 
-    // إيجاد أقرب نقطة على المسار
     double minDistance = double.infinity;
     int closestIndex = 0;
     for (int i = 0; i < routePolyline.value.points.length; i++) {
@@ -368,7 +352,6 @@ class MapController extends GetxController {
       }
     }
 
-    // تحديث المسافة المتبقية
     double totalRemainingDistance = 0;
     for (int i = closestIndex; i < routePolyline.value.points.length - 1; i++) {
       totalRemainingDistance += Geolocator.distanceBetween(
@@ -382,9 +365,7 @@ class MapController extends GetxController {
     remainingDistance.value =
         "${(totalRemainingDistance / 1000).toStringAsFixed(2)} km";
 
-    // عرض رسالة عند الوصول
     if (totalRemainingDistance <= 1) {
-      // إذا كانت المسافة أقل من 5 أمتار
       Get.snackbar(
         "Congratulations!".tr,
         "You have reached your destination.".tr,
@@ -392,22 +373,19 @@ class MapController extends GetxController {
         backgroundColor: Colors.green,
         colorText: Get.theme.colorScheme.background,
       );
-      stopNavigation(); // إيقاف التوجيه
+      stopNavigation(); 
     }
 
-    // حساب الزمن المتبقي بناءً على السرعة
-    double averageSpeed = 40.0; // سرعة المستخدم بالكيلومتر/ساعة
+    double averageSpeed = 40.0;
     double estimatedTime =
         totalRemainingDistance / (averageSpeed * 1000 / 3600);
     remainingDuration.value = "${estimatedTime.toStringAsFixed(1)} mins";
 
-    // تحديث النقاط المتبقية على المسار
     List<LatLng> remainingPoints =
         routePolyline.value.points.sublist(closestIndex);
     routePolyline.value =
         routePolyline.value.copyWith(pointsParam: remainingPoints);
 
-    // تحديث واجهة المستخدم
     routePolyline.refresh();
     remainingDistance.refresh();
     remainingDuration.refresh();
@@ -428,8 +406,8 @@ class MapController extends GetxController {
   Future<void> updateCameraPosition() async {
     if (mapController == null) {
       print("⏳ Waiting for mapController to be assigned...");
-      await Future.delayed(Duration(milliseconds: 500)); // انتظر 500 مللي ثانية
-      updateCameraPosition(); // أعد استدعاء الوظيفة
+      await Future.delayed(Duration(milliseconds: 500)); 
+      updateCameraPosition();
       return;
     }
 
@@ -455,7 +433,6 @@ class MapController extends GetxController {
     );
 
     if (distanceToNearestPoint > 50) {
-      // إذا كان خارج المسار بمسافة أكثر من 50 مترًا
       if (selectedDestination.value != null) {
         await getDirections(
           LatLng(position.latitude, position.longitude),
@@ -466,34 +443,29 @@ class MapController extends GetxController {
   }
 
   void onCameraMove(CameraPosition position) {
-    // تحديث موقع الكاميرا
     currentPosition.value = position;
-
-    // تحقق من التحديث لتقليل الحمل
     if ((position.zoom - currentZoom).abs() >= 1.0) {
-      // تحديث فقط عند اختلاف الزوم بشكل ملحوظ
       updateMarkersVisibility(position.zoom);
-      currentZoom = position.zoom; // تخزين الزوم الحالي
+      currentZoom = position.zoom; 
     }
   }
 
   void updateMarkersVisibility(double zoomLevel) {
     if (zoomLevel >= 16) {
-      // عرض جميع العلامات
       if (markers.length != recallTags.markers.length) {
-        markers.assignAll(recallTags.markers); // فقط إذا كانت هناك حاجة للتحديث
+        markers.assignAll(recallTags.markers); 
       }
     } else {
       if (markers.isNotEmpty) {
-        markers.clear(); // إخفاء العلامات فقط عند الحاجة
+        markers.clear(); 
       }
     }
   }
 
   void stopTracking() {
     if (positionStream != null) {
-      positionStream?.cancel(); // إلغاء الاشتراك في تدفق الموقع
-      positionStream = null; // إعادة تعيين المتغير لتجنب التكرار
+      positionStream?.cancel(); 
+      positionStream = null; 
       print("🚫 Tracking stopped successfully.");
     } else {
       print("⚠️ No active tracking to stop.");
@@ -501,14 +473,12 @@ class MapController extends GetxController {
   }
 
   void clearRoute() {
-    // إعادة تعيين قيمة Polyline إلى قائمة فارغة
     routePolyline.value = Polyline(
-      polylineId: PolylineId("route"), // نفس معرف Polyline
-      color: Colors.transparent, // اجعل الخط شفافًا (اختياري)
-      width: 0, // تعيين العرض إلى 0 لإخفاء الخط (اختياري)
-      points: [], // إزالة جميع النقاط
+      polylineId: PolylineId("route"),
+      color: Colors.transparent, 
+      width: 0,
+      points: [], 
     );
-    // تحديث الواجهة لتنعكس التعديلات
     routePolyline.refresh();
     print("🗑️ Route cleared successfully.");
   }
@@ -518,8 +488,7 @@ class MapController extends GetxController {
       selectedDestination.value = null;
       markers.removeWhere((marker) => marker.markerId.value == "destination");
       markers.refresh();
-      // إعادة تعيين الكاميرا إلى الموقع الحالي
-      updateCameraPosition(); // استدعاء دالة تحديث الكاميرا
+      updateCameraPosition(); 
       print("🚫 Destination canceled, marker removed, and camera reset.");
     } else {
       print("⚠️ No destination to cancel.");
@@ -527,15 +496,15 @@ class MapController extends GetxController {
   }
 
   void stopNavigation() {
-    stopTracking(); // إيقاف التتبع
-    clearRoute(); // إزالة المسار
-    cancelDestination(); // إلغاء الوجهة
+    stopTracking();
+    clearRoute(); 
+    cancelDestination();
     togglePositionedVisibility(false);
     print("🛑 Navigation stopped.");
   }
 
   void togglePositionedVisibility(bool isVisible) {
-    isPositionedVisible.value = isVisible; // تحديث الحالة
+    isPositionedVisible.value = isVisible; 
   }
 
   void onClose() {
@@ -547,7 +516,6 @@ class MapController extends GetxController {
     try {
       print("🚀 بدء عملية إرسال الشكوى...");
 
-      // 1. Get current location
       print("📍 محاولة الحصول على الموقع الحالي...");
       Position position = await Geolocator.getCurrentPosition(
           desiredAccuracy: LocationAccuracy.high);
@@ -557,7 +525,6 @@ class MapController extends GetxController {
 
       print("✅ Coordinates received: $latitude, $longitude");
 
-      // 2. Insert location with explicit error handling
       print("📤 Inserting location...");
       final locationResult = await Supabase.instance.client
           .from('locations')
@@ -566,7 +533,7 @@ class MapController extends GetxController {
             'longitude': longitude,
           })
           .select()
-          .maybeSingle(); // Use maybeSingle() instead of select()
+          .maybeSingle(); 
 
       if (locationResult == null) {
         throw Exception("Location insertion failed - no response received");
@@ -579,7 +546,6 @@ class MapController extends GetxController {
 
       print("✅ Location inserted successfully with ID: $locationId");
 
-      // 3. Insert report with the location
       print("📤 Inserting report...");
       final UserStorageService userStorage = UserStorageService();
 
