@@ -59,26 +59,51 @@ class MyDrawer extends GetWidget {
               "My total reports".tr,
               style: TextStyle(color: Theme.of(context).colorScheme.primary),
             ),
-            onTap: () => {Get.snackbar(
-                  "This feature will be added soon".tr,
-                  "",
-                  snackPosition: SnackPosition.BOTTOM,
-                )},
+            onTap: () => {
+              Get.snackbar(
+                "This feature will be added soon".tr,
+                "",
+                snackPosition: SnackPosition.BOTTOM,
+              )
+            },
           ),
           ListTile(
-            leading: Icon(Icons.help_outline,
-                color: Theme.of(context).colorScheme.primary),
-            title: Text(
-              "help".tr + " ؟ " + "Call Us".tr,
-              style: TextStyle(color: Theme.of(context).colorScheme.primary),
-            ),
-            onTap: () => Get.snackbar(
-                "For any comments or problems please contact".tr,
-                "+962786233247",
-                colorText: Theme.of(context).colorScheme.background,
-                snackPosition: SnackPosition.BOTTOM,
-                backgroundColor: Theme.of(context).colorScheme.primary),
-          ),
+              leading: Icon(Icons.help_outline,
+                  color: Theme.of(context).colorScheme.primary),
+              title: Text(
+                "help".tr + " ؟ " + "Call Us".tr,
+                style: TextStyle(color: Theme.of(context).colorScheme.primary),
+              ),
+              onTap: () => Get.dialog(
+                    AlertDialog(
+                      backgroundColor: Theme.of(context).colorScheme.background,
+                      content: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            "For any comments or problems please contact".tr,
+                            style: TextStyle(
+                                color:
+                                    Theme.of(context).colorScheme.primary),
+                          ),
+                          Text(
+                            "+962786233247",
+                            style: TextStyle(
+                                color:
+                                    Theme.of(context).colorScheme.primary),
+                          ),
+                        ],
+                      ),
+                      actions: [
+                        TextButton(
+                          onPressed: () => Get.back(),
+                          child: Text("OK"),
+                        ),
+                      ],
+                    ),
+                    barrierDismissible:
+                        true, // يسمح بإغلاق الصندوق عند النقر في مكان آخر
+                  )),
           ListTile(
             leading: Icon(Icons.settings,
                 color: Theme.of(context).colorScheme.primary),

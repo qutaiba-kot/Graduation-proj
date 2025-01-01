@@ -262,8 +262,8 @@ class GoogleMapView extends GetView<MapController> {
             ),
             Positioned(
               top: getHeight(context, 0.04),
-              left: language ? 345 : 10,
-              right: language ? 10 : 345,
+              left: language ? getWidth(context, 0.83) : getWidth(context, 0.02),
+              right: language ? getWidth(context, 0.02) : getWidth(context, 0.84),
               child: Builder(
                 builder: (context) => FloatingActionButton(
                   heroTag: "MenuButton",
