@@ -97,7 +97,7 @@ class MyDrawer extends GetWidget {
                       actions: [
                         TextButton(
                           onPressed: () => Get.back(),
-                          child: Text("OK"),
+                          child: Text("OK".tr),
                         ),
                       ],
                     ),

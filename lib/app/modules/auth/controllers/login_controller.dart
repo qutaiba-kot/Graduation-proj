@@ -94,9 +94,10 @@ class LoginController extends GetxController {
     } catch (e) {
       print("❌ Login Error: $e");
       Get.snackbar(
-        "Login Error".tr,
-        e.toString(),
+        "The password or email has an error".tr,
+        "Please correct the errors before proceeding.".tr,
         snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.red
       );
     } finally {
       isLoading.value = false;

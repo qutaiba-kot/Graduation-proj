@@ -112,4 +112,6 @@ const Map<String, String> ar = {
       "يرجى تصحيح الأخطاء قبل المتابعة.",
   "The email or phone number is used before":
       "ان الايميل او رقم الهاتف مستعملين من قبل",
+  "OK": "حسنا",
+  "The password or email has an error" : "كلمة السر او الايميل يوجد بهم خطأ",
 };
