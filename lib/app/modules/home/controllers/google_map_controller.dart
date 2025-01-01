@@ -416,7 +416,7 @@ class MapController extends GetxController {
       desiredAccuracy: LocationAccuracy.high,
     );
 
-    mapController?.moveCamera(CameraUpdate.newCameraPosition(
+    mapController?.animateCamera(CameraUpdate.newCameraPosition(
       CameraPosition(
         target: LatLng(position.latitude, position.longitude),
         zoom: currentPosition.value.zoom,
