@@ -29,7 +29,7 @@ class LoginController extends GetxController {
 
     if (!hasUppercase || !hasDigits || !hasSpecialCharacters || !hasMinLength) {
       passwordError.value =
-          "Password must be at least 8 characters long, contain uppercase letters, numbers, and special characters.";
+          "Password must be at least 8 characters long, contain uppercase letters, numbers, and special characters.".tr;
       print("Password validation failed: ${passwordError.value}");
       return false;
     }

@@ -100,5 +100,11 @@ const Map<String, String> en = {
 "My total reports" : "My total reports",
 "user id" : "User ID",
 "This feature will be added soon": "This feature will be added soon",
-
+"Phone must start with +962 and contain 9 digits." : "Phone must start with +962 and contain 9 digits.",
+  "Invalid email format." : "Invalid email format.",
+  "Name must contain only letters and spaces." : "Name must contain only letters and spaces.",
+  "Password must be at least 8 characters long, contain uppercase letters, numbers, and special characters." : "Password must be at least 8 characters long, contain uppercase letters, numbers, and special characters.",
+  "Unexpected error occurred during sign-up." : "Unexpected error occurred during sign-up.",
+"Please correct the errors before proceeding." : "Please correct the errors before proceeding.",
+"The email or phone number is used before" : "The email or phone number is used before",
 };

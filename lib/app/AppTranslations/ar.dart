@@ -19,16 +19,19 @@ const Map<String, String> ar = {
   'theme_switcher': 'تغيير الثيم',
   'Dont have an account ? Sign Up ': 'ليس لديط حساب ؟ إنشاء حساب ',
   'Already have an account? Login': 'لديط حساب بالفعل ؟ تسجيل الدخول',
-  'Please enter the 6-digit code sent to your phone': 'الرجاء إدخال الرمز المكون من 6 خانات المرسل الى هاتفك',
+  'Please enter the 6-digit code sent to your phone':
+      'الرجاء إدخال الرمز المكون من 6 خانات المرسل الى هاتفك',
   'archive': 'الأرشيف',
   'settings': 'الإعدادات',
   'reset_password': 'إعادة تعيين كلمة السر',
-  'Enter your email to reset your password': 'ادخل البريد الإلكتروني لإعادة تعيين كلمة المرور',
+  'Enter your email to reset your password':
+      'ادخل البريد الإلكتروني لإعادة تعيين كلمة المرور',
   'Send Reset Link': 'إعادة ارسال الرابط',
   'delete_account': 'حذف الحساب',
   'theme': 'السمة',
   'notifications': 'الإشعارات',
-  'Please enter the 6-digit code sent to your email': 'رجاءا ادخل الرمز المكون من 6 خانات المرسل الى بريدك',
+  'Please enter the 6-digit code sent to your email':
+      'رجاءا ادخل الرمز المكون من 6 خانات المرسل الى بريدك',
   'user name': 'اسم المستخدم',
   'help': 'المساعدة',
   'Call Us': 'اتصل بنا ',
@@ -40,7 +43,8 @@ const Map<String, String> ar = {
   'Construction': 'أعمال البناء',
   'report': 'رفع شكوى',
   'pick the type of the report': 'إختر نوع الشكوى',
-  'Write a brief description of the problem...': 'اكتب وصفاً مختصراً للمشكلة...',
+  'Write a brief description of the problem...':
+      'اكتب وصفاً مختصراً للمشكلة...',
   'Attach a photo:': 'إرفاق صورة:',
   'Take a photo': 'التقاط صورة',
   'Choose from the gallery': 'اختيار من المعرض',
@@ -63,28 +67,49 @@ const Map<String, String> ar = {
   "Congratulations!": "تهانينا!",
   "You have reached your destination.": "لقد وصلت إلى وجهتك.",
   'Login Failed': 'فشل في تسجيل الدخول',
-  'Invalid email or password. Please try again.': 'بريد إلكتروني أو كلمة مرور غير صالحة. يرجى المحاولة مرة أخرى.',
+  'Invalid email or password. Please try again.':
+      'بريد إلكتروني أو كلمة مرور غير صالحة. يرجى المحاولة مرة أخرى.',
   'Error': 'خطأ',
-  "Invalid OTP. Please try again.": "كلمة المرور لمرة واحدة غير صالحة. يرجى المحاولة مرة أخرى.",
+  "Invalid OTP. Please try again.":
+      "كلمة المرور لمرة واحدة غير صالحة. يرجى المحاولة مرة أخرى.",
   "OTP Sent": "تم إرسال كلمة المرور لمرة واحدة",
-  "A new OTP has been sent to your phone.": "تم إرسال كلمة مرور لمرة واحدة جديدة إلى هاتفك.",
+  "A new OTP has been sent to your phone.":
+      "تم إرسال كلمة مرور لمرة واحدة جديدة إلى هاتفك.",
   "Please enter a valid email address.": "يرجى إدخال عنوان بريد إلكتروني صالح.",
   "Location access denied": "تم رفض الوصول إلى الموقع",
-  "An error occurred while getting directions:": "حدث خطأ أثناء الحصول على الاتجاهات:",
-  "An error occurred while submitting the complaint:": "حدث خطأ أثناء إرسال الشكوى:",
+  "An error occurred while getting directions:":
+      "حدث خطأ أثناء الحصول على الاتجاهات:",
+  "An error occurred while submitting the complaint:":
+      "حدث خطأ أثناء إرسال الشكوى:",
   "success": "نجاح",
   "No image is chosen.": "لم يتم اختيار صورة.",
   "The image was successfully selected!": "تم اختيار الصورة بنجاح!",
   "An error occurred while choosing the image:": "حدث خطأ أثناء اختيار الصورة:",
-  "The current location has been successfully determined!": "تم تحديد الموقع الحالي بنجاح!",
+  "The current location has been successfully determined!":
+      "تم تحديد الموقع الحالي بنجاح!",
   "Complaint sent successfully": "تم إرسال الشكوى بنجاح",
   "Account": "الحساب",
   "Account deleted successfully": "تم حذف الحساب بنجاح",
   "Please pay attention": "يرجى الانتباه",
-  "You are close to a note on the way ahead of you!" : "انت قريب على ملاحظة في الطريق امامك",
-  "For any comments or problems please contact" : "لأي ملاحظات او مشاكل  يرجى الاتصال على",
-"Score" : "تقييمي",
-"My total reports" : "الشكاوي الخاصة بي",
-"user id" : "الرقم التعريفي",
-"This feature will be added soon": "سيتم اضافة هذه الخاصية قريبا",
+  "You are close to a note on the way ahead of you!":
+      "انت قريب على ملاحظة في الطريق امامك",
+  "For any comments or problems please contact":
+      "لأي ملاحظات او مشاكل  يرجى الاتصال على",
+  "Score": "تقييمي",
+  "My total reports": "الشكاوي الخاصة بي",
+  "user id": "الرقم التعريفي",
+  "This feature will be added soon": "سيتم اضافة هذه الخاصية قريبا",
+  "Phone must start with +962 and contain 9 digits.":
+      "يجب أن يبدأ الهاتف بـ +962 ويحتوي على 9 أرقام.",
+  "Invalid email format.": "صيغة البريد الإلكتروني غير صالحة.",
+  "Name must contain only letters and spaces.":
+      "يجب أن يحتوي الاسم على أحرف فقط ومسافات.",
+  "Password must be at least 8 characters long, contain uppercase letters, numbers, and special characters.":
+      "يجب أن تحتوي كلمة المرور على الأقل على 8 خانات، مع أحرف كبيرة، أرقام، ورموز خاصة.",
+  "Unexpected error occurred during sign-up.":
+      "حدث خطأ غير متوقع أثناء التسجيل.",
+  "Please correct the errors before proceeding.":
+      "يرجى تصحيح الأخطاء قبل المتابعة.",
+  "The email or phone number is used before":
+      "ان الايميل او رقم الهاتف مستعملين من قبل",
 };

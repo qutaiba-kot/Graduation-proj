@@ -45,6 +45,7 @@ class ReportationController extends GetxController {
       );
     }
   }
+
   Future<void> getCurrentLocation() async {
     try {
       LocationPermission permission = await Geolocator.checkPermission();
@@ -84,6 +85,7 @@ class ReportationController extends GetxController {
       );
     }
   }
+
   final List<HazardType> problemTypes = HazardTypeService.getHazardTypes();
   Future<void> submitComplaint() async {
     try {
@@ -155,6 +157,7 @@ class ReportationController extends GetxController {
       print("♻️ إعادة تعيين الحقول...");
       resetForm();
       print("✅ تم إعادة تعيين الحقول بنجاح.");
+      Get.toNamed('/map');
     } catch (e, stackTrace) {
       print("❌ Error during complaint submission: $e");
       print("📚 Stack trace: $stackTrace");
@@ -167,6 +170,7 @@ class ReportationController extends GetxController {
       );
     }
   }
+
   Future<int> _insertLocation() async {
     print("📍 محاولة إدراج الموقع...");
     try {
@@ -192,6 +196,7 @@ class ReportationController extends GetxController {
       rethrow;
     }
   }
+
   Future<String> _uploadImage(File image) async {
     print("📤 بدء رفع الصورة إلى Storage...");
     try {
@@ -205,7 +210,7 @@ class ReportationController extends GetxController {
             imageName,
             imageBytes,
             fileOptions: const FileOptions(
-              contentType: 'image/jpeg', 
+              contentType: 'image/jpeg',
               upsert: false,
             ),
           );
@@ -220,6 +225,7 @@ class ReportationController extends GetxController {
       throw Exception("Failed to upload image: $e");
     }
   }
+
   void resetForm() {
     selectedProblemId.value = 0;
     descriptionController.clear();

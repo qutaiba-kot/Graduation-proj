@@ -22,7 +22,7 @@ class SignUpController extends GetxController {
   bool validateName(String name) {
     print("Validating name: $name");
     if (!RegExp(r'^[a-zA-Z\s]+$').hasMatch(name)) {
-      nameError.value = "Name must contain only letters and spaces.";
+      nameError.value = "Name must contain only letters and spaces.".tr;
       print("Name validation failed: ${nameError.value}");
       return false;
     }
@@ -34,7 +34,7 @@ class SignUpController extends GetxController {
   bool validateEmail(String email) {
     print("Validating email: $email");
     if (!RegExp(r'^[^@]+@[^@]+\.[^@]+$').hasMatch(email)) {
-      emailError.value = "Invalid email format.";
+      emailError.value = "Invalid email format.".tr;
       print("Email validation failed: ${emailError.value}");
       return false;
     }
@@ -47,7 +47,7 @@ class SignUpController extends GetxController {
     print("Validating phone: $phone");
     if (!phone.startsWith("+962") ||
         !RegExp(r'^\+962[0-9]{9}$').hasMatch(phone)) {
-      phoneError.value = "Phone must start with +962 and contain 9 digits.";
+      phoneError.value = "Phone must start with +962 and contain 9 digits.".tr;
       print("Phone validation failed: ${phoneError.value}");
       return false;
     }
@@ -66,7 +66,7 @@ class SignUpController extends GetxController {
 
     if (!hasUppercase || !hasDigits || !hasSpecialCharacters || !hasMinLength) {
       passwordError.value =
-          "Password must be at least 8 characters long, contain uppercase letters, numbers, and special characters.";
+          "Password must be at least 8 characters long, contain uppercase letters, numbers, and special characters.".tr;
       print("Password validation failed: ${passwordError.value}");
       return false;
     }
@@ -133,13 +133,13 @@ class SignUpController extends GetxController {
         print("Navigating to the home page...");
         Get.offAllNamed(Routes.MAP);
       } else {
-        throw Exception("Unexpected error occurred during sign-up.");
+        throw Exception("Unexpected error occurred during sign-up.".tr);
       }
     } catch (e) {
       print("Error occurred during sign-up: ${e.toString()}");
       Get.snackbar(
-        "Sign Up Error",
-        e.toString(),
+        "Error".tr,
+        "The email or phone number is used before".tr,
         snackPosition: SnackPosition.BOTTOM,
       );
     } finally {

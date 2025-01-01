@@ -117,7 +117,7 @@ class LoginView extends StatelessWidget {
                           Get.snackbar(
                             "Error".tr,
                             "Please correct the errors before proceeding.".tr,
-                            snackPosition: SnackPosition.TOP,
+                            snackPosition: SnackPosition.BOTTOM,
                           );
                         }
                       },
@@ -128,7 +128,11 @@ class LoginView extends StatelessWidget {
             SizedBox(height: getHeight(context, 0.04)),
             CustomTextButton(
               text: 'forgot_password'.tr,
-              onPressed: () => {}, 
+              onPressed: () => {Get.snackbar(
+                  "This feature will be added soon".tr,
+                  "",
+                  snackPosition: SnackPosition.BOTTOM,
+                )}, 
               backgroundColor: Theme.of(context).colorScheme.background,
               textColor: Theme.of(context).colorScheme.primary,
             ),
