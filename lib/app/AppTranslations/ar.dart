@@ -17,7 +17,7 @@ const Map<String, String> ar = {
   'name': 'الاسم',
   'phone': 'رقم الهاتف',
   'theme_switcher': 'تغيير الثيم',
-  'Dont have an account ? Sign Up ': 'ليس لديط حساب ؟ إنشاء حساب ',
+  'Dont have an account ? Sign Up ': 'ليس لديك حساب ؟ إنشاء حساب ',
   'Already have an account? Login': 'لديط حساب بالفعل ؟ تسجيل الدخول',
   'Please enter the 6-digit code sent to your phone':
       'الرجاء إدخال الرمز المكون من 6 خانات المرسل الى هاتفك',
@@ -112,7 +112,4 @@ const Map<String, String> ar = {
       "ان الايميل او رقم الهاتف مستعملين من قبل",
   "OK": "حسنا",
   "The password or email has an error" : "كلمة السر او الايميل يوجد بهم خطأ",
-" min" : " د",
-"hrs" : " س ",
-"Km" : " Km",
 };

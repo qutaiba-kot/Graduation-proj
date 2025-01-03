@@ -27,6 +27,9 @@ class MapController extends GetxController {
   final Rx<LatLng?> selectedDestination = Rx<LatLng?>(null);
   final Rx<String> remainingDistance = ''.obs;
   final Rx<String> remainingDuration = ''.obs;
+  // final Rx<String> distanceText = ''.obs;
+  //final Rx<String> durationText = ''.obs;
+
   final RxList<Map<String, dynamic>> searchSuggestions =
       <Map<String, dynamic>>[].obs;
   StreamSubscription<Position>? positionStream;
@@ -233,7 +236,6 @@ class MapController extends GetxController {
       ),
     );
   }
-
   Future<void> getDirections(LatLng start, LatLng destination) async {
     try {
       final url =
@@ -259,21 +261,19 @@ class MapController extends GetxController {
     } catch (e) {
       Get.snackbar(
         "Error".tr,
-        "An error occurred while getting directions:$e".tr,
+        "An error occurred while getting directions".tr,
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: Colors.red,
         colorText: Get.theme.colorScheme.background,
       );
     }
   }
-   void updateRouteProgress(Position position) async {
+  void updateRouteProgress(Position position) async {
     if (routePolyline.value.points.isEmpty ||
         selectedDestination.value == null) {
       return;
     }
-
     LatLng currentPosition = LatLng(position.latitude, position.longitude);
-
     for (LatLng markerPosition in recallTags.markerCoordinates) {
       double distanceToMarker = Geolocator.distanceBetween(
         currentPosition.latitude,
@@ -281,7 +281,6 @@ class MapController extends GetxController {
         markerPosition.latitude,
         markerPosition.longitude,
       );
-
       if (distanceToMarker <= 30 && distanceToMarker >= 20) {
         Get.snackbar(
           "Please pay attention".tr,
@@ -303,7 +302,6 @@ class MapController extends GetxController {
         }
       }
     }
-
     double minDistance = double.infinity;
     int closestIndex = 0;
     for (int i = 0; i < routePolyline.value.points.length; i++) {
@@ -318,7 +316,6 @@ class MapController extends GetxController {
         closestIndex = i;
       }
     }
-
     double totalRemainingDistance = 0;
     for (int i = closestIndex; i < routePolyline.value.points.length - 1; i++) {
       totalRemainingDistance += Geolocator.distanceBetween(
@@ -328,10 +325,6 @@ class MapController extends GetxController {
         routePolyline.value.points[i + 1].longitude,
       );
     }
-
-    remainingDistance.value =
-        "${(totalRemainingDistance / 1000).toStringAsFixed(2)}"+"Km".tr;
-
     if (totalRemainingDistance <= 1) {
       Get.snackbar(
         "Congratulations!".tr,
@@ -342,34 +335,15 @@ class MapController extends GetxController {
       );
       stopNavigation();
     }
-
-    double averageSpeed = 40.0;
-double estimatedTime = totalRemainingDistance / (averageSpeed / 3.6);
-
-int hours = estimatedTime ~/ 3600; // عدد الساعات
-int minutes = (estimatedTime % 3600) ~/ 60; // عدد الدقائق المتبقية
-
-if (hours > 0) {
-  // إذا كان الوقت أكثر من ساعة
-  remainingDuration.value = "${hours}" +"hrs".tr+ "${minutes}"+" min".tr;
-} else {
-  // إذا كان الوقت أقل من ساعة
-  remainingDuration.value = "${minutes}"+" min".tr;
-}
-
-print("The estimated time is: ${remainingDuration.value}");
-
+    print("The estimated time is: ${remainingDuration.value}");
     List<LatLng> remainingPoints =
         routePolyline.value.points.sublist(closestIndex);
     routePolyline.value =
         routePolyline.value.copyWith(pointsParam: remainingPoints);
-
     routePolyline.refresh();
     remainingDistance.refresh();
     remainingDuration.refresh();
   }
-
-
   void startTracking() {
     if (positionStream != null) {
       print("⚠️ Tracking is already active.");
@@ -377,7 +351,7 @@ print("The estimated time is: ${remainingDuration.value}");
     }
     positionStream = Geolocator.getPositionStream(
       locationSettings: LocationSettings(
-        accuracy: LocationAccuracy.high,
+        accuracy: LocationAccuracy.bestForNavigation,
         distanceFilter: 3,
       ),
     ).listen((Position position) {
@@ -388,7 +362,6 @@ print("The estimated time is: ${remainingDuration.value}");
     print("🚀 Tracking started.");
   }
 
- 
   void updateCameraWithBearing(Position position) {
     final newCameraPosition = CameraPosition(
       target: LatLng(position.latitude, position.longitude),

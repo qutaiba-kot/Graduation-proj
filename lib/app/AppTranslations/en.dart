@@ -115,7 +115,4 @@ const Map<String, String> en = {
       "The email or phone number is used before",
   "OK": "OK",
     "The password or email has an error" : "The password or email has an error",
-" min" : " Min",
-"hrs" : " Hrs ",
-"Km" : " Km",
 };
