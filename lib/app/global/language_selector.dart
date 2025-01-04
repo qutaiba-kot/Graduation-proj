@@ -5,8 +5,6 @@ import 'package:maps/app/const/size.dart';
 
 class LanguageSelector extends StatelessWidget {
   final double height;
-
-  // يمكنك تعيين قيمة افتراضية للارتفاع هنا، مثلاً 50.0
   LanguageSelector({this.height = 50.0});
 
   @override

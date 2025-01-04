@@ -102,7 +102,6 @@ class ReportationController extends GetxController {
       final UserStorageService userStorage = UserStorageService();
 
       int locationId = await _insertLocation();
-
       print("📍 موقع إدراج الموقع ناجح، ID: $locationId");
 
       final reportResult = await Supabase.instance.client

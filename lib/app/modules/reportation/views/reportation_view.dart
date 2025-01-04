@@ -213,7 +213,6 @@ class ReportationView extends GetView<ReportationController> {
                     ),
                   backgroundColor: Colors.yellow,
                   ),
-                  
                 ),
               ),
             ],

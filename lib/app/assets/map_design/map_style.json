@@ -55,60 +55,60 @@
       ]
     }
   ],
-  "night": [
-    {
-      "featureType": "all",
-      "elementType": "geometry",
-      "stylers": [
-        {
-          "color": "#242f3e"
-        }
-      ]
-    },
-    {
-      "featureType": "road",
-      "elementType": "geometry",
-      "stylers": [
-        {
-          "color": "#38414e"
-        }
-      ]
-    },
-    {
-      "featureType": "road.highway",
-      "elementType": "geometry",
-      "stylers": [
-        {
-          "color": "#f2994a"
-        }
-      ]
-    },
-    {
-      "featureType": "water",
-      "elementType": "geometry",
-      "stylers": [
-        {
-          "color": "#17263c"
-        }
-      ]
-    },
-    {
-      "featureType": "landscape",
-      "elementType": "geometry",
-      "stylers": [
-        {
-          "color": "#1d2c4d"
-        }
-      ]
-    },
-    {
-      "featureType": "poi",
-      "elementType": "geometry",
-      "stylers": [
-        {
-          "color": "#3e4d61"
-        }
-      ]
-    }
-  ]
+    "night": [
+      {
+        "featureType": "all",
+        "elementType": "geometry",
+        "stylers": [
+          {
+            "color": "#121212"
+          }
+        ]
+      },
+      {
+        "featureType": "road",
+        "elementType": "geometry",
+        "stylers": [
+          {
+            "color": "#444444"
+          }
+        ]
+      },
+      {
+        "featureType": "road.highway",
+        "elementType": "geometry",
+        "stylers": [
+          {
+            "color": "#f1a700"
+          }
+        ]
+      },
+      {
+        "featureType": "water",
+        "elementType": "geometry",
+        "stylers": [
+          {
+            "color": "#1a2b3c"
+          }
+        ]
+      },
+      {
+        "featureType": "landscape",
+        "elementType": "geometry",
+        "stylers": [
+          {
+            "color": "#212f45"
+          }
+        ]
+      },
+      {
+        "featureType": "poi",
+        "elementType": "geometry",
+        "stylers": [
+          {
+            "color": "#5f6d7a"
+          }
+        ]
+      }
+    ]
 }

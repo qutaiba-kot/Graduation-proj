@@ -11,13 +11,6 @@ class ProfileController extends GetxController {
     super.onInit();
   }
 
-  void deleteAccount() {
-    userStorage.clearUserData();
-    profileImage.value = null;
-    Get.snackbar("Account".tr, "Account deleted successfully".tr,
-        backgroundColor: Colors.red, colorText: Colors.white);
-  }
-
   ImageProvider getProfileImage() {
     if (profileImage.value == null) {
       return const AssetImage("lib/app/assets/images/OIP.jpeg");
