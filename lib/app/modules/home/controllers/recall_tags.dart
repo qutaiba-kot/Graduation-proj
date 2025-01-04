@@ -13,7 +13,7 @@ class RecallTags extends GetxController {
       IconData iconData, Color backgroundColor, Color iconColor) async {
     final pictureRecorder = ui.PictureRecorder();
     final canvas = Canvas(pictureRecorder);
-    const size = 150; 
+    const size =  150; 
 
     final paint = Paint()..color = backgroundColor;
     final textPainter = TextPainter(

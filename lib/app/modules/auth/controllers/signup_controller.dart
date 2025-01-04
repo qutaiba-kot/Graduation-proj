@@ -92,54 +92,64 @@ class SignUpController extends GetxController {
   }
 
   void signUp(String name, String email, String phone, String password) async {
-    print("Sign-up initiated...");
+    print("Sign-up process started...");
     isLoading.value = true;
 
     try {
-      print("Sending user data to Supabase...");
-      final response = await Supabase.instance.client
+      // Step 1: Register user in Supabase Authentication
+      print("Sending email and password to Supabase authentication...");
+      print("Email: $email, Password: $password");
+      final signUpResponse = await Supabase.instance.client.auth.signUp(
+        email: email,
+        password: password,
+      );
+
+      final uuid = signUpResponse.user?.id;
+      if (uuid == null) {
+        throw Exception("Failed to retrieve user ID (UUID) from sign-up response.");
+      }
+      print("User registered successfully with UUID: $uuid");
+
+      // Step 2: Insert user data into 'users' table
+      print("Inserting user data into 'users' table...");
+      final userResponse = await Supabase.instance.client
           .from('users')
           .insert({
-            'email': email,
-            'password_hash': password, 
+            'auth_id': uuid,
             'name': name,
+            'email': email,
             'phone': phone,
-            'trusted_score': 100,
-            'total_reports': 0,
           })
           .select()
           .maybeSingle();
 
-      if (response != null) {
-        print("User successfully registered. Response: $response");
-        Get.snackbar(
-          "success".tr,
-          "signup".tr,
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.green,
-          colorText: Colors.white,
-        );
+      if (userResponse != null) {
+        print("User data inserted successfully. Response: $userResponse");
+
+        // Save user data locally
         print("Saving user data locally...");
         userStorageService.saveUserData(
-          email: response['email'],
-          phone: response['phone'],
-          name: response['name'],
-          userId: response['id'],
-          trustedScore: response['trusted_score'],
-          totalReports: response['total_reports'],
+          email: userResponse['email'],
+          phone: userResponse['phone'],
+          name: userResponse['name'],
+          userId: userResponse['id'],
+          trustedScore: userResponse['trusted_score'],
+          totalReports: userResponse['total_reports'],
           isLoggedIn: true,
         );
         print("User data saved locally.");
+
+        // Navigate to the home page
         print("Navigating to the home page...");
         Get.offAllNamed(Routes.MAP);
       } else {
-        throw Exception("Unexpected error occurred during sign-up.".tr);
+        throw Exception("Unexpected error occurred while inserting user data into 'users' table.");
       }
     } catch (e) {
       print("Error occurred during sign-up: ${e.toString()}");
       Get.snackbar(
         "Error".tr,
-        "The email or phone number is used before".tr,
+        e.toString().tr,
         snackPosition: SnackPosition.BOTTOM,
       );
     } finally {

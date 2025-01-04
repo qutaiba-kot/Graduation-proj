@@ -9,7 +9,7 @@ import 'package:maps/app/global/theme_switcher.dart';
 import 'package:maps/app/modules/auth/controllers/signup_controller.dart';
 
 class SignUpView extends StatelessWidget {
-    final SignUpController controller = Get.find<SignUpController>();
+  final SignUpController controller = Get.find<SignUpController>();
 
   final nameController = TextEditingController();
   final emailController = TextEditingController();
@@ -41,7 +41,6 @@ class SignUpView extends StatelessWidget {
               color: Theme.of(context).colorScheme.primary,
             ),
             SizedBox(height: getHeight(context, 0.05)),
-
             Obx(() => CustomTextField(
                   controller: nameController,
                   hintText: "name".tr,
@@ -65,9 +64,7 @@ class SignUpView extends StatelessWidget {
                       : null,
                   onChanged: (value) => controller.validateName(value),
                 )),
-
             SizedBox(height: getHeight(context, 0.02)),
-
             Obx(() => CustomTextField(
                   controller: emailController,
                   hintText: "email".tr,
@@ -80,8 +77,7 @@ class SignUpView extends StatelessWidget {
                   ),
                   textColor: Theme.of(context).colorScheme.background,
                   borderColor: Theme.of(context).colorScheme.background,
-                  focusedBorderColor:
-                      Theme.of(context).colorScheme.primary,
+                  focusedBorderColor: Theme.of(context).colorScheme.primary,
                   prefixIcon: Icon(
                     Icons.email,
                     color: Theme.of(context).colorScheme.background,
@@ -91,13 +87,11 @@ class SignUpView extends StatelessWidget {
                       : null,
                   onChanged: (value) => controller.validateEmail(value),
                 )),
-
             SizedBox(height: getHeight(context, 0.02)),
-
             Obx(
               () => CustomTextField(
                 controller: phoneController,
-                hintText: "name".tr, 
+                hintText: "name".tr,
                 backgroundColor: Theme.of(context).colorScheme.primary,
                 hintStyle: TextStyle(
                   color:
@@ -110,7 +104,7 @@ class SignUpView extends StatelessWidget {
                   Icons.phone,
                   color: Theme.of(context).colorScheme.background,
                 ),
-                textDirection: TextDirection.ltr, 
+                textDirection: TextDirection.ltr,
                 errorText: controller.phoneError.value.isNotEmpty
                     ? controller.phoneError.value
                     : null,
@@ -133,9 +127,7 @@ class SignUpView extends StatelessWidget {
                 },
               ),
             ),
-
             SizedBox(height: getHeight(context, 0.02)),
-
             Obx(() => CustomTextField(
                   controller: passwordController,
                   hintText: "password".tr,
@@ -148,8 +140,7 @@ class SignUpView extends StatelessWidget {
                   ),
                   textColor: Theme.of(context).colorScheme.background,
                   borderColor: Theme.of(context).colorScheme.background,
-                  focusedBorderColor:
-                      Theme.of(context).colorScheme.primary,
+                  focusedBorderColor: Theme.of(context).colorScheme.primary,
                   obscureText: !controller.isPasswordVisible.value,
                   prefixIcon: Icon(
                     Icons.lock,
@@ -167,9 +158,7 @@ class SignUpView extends StatelessWidget {
                       : null,
                   onChanged: (value) => controller.validatePassword(value),
                 )),
-
             SizedBox(height: getHeight(context, 0.03)),
-
             Obx(() => controller.isLoading.value
                 ? CircularProgressIndicator()
                 : CustomButton(
@@ -199,14 +188,12 @@ class SignUpView extends StatelessWidget {
                     textColor: Theme.of(context).colorScheme.background,
                     width: getWidth(context, 0.9),
                   )),
-
             SizedBox(height: getHeight(context, 0.02)),
-
             CustomTextButton(
               text: 'Already have an account? Login'.tr,
               onPressed: () => Get.offAllNamed('/login'),
               backgroundColor: Theme.of(context).colorScheme.background,
-              textColor: Theme.of(context).colorScheme.onBackground,
+              textColor: Theme.of(context).colorScheme.primary,
             ),
           ],
         ),

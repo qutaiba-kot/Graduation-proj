@@ -9,6 +9,7 @@ class LoginController extends GetxController {
   RxString passwordError = ''.obs;
   RxBool isLoading = false.obs;
   final UserStorageService userStorageService = UserStorageService();
+  
   bool validateEmail(String email) {
     final emailRegex =
         RegExp(r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$");
@@ -20,7 +21,9 @@ class LoginController extends GetxController {
     emailError.value = '';
     return true;
   }
-  bool validatePassword(String password) {print("Validating password...");
+
+  bool validatePassword(String password) {
+    print("Validating password...");
     final hasUppercase = password.contains(RegExp(r'[A-Z]'));
     final hasDigits = password.contains(RegExp(r'[0-9]'));
     final hasSpecialCharacters =
@@ -37,6 +40,7 @@ class LoginController extends GetxController {
     print("Password validation passed.");
     return true;
   }
+
   void login(String email, String password) async {
     if (!validateEmail(email) || !validatePassword(password)) {
       Get.snackbar(
@@ -46,31 +50,50 @@ class LoginController extends GetxController {
       );
       return;
     }
+    
     isLoading.value = true;
-
     try {
       print("🚀 Starting login process...");
       print("📧 Email: $email");
-      print("Fetching user data from Supabase...");
+      print("Sending credentials to Supabase...");
+      
+      // إرسال البريد وكلمة السر إلى Supabase لتسجيل الدخول
+      final response = await Supabase.instance.client.auth.signInWithPassword(
+        email: email,
+        password: password,
+      );
+      
+      /*if (response.error != null) {
+        print("❌ Login failed: ${response.error?.message}");
+        throw Exception("Login failed: ${response.error?.message}");
+      }*/
+      
+      final uuid = response.user?.id ?? 'Unknown';
+      print("🎉 Login successful. User UUID: $uuid");
+      
+      // البحث عن المستخدم في جدول 'users' باستخدام الـ uuid
       final additionalData = await Supabase.instance.client
           .from('users')
           .select('id, email, name, phone, password_hash, trusted_score, total_reports')
-          .eq('email', email)
-          //.eq('password_hash' ,password )
+          .eq('auth_id', uuid)
           .single();
+      
       print("Data fetched from Supabase: $additionalData");
       if (additionalData == false || additionalData.isEmpty) {
-        print("❌ No user found with the provided email.");
-        throw Exception("Invalid email or password.");
+        print("❌ No user found with the provided UUID.");
+        throw Exception("No user found.");
       }
+      
       final userId = additionalData['id'] ?? 'Unknown';
       final userEmail = additionalData['email'] ?? 'Unknown';
       final name = additionalData['name'] ?? 'Unknown';
       final phone = additionalData['phone'] ?? 'Unknown';
       final trustedScore = additionalData['trusted_score'] ?? 0;
       final totalReports = additionalData['total_reports'] ?? 0;
-      print(
-          "Parsed Data -> UserID: $userId, Email: $userEmail, Name: $name, Phone: $phone, Trusted Score: $trustedScore, Total Reports: $totalReports");
+      
+      print("Parsed Data -> UserID: $userId, Email: $userEmail, Name: $name, Phone: $phone, Trusted Score: $trustedScore, Total Reports: $totalReports");
+      
+      // حفظ بيانات المستخدم محليًا
       print("Saving user data locally...");
       userStorageService.saveUserData(
         email: userEmail,
@@ -82,30 +105,35 @@ class LoginController extends GetxController {
         isLoggedIn: true,
       );
       print("✅ User data saved locally.");
+      
+      // الانتقال إلى الصفحة الرئيسية
       print("Navigating to the home page...");
       Get.snackbar(
-          "success".tr,
-          "login".tr,
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.green,
-          colorText: Colors.white,
-        );
+        "Success".tr,
+        "Login successful".tr,
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.green,
+        colorText: Colors.white,
+      );
       Get.offAllNamed('/map');
+      
     } catch (e) {
       print("❌ Login Error: $e");
       Get.snackbar(
         "The password or email has an error".tr,
         "Please correct the errors before proceeding.".tr,
         snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.red
+        backgroundColor: Colors.red,
       );
     } finally {
       isLoading.value = false;
     }
   }
+
   void togglePasswordVisibility() {
     isPasswordVisible.value = !isPasswordVisible.value;
   }
+
   void resetErrors() {
     emailError.value = '';
     passwordError.value = '';
