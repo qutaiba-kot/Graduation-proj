@@ -156,7 +156,6 @@ class ReportationController extends GetxController {
       print("♻️ إعادة تعيين الحقول...");
       resetForm();
       print("✅ تم إعادة تعيين الحقول بنجاح.");
-      Get.toNamed('/map');
     } catch (e, stackTrace) {
       print("❌ Error during complaint submission: $e");
       print("📚 Stack trace: $stackTrace");

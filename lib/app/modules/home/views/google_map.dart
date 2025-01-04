@@ -72,6 +72,8 @@ class GoogleMapView extends GetView<MapController> {
                     ],
                   ),
                   child: TextField(
+                    controller: controller
+                        .textEditingController, // استخدام TextEditingController
                     cursorColor: Theme.of(context).colorScheme.background,
                     style: TextStyle(
                       color: Theme.of(context).colorScheme.background,
@@ -91,6 +93,16 @@ class GoogleMapView extends GetView<MapController> {
                       prefixIcon: Icon(
                         Icons.search,
                         color: Theme.of(context).colorScheme.background,
+                      ),
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          Icons.clear,
+                          color: Theme.of(context).colorScheme.background,
+                        ),
+                        onPressed: () {
+                          controller.textEditingController.clear();
+                          controller.searchSuggestions.clear();
+                        },
                       ),
                     ),
                     onChanged: (query) {
@@ -131,6 +143,7 @@ class GoogleMapView extends GetView<MapController> {
                                 ),
                               ),
                               onTap: () async {
+                                controller.textEditingController.clear();
                                 final placeId = suggestion['place_id'];
                                 final description = suggestion['description'];
                                 controller.searchSuggestions.clear();
@@ -172,10 +185,10 @@ class GoogleMapView extends GetView<MapController> {
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [                        
+                      children: [
                         Flexible(
                           child: Text(
-                                controller.remainingDistance.value,
+                            controller.remainingDistance.value,
                             style: TextStyle(
                               fontSize: getWidth(context, 0.035),
                               fontWeight: FontWeight.bold,
@@ -210,7 +223,7 @@ class GoogleMapView extends GetView<MapController> {
                         ),
                         Flexible(
                           child: Text(
-                                controller.remainingDuration.value,
+                            controller.remainingDuration.value,
                             style: TextStyle(
                               fontSize: getWidth(context, 0.035),
                               fontWeight: FontWeight.bold,

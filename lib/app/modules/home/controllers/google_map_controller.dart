@@ -24,6 +24,7 @@ class MapController extends GetxController {
     color: Colors.blue,
     width: 5,
   ).obs;
+  final TextEditingController textEditingController = TextEditingController();
   final Rx<LatLng?> selectedDestination = Rx<LatLng?>(null);
   final Rx<String> remainingDistance = ''.obs;
   final Rx<String> remainingDuration = ''.obs;

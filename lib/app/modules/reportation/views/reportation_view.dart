@@ -5,6 +5,7 @@ import 'package:maps/app/const/size.dart';
 import 'package:maps/app/modules/reportation/controllers/reportation_controller.dart';
 import '../../../assets/hazzard types/hazard_types.dart';
 import '../../../global/text_feild.dart';
+
 class ReportationView extends GetView<ReportationController> {
   @override
   Widget build(BuildContext context) {
@@ -28,7 +29,11 @@ class ReportationView extends GetView<ReportationController> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Icon(Icons.report, size: 110,color:Theme.of(context).colorScheme.primary,),
+              Icon(
+                Icons.report,
+                size: 110,
+                color: Theme.of(context).colorScheme.primary,
+              ),
               Card(
                 color: Theme.of(context).colorScheme.primary,
                 elevation: 3,
@@ -48,11 +53,17 @@ class ReportationView extends GetView<ReportationController> {
                               value: hazard.hazardTypeId,
                               child: Row(
                                 children: [
-                                  Icon(hazard.icon, color: Theme.of(context).colorScheme.background),
+                                  Icon(hazard.icon,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .background),
                                   SizedBox(width: 8),
                                   Text(
                                     hazard.name,
-                                    style: TextStyle(color: Theme.of(context).colorScheme.background),
+                                    style: TextStyle(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .background),
                                   ),
                                 ],
                               ),
@@ -61,11 +72,14 @@ class ReportationView extends GetView<ReportationController> {
                           .toList(),
                       hint: Row(
                         children: [
-                          Icon(Icons.warning, color: Theme.of(context).colorScheme.background),
+                          Icon(Icons.warning,
+                              color: Theme.of(context).colorScheme.background),
                           SizedBox(width: 8),
                           Text(
                             'pick the type of the report'.tr,
-                            style: TextStyle(color: Theme.of(context).colorScheme.background),
+                            style: TextStyle(
+                                color:
+                                    Theme.of(context).colorScheme.background),
                           ),
                         ],
                       ),
@@ -73,7 +87,8 @@ class ReportationView extends GetView<ReportationController> {
                         controller.selectedProblemId.value = value!;
                       },
                       dropdownColor: Theme.of(context).colorScheme.primary,
-                      iconEnabledColor: Theme.of(context).colorScheme.background,
+                      iconEnabledColor:
+                          Theme.of(context).colorScheme.background,
                       style: TextStyle(fontSize: 16),
                     ),
                   ),
@@ -92,13 +107,16 @@ class ReportationView extends GetView<ReportationController> {
                     controller: controller.descriptionController,
                     maxLines: 3,
                     hintText: 'Write a brief description of the problem...'.tr,
-                    hintStyle: TextStyle(color: Theme.of(context).colorScheme.onBackground,),
-                    labelStyle: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+                    hintStyle: TextStyle(
+                      color: Theme.of(context).colorScheme.onBackground,
+                    ),
+                    labelStyle:
+                        TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
                     borderRadius: 8.0,
                     borderColor: Theme.of(context).colorScheme.background,
                     backgroundColor: Theme.of(context).colorScheme.background,
                     textColor: Theme.of(context).colorScheme.onBackground,
-                    cursorColor :Theme.of(context).colorScheme.primary,
+                    cursorColor: Theme.of(context).colorScheme.primary,
                   ),
                 ),
               ),
@@ -116,7 +134,11 @@ class ReportationView extends GetView<ReportationController> {
                     children: [
                       Text(
                         'Attach a photo:'.tr,
-                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Theme.of(context).colorScheme.background,),
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                          color: Theme.of(context).colorScheme.background,
+                        ),
                       ),
                       SizedBox(height: 8),
                       Row(
@@ -132,7 +154,8 @@ class ReportationView extends GetView<ReportationController> {
                                       title: Text('Take a photo'.tr),
                                       onTap: () {
                                         Navigator.pop(context);
-                                        controller.pickImage(source: ImageSource.camera);
+                                        controller.pickImage(
+                                            source: ImageSource.camera);
                                       },
                                     ),
                                     ListTile(
@@ -140,7 +163,8 @@ class ReportationView extends GetView<ReportationController> {
                                       title: Text('Choose from the gallery'.tr),
                                       onTap: () {
                                         Navigator.pop(context);
-                                        controller.pickImage(source: ImageSource.gallery);
+                                        controller.pickImage(
+                                            source: ImageSource.gallery);
                                       },
                                     ),
                                   ],
@@ -161,7 +185,14 @@ class ReportationView extends GetView<ReportationController> {
                                     fit: BoxFit.cover,
                                   ),
                                 )
-                              : Text('No image selected'.tr , style: TextStyle(color: Theme.of(context).colorScheme.background ,),)),
+                              : Text(
+                                  'No image selected'.tr,
+                                  style: TextStyle(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .background,
+                                  ),
+                                )),
                         ],
                       ),
                     ],
@@ -190,10 +221,14 @@ class ReportationView extends GetView<ReportationController> {
                       SizedBox(height: 8),
                       Obx(
                         () => Text(
-                          controller.latitude.value != 0.0 && controller.longitude.value != 0.0
+                          controller.latitude.value != 0.0 &&
+                                  controller.longitude.value != 0.0
                               ? '${'current_location'.tr}\n${'latitude'.tr}: ${controller.latitude.value}\n${'longitude'.tr}: ${controller.longitude.value}'
                               : 'Location not yet determined'.tr,
-                          style: TextStyle(fontSize: 14, color: Theme.of(context).colorScheme.background,),
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Theme.of(context).colorScheme.background,
+                          ),
                         ),
                       ),
                     ],
@@ -204,14 +239,14 @@ class ReportationView extends GetView<ReportationController> {
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: controller.submitComplaint,
+                  onPressed:controller.submitComplaint,
                   child: Text('Submit a complaint'.tr),
                   style: ElevatedButton.styleFrom(
                     padding: EdgeInsets.symmetric(vertical: 16),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
-                  backgroundColor: Colors.yellow,
+                    backgroundColor: Colors.yellow,
                   ),
                 ),
               ),
