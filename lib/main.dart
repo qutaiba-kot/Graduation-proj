@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'My App',
+      title: 'Khaberni',
       theme: AppTheme.light.copyWith(
         textSelectionTheme: TextSelectionThemeData(
           cursorColor: Colors.white, 

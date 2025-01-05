@@ -9,8 +9,9 @@ import '../controllers/google_map_controller.dart';
 import '../controllers/recall_tags.dart';
 
 class GoogleMapView extends GetView<MapController> {
+  
   final RecallTags recallTags = Get.find<RecallTags>();
-  bool language = GetStorage().read('lang') == 'ar';
+  final bool language = GetStorage().read('lang') == 'ar';
   @override
   Widget build(BuildContext context) {
     return Scaffold(

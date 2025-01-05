@@ -28,8 +28,6 @@ class MapController extends GetxController {
   final Rx<LatLng?> selectedDestination = Rx<LatLng?>(null);
   final Rx<String> remainingDistance = ''.obs;
   final Rx<String> remainingDuration = ''.obs;
-  // final Rx<String> distanceText = ''.obs;
-  //final Rx<String> durationText = ''.obs;
 
   final RxList<Map<String, dynamic>> searchSuggestions =
       <Map<String, dynamic>>[].obs;
@@ -151,8 +149,6 @@ class MapController extends GetxController {
         ? json.encode(mapStyles['night'])
         : json.encode(mapStyles['day']);
   }
-
-  @override
   Future<void> fetchSearchSuggestions(String query) async {
     try {
       final url =
@@ -404,7 +400,7 @@ class MapController extends GetxController {
       routePolyline.value.points,
     );
 
-    if (distanceToNearestPoint > 50) {
+    if (distanceToNearestPoint > 20) {
       if (selectedDestination.value != null) {
         await getDirections(
           LatLng(position.latitude, position.longitude),
