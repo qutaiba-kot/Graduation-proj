@@ -11,7 +11,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
   WidgetsFlutterBinding.ensureInitialized();
-  await initSupabase(); 
+  await initSupabase();
   runApp(MyApp());
 }
 
@@ -26,23 +26,23 @@ class MyApp extends StatelessWidget {
       title: 'Khaberni',
       theme: AppTheme.light.copyWith(
         textSelectionTheme: TextSelectionThemeData(
-          cursorColor: Colors.white, 
+          cursorColor: Colors.white,
           selectionColor: Colors.white.withOpacity(0.3),
           selectionHandleColor: Colors.white,
         ),
       ),
       darkTheme: AppTheme.dark.copyWith(
         textSelectionTheme: TextSelectionThemeData(
-          cursorColor: Colors.black, 
+          cursorColor: Colors.black,
           selectionColor: Colors.black.withOpacity(0.3),
-          selectionHandleColor: Colors.black, 
+          selectionHandleColor: Colors.black,
         ),
       ),
-      themeMode: _getThemeMode(), 
-      initialRoute: _getInitialRoute(), 
+      themeMode: _getThemeMode(),
+      initialRoute: _getInitialRoute(),
       getPages: AppPages.routes,
       translations: AppTranslations(),
-      locale: Locale(storage.read('lang') ?? 'en'), 
+      locale: Locale(storage.read('lang') ?? 'en'),
     );
   }
 
@@ -52,10 +52,10 @@ class MyApp extends StatelessWidget {
   }
 
   String _getInitialRoute() {
-if (userStorage.isLoggedIn) {
-  return '/map' ;
-} else {
-  return AppPages.INITIAL;
-}
+    if (userStorage.isLoggedIn) {
+      return '/map';
+    } else {
+      return AppPages.INITIAL;
+    }
   }
 }

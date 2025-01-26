@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:maps/app/const/size.dart';
 import '../controllers/settings_controller.dart';
 import 'package:maps/app/global/language_selector.dart';
 import 'package:maps/app/global/theme_switcher.dart';
@@ -28,11 +29,14 @@ class SettingsView extends GetView<SettingsController> {
           children: [
      
             ListTile(
-              leading: LanguageSelector()
+              leading: LanguageSelector(),
+              horizontalTitleGap: getWidth(context, 0.4),
+              title: Text("Language".tr , style: TextStyle(color:Theme.of(context).colorScheme.onBackground, ),),
             ),
             Divider(color: Theme.of(context).colorScheme.primary.withOpacity(0.3)),
-
             ListTile(
+              horizontalTitleGap: getWidth(context, 0.55),
+              title: Text("Mode".tr , style: TextStyle(color:Theme.of(context).colorScheme.onBackground, ),),
               leading:ThemeSwitcher(), 
             ),
             Divider(color: Theme.of(context).colorScheme.primary.withOpacity(0.3)),

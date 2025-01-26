@@ -122,4 +122,6 @@ const Map<String, String> en = {
     'You will be logged out of the existing account. Do you want to continue the process?' : 'You will be logged out of the existing account. Do you want to continue the process?' ,
     "Cancel" : "Cancel",
     "Call" : "Call",
+    "Mode" : "Mode" ,
+    "Language" : "Language",
 };
