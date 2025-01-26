@@ -135,6 +135,7 @@ class RecallTags extends GetxController {
 
       markers.refresh();
       print("✅ [COMPLETE] Markers added successfully: ${markers.length} markers in total.");
+      Get.back();
     } catch (e) {
       print("❌ [ERROR] An error occurred: $e");
     }

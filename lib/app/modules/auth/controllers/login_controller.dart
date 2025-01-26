@@ -9,7 +9,7 @@ class LoginController extends GetxController {
   RxString passwordError = ''.obs;
   RxBool isLoading = false.obs;
   final UserStorageService userStorageService = UserStorageService();
-  
+
   bool validateEmail(String email) {
     final emailRegex =
         RegExp(r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$");
@@ -32,7 +32,8 @@ class LoginController extends GetxController {
 
     if (!hasUppercase || !hasDigits || !hasSpecialCharacters || !hasMinLength) {
       passwordError.value =
-          "Password must be at least 8 characters long, contain uppercase letters, numbers, and special characters.".tr;
+          "Password must be at least 8 characters long, contain uppercase letters, numbers, and special characters."
+              .tr;
       print("Password validation failed: ${passwordError.value}");
       return false;
     }
@@ -50,49 +51,50 @@ class LoginController extends GetxController {
       );
       return;
     }
-    
+
     isLoading.value = true;
     try {
       print("🚀 Starting login process...");
       print("📧 Email: $email");
       print("Sending credentials to Supabase...");
-      
+
       // إرسال البريد وكلمة السر إلى Supabase لتسجيل الدخول
       final response = await Supabase.instance.client.auth.signInWithPassword(
         email: email,
         password: password,
       );
-      
+
       /*if (response.error != null) {
         print("❌ Login failed: ${response.error?.message}");
         throw Exception("Login failed: ${response.error?.message}");
       }*/
-      
+
       final uuid = response.user?.id ?? 'Unknown';
       print("🎉 Login successful. User UUID: $uuid");
-      
+
       // البحث عن المستخدم في جدول 'users' باستخدام الـ uuid
       final additionalData = await Supabase.instance.client
           .from('users')
-          .select('id, email, name, phone, password_hash, trusted_score, total_reports')
+          .select(
+              'id, email, name, phone, password_hash, trusted_score, total_reports')
           .eq('auth_id', uuid)
           .single();
-      
+
       print("Data fetched from Supabase: $additionalData");
       if (additionalData == false || additionalData.isEmpty) {
         print("❌ No user found with the provided UUID.");
         throw Exception("No user found.");
       }
-      
+
       final userId = additionalData['id'] ?? 'Unknown';
       final userEmail = additionalData['email'] ?? 'Unknown';
       final name = additionalData['name'] ?? 'Unknown';
       final phone = additionalData['phone'] ?? 'Unknown';
       final trustedScore = additionalData['trusted_score'] ?? 0;
       final totalReports = additionalData['total_reports'] ?? 0;
-      
-      print("Parsed Data -> UserID: $userId, Email: $userEmail, Name: $name, Phone: $phone, Trusted Score: $trustedScore, Total Reports: $totalReports");
-      
+
+      print(
+          "Parsed Data -> UserID: $userId, Email: $userEmail, Name: $name, Phone: $phone, Trusted Score: $trustedScore, Total Reports: $totalReports");
       // حفظ بيانات المستخدم محليًا
       print("Saving user data locally...");
       userStorageService.saveUserData(
@@ -105,18 +107,8 @@ class LoginController extends GetxController {
         isLoggedIn: true,
       );
       print("✅ User data saved locally.");
-      
-      // الانتقال إلى الصفحة الرئيسية
       print("Navigating to the home page...");
-      Get.snackbar(
-        "Success".tr,
-        "Login successful".tr,
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.green,
-        colorText: Colors.white,
-      );
       Get.offAllNamed('/map');
-      
     } catch (e) {
       print("❌ Login Error: $e");
       Get.snackbar(

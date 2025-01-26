@@ -18,7 +18,7 @@ const Map<String, String> ar = {
   'phone': 'رقم الهاتف',
   'theme_switcher': 'تغيير الثيم',
   'Dont have an account ? Sign Up ': 'ليس لديك حساب ؟ إنشاء حساب ',
-  'Already have an account? Login': 'لديط حساب بالفعل ؟ تسجيل الدخول',
+  'Already have an account? Login': 'لديك حساب بالفعل ؟ تسجيل الدخول',
   'Please enter the 6-digit code sent to your phone':
       'الرجاء إدخال الرمز المكون من 6 خانات المرسل الى هاتفك',
   'archive': 'الأرشيف',
@@ -111,5 +111,12 @@ const Map<String, String> ar = {
   "The email or phone number is used before":
       "ان الايميل او رقم الهاتف مستعملين من قبل",
   "OK": "حسنا",
-  "The password or email has an error" : "كلمة السر او الايميل يوجد بهم خطأ",
+  "The password or email has an error": "كلمة السر او الايميل يوجد بهم خطأ",
+  "Loading": "تحميل",
+  "Thank you for your note.": "شكرا على ملاحظتك",
+  'Are you sure you\'re logged out?': 'هل أنت متأكد من تسجيل الخروج؟',
+  'You will be logged out of the existing account. Do you want to continue the process?':
+      'سيتم تسجيل الخروج من الحساب الحالي. هل تريد متابعة العملية؟',
+  "Cancel": "إلغاء",
+  "Call": "الإتصال",
 };

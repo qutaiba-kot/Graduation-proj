@@ -8,6 +8,8 @@ import 'package:maps/app/global/text_feild.dart';
 import 'package:maps/app/global/theme_switcher.dart';
 import 'package:maps/app/modules/auth/controllers/signup_controller.dart';
 
+import '../../../global/language_selector.dart';
+
 class SignUpView extends StatelessWidget {
   final SignUpController controller = Get.find<SignUpController>();
 
@@ -195,6 +197,8 @@ class SignUpView extends StatelessWidget {
               backgroundColor: Theme.of(context).colorScheme.background,
               textColor: Theme.of(context).colorScheme.primary,
             ),
+            SizedBox(height: getHeight(context, 0.02)),
+            LanguageSelector(),
           ],
         ),
       ),

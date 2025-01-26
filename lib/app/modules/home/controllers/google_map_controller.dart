@@ -73,6 +73,21 @@ class MapController extends GetxController {
       }
 
       print("📍 Fetching current position...");
+      Get.dialog(
+        Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Image.asset(
+                  'lib/app/assets/GIF/Animation - 1737898892819.gif'), // عرض GIF من الأصول
+              SizedBox(height: 16),
+            ],
+          ),
+        ),
+        barrierDismissible: false,
+        barrierColor: Get.theme.colorScheme.background,
+      );
+
       Position position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high,
       );
@@ -149,6 +164,7 @@ class MapController extends GetxController {
         ? json.encode(mapStyles['night'])
         : json.encode(mapStyles['day']);
   }
+
   Future<void> fetchSearchSuggestions(String query) async {
     try {
       final url =
@@ -233,6 +249,7 @@ class MapController extends GetxController {
       ),
     );
   }
+
   Future<void> getDirections(LatLng start, LatLng destination) async {
     try {
       final url =
@@ -265,6 +282,7 @@ class MapController extends GetxController {
       );
     }
   }
+
   void updateRouteProgress(Position position) async {
     if (routePolyline.value.points.isEmpty ||
         selectedDestination.value == null) {
@@ -341,6 +359,7 @@ class MapController extends GetxController {
     remainingDistance.refresh();
     remainingDuration.refresh();
   }
+
   void startTracking() {
     if (positionStream != null) {
       print("⚠️ Tracking is already active.");
@@ -534,7 +553,7 @@ class MapController extends GetxController {
       print("✅ Report inserted successfully");
 
       Get.snackbar(
-        "success".tr,
+        "Thank you for your note.".tr,
         "Complaint sent successfully".tr,
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: Get.theme.colorScheme.primary,

@@ -76,7 +76,8 @@ class CustomTextField extends StatelessWidget {
       maxLines: maxLines,
       readOnly: readOnly,
       onTap: onTap,
-      cursorColor: cursorColor ?? colorScheme.primary, 
+      cursorColor: cursorColor ?? colorScheme.background,
+      cursorErrorColor: Colors.red, 
       style: TextStyle(
         color: textColor ?? colorScheme.background, 
         fontSize: fontSize,

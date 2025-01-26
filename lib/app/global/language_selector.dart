@@ -18,6 +18,8 @@ class LanguageSelector extends StatelessWidget {
         border: Border.all(color: Theme.of(context).colorScheme.primary, width: 1.5), 
       ),
       child: DropdownButton<String>(
+        borderRadius:
+            BorderRadius.all(Radius.circular(10)),
         value: Get.locale?.languageCode,
         dropdownColor: Theme.of(context).colorScheme.primary, 
         underline: SizedBox(), 

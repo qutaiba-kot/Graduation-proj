@@ -115,4 +115,11 @@ const Map<String, String> en = {
       "The email or phone number is used before",
   "OK": "OK",
     "The password or email has an error" : "The password or email has an error",
+      'Already have an account? Login': 'Already have an account ? Login',
+    "Loading" : "Loading",
+    "Thank you for your note." : "Thank you for your note.", 
+    'Are you sure you\'re logged out?' : 'Are you sure you\'re logged out?', 
+    'You will be logged out of the existing account. Do you want to continue the process?' : 'You will be logged out of the existing account. Do you want to continue the process?' ,
+    "Cancel" : "Cancel",
+    "Call" : "Call",
 };
