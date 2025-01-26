@@ -29,15 +29,15 @@ class SettingsView extends GetView<SettingsController> {
           children: [
      
             ListTile(
-              leading: LanguageSelector(),
-              horizontalTitleGap: getWidth(context, 0.4),
-              title: Text("Language".tr , style: TextStyle(color:Theme.of(context).colorScheme.onBackground, ),),
+              leading:  Text("Language".tr , style: TextStyle(color:Theme.of(context).colorScheme.onBackground,fontSize: 17 ),),
+              horizontalTitleGap: getWidth(context, 0.35),
+              title:LanguageSelector()
             ),
             Divider(color: Theme.of(context).colorScheme.primary.withOpacity(0.3)),
             ListTile(
-              horizontalTitleGap: getWidth(context, 0.55),
-              title: Text("Mode".tr , style: TextStyle(color:Theme.of(context).colorScheme.onBackground, ),),
-              leading:ThemeSwitcher(), 
+              horizontalTitleGap: getWidth(context, 0.6),
+              title: ThemeSwitcher(),
+              leading:Text("Mode".tr , style: TextStyle(color:Theme.of(context).colorScheme.onBackground, fontSize: 17 ),), 
             ),
             Divider(color: Theme.of(context).colorScheme.primary.withOpacity(0.3)),
            ],
