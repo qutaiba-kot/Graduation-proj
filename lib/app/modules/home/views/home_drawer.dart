@@ -60,13 +60,7 @@ class MyDrawer extends GetWidget {
               "My total reports".tr,
               style: TextStyle(color: Theme.of(context).colorScheme.primary),
             ),
-            onTap: () => {
-              Get.snackbar(
-                "This feature will be added soon".tr,
-                "",
-                snackPosition: SnackPosition.BOTTOM,
-              )
-            },
+            onTap: () => {Get.toNamed("/archive")},
           ),
           ListTile(
             leading: Icon(Icons.help_outline,
@@ -114,9 +108,11 @@ class MyDrawer extends GetWidget {
                         },
                         child: Row(
                           children: [
-                          Icon(Icons.call),
-                          SizedBox(width: 10,),
-                           Text("Call".tr),
+                            Icon(Icons.call),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Text("Call".tr),
                           ],
                         ),
                       ),

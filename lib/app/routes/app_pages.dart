@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:maps/app/modules/archive/binding/archive_binding.dart';
+import 'package:maps/app/modules/archive/view/archive_view.dart';
 import 'package:maps/app/modules/reportation/bindings/reportation_binding.dart';
 import '../modules/auth/bindings/login_binding.dart';
 import '../modules/auth/bindings/signup_binding.dart';
@@ -51,6 +53,11 @@ class AppPages {
     GetPage(
       name: Routes.MY_DRAWER,
       page: () => MyDrawer(),
+    ),
+    GetPage(
+      name: Routes.ARCHIVE,
+      page: () => ArchiveView(),
+      binding: ArchiveBinding(),
     ),
   ];
 }

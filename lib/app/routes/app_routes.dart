@@ -6,8 +6,8 @@ abstract class Routes {
   static const SIGNUP = '/signup';
   static const MAP = '/map';
   static const PROFILE = '/profile';
-  static const ARCHIVE = '/archive';
   static const SETTINGS = '/settings';
   static const MY_DRAWER = '/my-drawer';
   static const REPORTATION = '/reportation';
+  static const ARCHIVE = '/archive';
 }
