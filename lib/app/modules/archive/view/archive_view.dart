@@ -7,7 +7,6 @@ class ArchiveView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.find<ArchiveController>();
-    HazardType? hazard = HazardTypeService.getHazardTypeById(1);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context)
@@ -37,8 +36,6 @@ class ArchiveView extends StatelessWidget {
                     complaint['status']?.toString() ?? 'Unknown';
                 final String locationId =
                     complaint['location_id']?.toString() ?? '';
-                final String hazardType =
-                    complaint['hazard_type_id']?.toString() ?? 'Unknown';
                 final String description =
                     complaint['description']?.toString() ?? 'No Description'.tr;
                 final String reportId =

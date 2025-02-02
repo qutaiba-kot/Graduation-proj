@@ -53,6 +53,7 @@ class ArchiveController extends GetxController {
           .eq('location_id', locationId)
           .single();
 
+      // ignore: unnecessary_null_comparison
       if (response != null) {
         locationCoordinates[locationId] = {
           'latitude': response['latitude'],
