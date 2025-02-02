@@ -124,4 +124,18 @@ const Map<String, String> en = {
     "Call" : "Call",
     "Mode" : "Mode" ,
     "Language" : "Language",
+    'My Reports' : 'My Reports',
+    'You did not make any repoerts yet' : 'You did not make any repoerts yet',
+    'No Description' : 'No Description',
+    'Location' : 'Location',
+    'Status of the report : ' : 'Status of the report : ',
+    'Type of hazard : ' : 'Type of hazzard : ',
+    'Description : ' :'Description : ',
+    'No photo Attatched' : 'No photo Attatched',
+    "rejected" : "rejected",
+    "validated" : "validated",
+    "pending" : "pending" ,
+    "Quick Report" : "Quick Report",
+    "Detailed Report" : "Detailed Report" ,
+
 };

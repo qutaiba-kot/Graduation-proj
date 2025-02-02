@@ -26,7 +26,7 @@ class SettingsView extends GetView<SettingsController> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
+          children: [     
      
             ListTile(
               leading:  Text("Language".tr , style: TextStyle(color:Theme.of(context).colorScheme.onBackground,fontSize: 17 ),),
