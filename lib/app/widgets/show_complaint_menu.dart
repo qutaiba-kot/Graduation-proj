@@ -7,7 +7,7 @@ void showComplaintMenu(MapController controller) {
   Get.bottomSheet(
     Container(
       decoration: BoxDecoration(
-        color: Theme.of(Get.context!).colorScheme.primary,
+        color: Theme.of(Get.context!).colorScheme.background,
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(16.0),
           topRight: Radius.circular(16.0),
@@ -27,6 +27,7 @@ void showComplaintMenu(MapController controller) {
         controller.submitComplaint(hazardType.hazardTypeId);
       },
       child: Card(
+        color: Theme.of(Get.context!).colorScheme.primary,
         elevation: 10,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
@@ -36,7 +37,7 @@ void showComplaintMenu(MapController controller) {
           children: [
             Icon(
               hazardType.icon,
-              color: Theme.of(Get.context!).colorScheme.primary,
+              color: Theme.of(Get.context!).colorScheme.background,
               size: 40,
             ),
             SizedBox(height: 8),
@@ -45,7 +46,7 @@ void showComplaintMenu(MapController controller) {
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
-                color: Theme.of(Get.context!).colorScheme.primary,
+                color: Theme.of(Get.context!).colorScheme.background,
               ),
               textAlign: TextAlign.center,
             ),

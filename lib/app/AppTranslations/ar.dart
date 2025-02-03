@@ -143,4 +143,11 @@ const Map<String, String> ar = {
   "Please fill the description": "يرجى إدخال وصف للمشكلة.",
   "Please press the button to get your location": "يرجى تحديد الموقع الحالي.",
   "Please instert a photo": "يرجى إرفاق صورة للمشكلة.",
+      "Some changes will require a restart of the application." : "بعض التغييرات ستحتاج لإعادة تشغيل التطبيق , هل تريد إعادة تشغيله؟",
+          'Just change the theme' : 'فقط تغيير السمة',
+          'Alert' : 'تنبيه',
+              "Just change the Langage" : "فقط غير اللغة",
+
+
+
 };

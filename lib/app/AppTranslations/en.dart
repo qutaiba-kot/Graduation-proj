@@ -142,4 +142,7 @@ const Map<String, String> en = {
     "Please fill the description" : "Please fill the description",
     "Please press the button to get your location" : "Please press the button to get your location",
     "Please instert a photo" : "Please instert a photo",
+    "Some changes will require a restart of the application." : "Some changes will require a restart of the application , Do you want to restart it ?",
+    'Just change the theme' : 'Just change the theme',
+    "Just change the Langage" : "Just change the Langage",
 };

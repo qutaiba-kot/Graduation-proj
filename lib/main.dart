@@ -10,7 +10,6 @@ import 'app/supabase_config.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
-  WidgetsFlutterBinding.ensureInitialized();
   await initSupabase();
   runApp(MyApp());
 }

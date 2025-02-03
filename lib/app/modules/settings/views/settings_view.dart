@@ -7,7 +7,6 @@ import 'package:maps/app/global/theme_switcher.dart';
 
 class SettingsView extends GetView<SettingsController> {
   const SettingsView({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,28 +18,39 @@ class SettingsView extends GetView<SettingsController> {
         backgroundColor: Theme.of(context).colorScheme.background,
         centerTitle: true,
         iconTheme: IconThemeData(
-          color: Theme.of(context).colorScheme.onBackground, 
+          color: Theme.of(context).colorScheme.onBackground,
         ),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: [     
+          children: [
             ListTile(
-              leading:  Text("Language".tr , style: TextStyle(color:Theme.of(context).colorScheme.onBackground,fontSize: 17 ),),
+              leading: Text(
+                "Language".tr,
+                style: TextStyle(
+                    color: Theme.of(context).colorScheme.onBackground,
+                    fontSize: 17),
+              ),
               horizontalTitleGap: getWidth(context, 0.35),
-              //title:LanguageSelector(),
-              trailing:LanguageSelector() ,
+              trailing: LanguageSelector(),
             ),
-            Divider(color: Theme.of(context).colorScheme.primary.withOpacity(0.3)),
+            Divider(
+                color: Theme.of(context).colorScheme.primary.withOpacity(0.3)),
             ListTile(
               horizontalTitleGap: getWidth(context, 0.6),
               trailing: ThemeSwitcher(),
-              leading:Text("Mode".tr , style: TextStyle(color:Theme.of(context).colorScheme.onBackground, fontSize: 17 ),), 
+              leading: Text(
+                "Mode".tr,
+                style: TextStyle(
+                    color: Theme.of(context).colorScheme.onBackground,
+                    fontSize: 17),
+              ),
             ),
-            Divider(color: Theme.of(context).colorScheme.primary.withOpacity(0.3)),
-           ],
+            Divider(
+                color: Theme.of(context).colorScheme.primary.withOpacity(0.3)),
+          ],
         ),
       ),
     );
