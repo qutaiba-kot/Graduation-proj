@@ -9,7 +9,7 @@ import '../controllers/google_map_controller.dart';
 import '../controllers/recall_tags.dart';
 
 class GoogleMapView extends GetView<MapController> {
-  
+  final MapController mapController = Get.find<MapController>();
   final RecallTags recallTags = Get.find<RecallTags>();
   final bool language = GetStorage().read('lang') == 'ar';
   @override
@@ -281,6 +281,22 @@ class GoogleMapView extends GetView<MapController> {
                     color: Theme.of(context).colorScheme.background),
               ),
             ),
+          ),
+          Positioned(
+            top: getHeight(context, 0.49),
+            left: language ? getWidth(context, 0.83) : getWidth(context, 0.02),
+            right: language ? getWidth(context, 0.02) : getWidth(context, 0.84),
+            child: Obx(() => FloatingActionButton(
+                  heroTag: "sound controller",
+                  backgroundColor: Theme.of(context).colorScheme.primary,
+                  child: Icon(
+                    mapController.isMuted.value
+                        ? Icons.volume_off
+                        : Icons.volume_up,
+                    color: Theme.of(context).colorScheme.background,
+                  ),
+                  onPressed: mapController.toggleMute,
+                )),
           ),
         ],
       ),

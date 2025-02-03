@@ -49,6 +49,12 @@ class MapController extends GetxController {
     getInitialPosition();
     isDarkMode.value = storage.read('isDarkMode') ?? false;
   }
+  var isMuted = true.obs;
+
+  void toggleMute() {
+    isMuted.value = !isMuted.value;
+    print("is muted ????????????? ${isMuted.value}");
+  }
 
   Future<void> getInitialPosition() async {
     try {
@@ -305,13 +311,15 @@ class MapController extends GetxController {
           colorText: Get.theme.colorScheme.background,
         );
         try {
-          final language = GetStorage().read('lang') ?? 'ar';
+          if(isMuted== false ){
+            final language = GetStorage().read('lang') ?? 'ar';
           final assetPath = language == 'en'
               ? "lib/app/assets/sounds/alert_en.mp3"
               : "lib/app/assets/sounds/alert_ar.mp3";
           AudioCache.instance = AudioCache(prefix: "");
           final player = AudioPlayer();
           await player.play(AssetSource(assetPath));
+          }
         } catch (e) {
           print('Error occurred while playing sound: $e');
         }
