@@ -12,12 +12,6 @@ class ReportationView extends GetView<ReportationController> {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
-        title: Text(
-          'File a complaint'.tr,
-          style: TextStyle(
-            color: Theme.of(context).colorScheme.onBackground,
-          ),
-        ),
         backgroundColor: Theme.of(context).colorScheme.background,
         iconTheme: IconThemeData(
           color: Theme.of(context).colorScheme.onBackground,
@@ -29,10 +23,35 @@ class ReportationView extends GetView<ReportationController> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Icon(
-                Icons.report,
-                size: 110,
-                color: Theme.of(context).colorScheme.primary,
+              Container(  
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'File a complaint'.tr,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 45,
+                        color: Theme.of(context).colorScheme.onBackground,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 10,),
+              Container(
+                padding: EdgeInsets.only(left: 10, right: 10),
+                child: Row(
+                  children: [
+                    Text(
+                      "Required : ".tr,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).colorScheme.onBackground,
+                      ),
+                    ),
+                  ],
+                ),
               ),
               Card(
                 color: Theme.of(context).colorScheme.primary,
@@ -56,14 +75,14 @@ class ReportationView extends GetView<ReportationController> {
                                   Icon(hazard.icon,
                                       color: Theme.of(context)
                                           .colorScheme
-                                          .background),
+                                          .onBackground),
                                   SizedBox(width: 8),
                                   Text(
                                     hazard.name,
                                     style: TextStyle(
                                         color: Theme.of(context)
                                             .colorScheme
-                                            .background),
+                                            .onBackground),
                                   ),
                                 ],
                               ),
@@ -73,13 +92,13 @@ class ReportationView extends GetView<ReportationController> {
                       hint: Row(
                         children: [
                           Icon(Icons.warning,
-                              color: Theme.of(context).colorScheme.background),
+                              color: Theme.of(context).colorScheme.onBackground),
                           SizedBox(width: 8),
                           Text(
                             'pick the type of the report'.tr,
                             style: TextStyle(
                                 color:
-                                    Theme.of(context).colorScheme.background),
+                                    Theme.of(context).colorScheme.onBackground),
                           ),
                         ],
                       ),
@@ -88,13 +107,27 @@ class ReportationView extends GetView<ReportationController> {
                       },
                       dropdownColor: Theme.of(context).colorScheme.primary,
                       iconEnabledColor:
-                          Theme.of(context).colorScheme.background,
+                          Theme.of(context).colorScheme.onBackground,
                       style: TextStyle(fontSize: 16),
                     ),
                   ),
                 ),
               ),
               SizedBox(height: getHeight(context, 0.01)),
+              Container(
+                padding: EdgeInsets.only(left: 10, right: 10),
+                child: Row(
+                  children: [
+                    Text(
+                      "Required : ".tr,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).colorScheme.onBackground,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
               Card(
                 color: Theme.of(context).colorScheme.primary,
                 elevation: 3,
@@ -121,6 +154,20 @@ class ReportationView extends GetView<ReportationController> {
                 ),
               ),
               SizedBox(height: getHeight(context, 0.01)),
+              Container(
+                padding: EdgeInsets.only(left: 10, right: 10),
+                child: Row(
+                  children: [
+                    Text(
+                      "Required : ".tr,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).colorScheme.onBackground,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
               Card(
                 color: Theme.of(context).colorScheme.primary,
                 elevation: 3,
@@ -137,7 +184,7 @@ class ReportationView extends GetView<ReportationController> {
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 16,
-                          color: Theme.of(context).colorScheme.background,
+                          color: Theme.of(context).colorScheme.onBackground,
                         ),
                       ),
                       SizedBox(height: 8),
@@ -175,24 +222,28 @@ class ReportationView extends GetView<ReportationController> {
                             label: Text('Attach a photo:'.tr),
                           ),
                           SizedBox(width: 16),
-                          Obx(() => controller.selectedImage.value != null
-                              ? ClipRRect(
-                                  borderRadius: BorderRadius.circular(8),
-                                  child: Image.file(
-                                    controller.selectedImage.value!,
-                                    width: 100,
-                                    height: 100,
-                                    fit: BoxFit.cover,
+                          Obx(
+                            () => controller.selectedImage.value != null
+                                ? ClipRRect(
+                                    borderRadius: BorderRadius.circular(8),
+                                    child: Image.file(
+                                      controller.selectedImage.value!,
+                                      width: 100,
+                                      height: 100,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  )
+                                : Flexible(
+                                    child: Text(
+                                      'No image selected'.tr,
+                                      style: TextStyle(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .onBackground,
+                                      ),
+                                    ),
                                   ),
-                                )
-                              : Text(
-                                  'No image selected'.tr,
-                                  style: TextStyle(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .background,
-                                  ),
-                                )),
+                          ),
                         ],
                       ),
                     ],
@@ -200,6 +251,20 @@ class ReportationView extends GetView<ReportationController> {
                 ),
               ),
               SizedBox(height: 16),
+              Container(
+                padding: EdgeInsets.only(left: 10, right: 10),
+                child: Row(
+                  children: [
+                    Text(
+                      "Required : ".tr,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).colorScheme.onBackground,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
               Card(
                 color: Theme.of(context).colorScheme.primary,
                 elevation: 3,
@@ -227,7 +292,7 @@ class ReportationView extends GetView<ReportationController> {
                               : 'Location not yet determined'.tr,
                           style: TextStyle(
                             fontSize: 14,
-                            color: Theme.of(context).colorScheme.background,
+                            color: Theme.of(context).colorScheme.onBackground,
                           ),
                         ),
                       ),
@@ -239,7 +304,7 @@ class ReportationView extends GetView<ReportationController> {
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed:controller.submitComplaint,
+                  onPressed: controller.submitComplaint,
                   child: Text('Submit a complaint'.tr),
                   style: ElevatedButton.styleFrom(
                     padding: EdgeInsets.symmetric(vertical: 16),

@@ -48,9 +48,10 @@ const Map<String, String> ar = {
   'Attach a photo:': 'إرفاق صورة:',
   'Take a photo': 'التقاط صورة',
   'Choose from the gallery': 'اختيار من المعرض',
-  'No image selected': 'لم يتم اختيار صورة',
+  'No image selected': ' لم يتم اختيار صورة بعد , يرجى اختيار صورة',
   'Use of the current location': 'استخدام الموقع الحالي',
-  'Location not yet determined': 'لم يتم تحديد الموقع بعد',
+  'Location not yet determined':
+      'لم يتم تحديد الموقع بعد , يرجى الضغط على الزر',
   'Submit a complaint': 'إرسال الشكوى',
   'File a complaint': 'رفع شكوى',
   'current_location': 'الموقع الحالي',
@@ -116,7 +117,7 @@ const Map<String, String> ar = {
   "Thank you for your note.": "شكرا على ملاحظتك",
   'Are you sure you\'re logged out?': 'هل أنت متأكد من تسجيل الخروج؟',
   'You will be logged out of the existing account. Do you want to continue the process?':
-      'سيتم تسجيل الخروج من الحساب الحالي. هل تريد متابعة العملية؟',
+      'سيتم تسجيل الخروج من الحساب الحالي , هل تريد متابعة العملية؟',
   "Cancel": "إلغاء",
   "Call": "الإتصال",
   "Mode": "السمة",
@@ -137,4 +138,9 @@ const Map<String, String> ar = {
   "مرفوضة": "rejected",
   "موثقة": "validated",
   "جاري العمل عليها": "pending",
+  "Required : ": "ضروري : ",
+  "Please select the type of the report": "يرجى اختيار نوع المشكلة",
+  "Please fill the description": "يرجى إدخال وصف للمشكلة.",
+  "Please press the button to get your location": "يرجى تحديد الموقع الحالي.",
+  "Please instert a photo": "يرجى إرفاق صورة للمشكلة.",
 };

@@ -27,16 +27,16 @@ class SettingsView extends GetView<SettingsController> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [     
-     
             ListTile(
               leading:  Text("Language".tr , style: TextStyle(color:Theme.of(context).colorScheme.onBackground,fontSize: 17 ),),
               horizontalTitleGap: getWidth(context, 0.35),
-              title:LanguageSelector()
+              //title:LanguageSelector(),
+              trailing:LanguageSelector() ,
             ),
             Divider(color: Theme.of(context).colorScheme.primary.withOpacity(0.3)),
             ListTile(
               horizontalTitleGap: getWidth(context, 0.6),
-              title: ThemeSwitcher(),
+              trailing: ThemeSwitcher(),
               leading:Text("Mode".tr , style: TextStyle(color:Theme.of(context).colorScheme.onBackground, fontSize: 17 ),), 
             ),
             Divider(color: Theme.of(context).colorScheme.primary.withOpacity(0.3)),

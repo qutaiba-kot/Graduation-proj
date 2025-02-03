@@ -9,6 +9,9 @@ class ArchiveView extends StatelessWidget {
     final controller = Get.find<ArchiveController>();
     return Scaffold(
       appBar: AppBar(
+       iconTheme: IconThemeData(
+          color: Theme.of(context).colorScheme.onBackground,
+        ),
         backgroundColor: Theme.of(context)
                                           .colorScheme
                                           .background,
@@ -16,6 +19,7 @@ class ArchiveView extends StatelessWidget {
           'My Reports'.tr,
           style: TextStyle(color: Theme.of(context).colorScheme.onBackground),
         ),
+
         centerTitle: true,
       ),
       body: Center(

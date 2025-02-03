@@ -11,7 +11,6 @@ class ArchiveController extends GetxController {
   void onInit() {
     super.onInit();
     fetchUserComplaints();
-
   }
   String statusCheck(String status) {
     if (status == "rejected") {
@@ -39,7 +38,6 @@ class ArchiveController extends GetxController {
     }
   }
 
-  // جلب بيانات الموقع باستخدام location_id
   Future<void> fetchLocationById(String locationId) async {
     if (locationCoordinates.containsKey(locationId)) return;
 
@@ -68,7 +66,6 @@ class ArchiveController extends GetxController {
     }
   }
 
-  // جلب صور التقرير باستخدام report_id
   Future<void> fetchPhotosByReportId(String reportId) async {
     if (photoUrlsMap.containsKey(reportId)) return;
 
@@ -92,39 +89,58 @@ class ArchiveController extends GetxController {
     }
   }
 
-  // جلب الشكاوى الخاصة بالمستخدم
   Future<void> fetchUserComplaints() async {
+  try {
+    Future.delayed(Duration.zero, () {
+      Get.dialog(
+        Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Image.asset(
+                  'lib/app/assets/GIF/Animation - 1737898892819.gif'), 
+              SizedBox(height: 16),
+            ],
+          ),
+        ),
+        barrierDismissible: false,
+        barrierColor: Get.theme.colorScheme.background,
+      );
+    });
 
-    try {
-      debugPrint('[fetchUserComplaints] بدأ تحميل بيانات الشكاوى');
+    debugPrint('[fetchUserComplaints] 🚀 بدأ تحميل بيانات الشكاوى');
 
-      final uId = storage.userId;
-      if (uId == null) {
-        debugPrint(
-            '⚠️ [fetchUserComplaints] رقم المستخدم غير موجود في التخزين المحلي.');
-        return;
+    final uId = storage.userId;
+    if (uId == null) {
+      debugPrint('⚠️ [fetchUserComplaints] رقم المستخدم غير موجود في التخزين المحلي.');
+      Get.back(); 
+      return;
+    }
+
+    final response = await Supabase.instance.client
+        .from('reports')
+        .select('status, location_id, hazard_type_id, description, report_id')
+        .eq('user_id', uId);
+
+    complaints.value =
+        response.isNotEmpty ? List<Map<String, dynamic>>.from(response) : [];
+
+    for (var complaint in complaints) {
+      final locationId = complaint['location_id']?.toString();
+      if (locationId != null && locationId.isNotEmpty) {
+        await fetchLocationById(locationId);
       }
+    }
 
-      final response = await Supabase.instance.client
-          .from('reports')
-          .select('status, location_id, hazard_type_id, description, report_id')
-          .eq('user_id', uId);
+    debugPrint('✅ [fetchUserComplaints] تم تحميل الشكاوى بنجاح: ${complaints.length} شكوى');
 
-      complaints.value =
-          response.isNotEmpty ? List<Map<String, dynamic>>.from(response) : [];
-
-      for (var complaint in complaints) {
-        final locationId = complaint['location_id']?.toString();
-        if (locationId != null && locationId.isNotEmpty) {
-          fetchLocationById(locationId);
-        }
-      }
-
-      debugPrint(
-          '✅ [fetchUserComplaints] تم تحميل الشكاوى بنجاح: ${complaints.length} شكوى');
-    } catch (e, stackTrace) {
-      debugPrint(
-          '❌ [fetchUserComplaints] خطأ أثناء جلب الشكاوى: $e\n$stackTrace');
+  } catch (e, stackTrace) {
+    debugPrint('❌ [fetchUserComplaints] خطأ أثناء جلب الشكاوى: $e\n$stackTrace');
+  } finally {
+    if (Get.isDialogOpen ?? false) {
+      Get.back();
     }
   }
+}
+
 }

@@ -106,6 +106,9 @@ class ProfileView extends StatelessWidget {
                 ' ${controller.userStorage.totalReports ?? "unavailable".tr}',
                 style: TextStyle(color: Theme.of(context).colorScheme.primary),
               ),
+              onTap: () {
+    Get.toNamed("/archive"); // استبدل ReportsPage بالصفحة التي تريد الانتقال إليها
+  },
             ),
             ListTile(
               leading: Icon(Icons.numbers,

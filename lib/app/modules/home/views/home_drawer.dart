@@ -150,6 +150,7 @@ class MyDrawer extends GetWidget {
               onTap: () {
                 Get.dialog(
                   AlertDialog(
+                    backgroundColor: Theme.of(Get.context!).colorScheme.background,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15),
                     ),
