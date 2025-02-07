@@ -42,6 +42,7 @@ class MapController extends GetxController {
     target: LatLng(31.963158, 35.930359),
     zoom: 15,
   ).obs;
+  
   @override
   void onInit() {
     super.onInit();
@@ -49,6 +50,7 @@ class MapController extends GetxController {
     getInitialPosition();
     isDarkMode.value = storage.read('isDarkMode') ?? false;
   }
+  
   var isMuted = true.obs;
 
   void toggleMute() {
@@ -73,7 +75,7 @@ class MapController extends GetxController {
           throw Exception("⛔ إذن الموقع مرفوض.");
         }
       }
-      if (permission == LocationPermission.deniedForever) {
+      if (permission == LocationPermission.always) {
         throw Exception(
             "⛔ إذن الموقع مرفوض بشكل دائم. لا يمكن طلب الإذن مجددًا.");
       }
@@ -302,7 +304,7 @@ class MapController extends GetxController {
         markerPosition.latitude,
         markerPosition.longitude,
       );
-      if (distanceToMarker <= 30 && distanceToMarker >= 20) {
+      if (distanceToMarker <= 30 && distanceToMarker >= 20  &&position.speed > 0 ) {
         Get.snackbar(
           "Please pay attention".tr,
           "You are close to a note on the way ahead of you!".tr,
@@ -311,7 +313,7 @@ class MapController extends GetxController {
           colorText: Get.theme.colorScheme.background,
         );
         try {
-          if(isMuted== false ){
+          if(isMuted== false){
             final language = GetStorage().read('lang') ?? 'ar';
           final assetPath = language == 'en'
               ? "lib/app/assets/sounds/alert_en.mp3"
@@ -369,27 +371,30 @@ class MapController extends GetxController {
   }
 
   void startTracking() {
-    if (positionStream != null) {
-      print("⚠️ Tracking is already active.");
-      return;
-    }
-    positionStream = Geolocator.getPositionStream(
-      locationSettings: LocationSettings(
-        accuracy: LocationAccuracy.bestForNavigation,
-        distanceFilter: 3,
-      ),
-    ).listen((Position position) {
-      updateRouteProgress(position);
-      checkIfOffRoute(position);
-      updateCameraWithBearing(position);
-    });
-    print("🚀 Tracking started.");
+  if (positionStream != null) {
+    print("⚠️ Tracking is already active.");
+    return;
   }
+
+  positionStream = Geolocator.getPositionStream(
+    locationSettings: LocationSettings(
+      accuracy: LocationAccuracy.bestForNavigation,
+      distanceFilter: 3,
+    ),
+  ).listen((Position position) async {
+    updateRouteProgress(position);
+    checkIfOffRoute(position);
+    updateCameraWithBearing(position);
+  });
+
+  print("🚀 Tracking started.");
+}
+
 
   void updateCameraWithBearing(Position position) {
     final newCameraPosition = CameraPosition(
       target: LatLng(position.latitude, position.longitude),
-      zoom: 20,
+      zoom: 19.5,
       bearing: position.heading,
       tilt: 90,
     );
@@ -418,6 +423,8 @@ class MapController extends GetxController {
       ),
     ));
     print("✅ Camera position updated successfully.");
+          Get.back();
+
   }
 
   void checkIfOffRoute(Position position) async {
