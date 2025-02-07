@@ -107,7 +107,7 @@ class ProfileView extends StatelessWidget {
                 style: TextStyle(color: Theme.of(context).colorScheme.primary),
               ),
               onTap: () {
-    Get.toNamed("/archive"); // استبدل ReportsPage بالصفحة التي تريد الانتقال إليها
+    Get.toNamed("/archive"); 
   },
             ),
             ListTile(

@@ -76,14 +76,13 @@ class ReportationController extends GetxController {
 
   Future<void> submitComplaint() async {
   try {
-    // عرض شاشة التحميل
     Get.dialog(
       Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             Image.asset(
-                'lib/app/assets/GIF/Animation - 1737898892819.gif'), // عرض GIF
+                'lib/app/assets/GIF/Animation - 1737898892819.gif'), 
             SizedBox(height: 16),
           ],
         ),
@@ -94,7 +93,6 @@ class ReportationController extends GetxController {
 
     print("🚀 بدء عملية إرسال الشكوى...");
 
-    // **التحقق من الحقول المطلوبة**
     if (selectedProblemId.value == 0) {
       throw Exception("Please select the type of the report".tr);
     }
@@ -152,7 +150,6 @@ class ReportationController extends GetxController {
     print("✅ Photo linked to report successfully.");
     print("🎉 الشكوى أرسلت بنجاح.");
 
-    // إغلاق شاشة التحميل بعد النجاح
     Get.back();
     Get.back();
 
@@ -169,8 +166,6 @@ class ReportationController extends GetxController {
     print("✅ تم إعادة تعيين الحقول بنجاح.");
   } catch (e) {
     print("❌ Error during complaint submission: $e");
-
-    // إغلاق شاشة التحميل عند حدوث خطأ
     Get.back();
 
     Get.snackbar(

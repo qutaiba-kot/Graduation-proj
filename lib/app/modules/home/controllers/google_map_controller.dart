@@ -87,7 +87,7 @@ class MapController extends GetxController {
             mainAxisSize: MainAxisSize.min,
             children: [
               Image.asset(
-                  'lib/app/assets/GIF/Animation - 1737898892819.gif'), // عرض GIF من الأصول
+                  'lib/app/assets/GIF/Animation - 1737898892819.gif'),
               SizedBox(height: 16),
             ],
           ),

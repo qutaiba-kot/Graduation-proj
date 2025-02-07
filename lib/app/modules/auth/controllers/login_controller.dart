@@ -58,21 +58,14 @@ class LoginController extends GetxController {
       print("📧 Email: $email");
       print("Sending credentials to Supabase...");
 
-      // إرسال البريد وكلمة السر إلى Supabase لتسجيل الدخول
       final response = await Supabase.instance.client.auth.signInWithPassword(
         email: email,
         password: password,
       );
 
-      /*if (response.error != null) {
-        print("❌ Login failed: ${response.error?.message}");
-        throw Exception("Login failed: ${response.error?.message}");
-      }*/
-
       final uuid = response.user?.id ?? 'Unknown';
       print("🎉 Login successful. User UUID: $uuid");
 
-      // البحث عن المستخدم في جدول 'users' باستخدام الـ uuid
       final additionalData = await Supabase.instance.client
           .from('users')
           .select(
@@ -95,7 +88,6 @@ class LoginController extends GetxController {
 
       print(
           "Parsed Data -> UserID: $userId, Email: $userEmail, Name: $name, Phone: $phone, Trusted Score: $trustedScore, Total Reports: $totalReports");
-      // حفظ بيانات المستخدم محليًا
       print("Saving user data locally...");
       userStorageService.saveUserData(
         email: userEmail,

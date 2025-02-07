@@ -49,7 +49,6 @@ class LanguageSelector extends StatelessWidget {
           onChanged: (value) {
             if (value != null) {
               if (Get.currentRoute == '/settings') {
-                // إظهار Dialog في حال كانت الصفحة هي settings
                 Get.dialog(
                   AlertDialog(
                     title: Text('Alert'.tr),
@@ -60,19 +59,19 @@ class LanguageSelector extends StatelessWidget {
                       TextButton(
                         onPressed: () {
                           Get.updateLocale(
-                              Locale(value)); // تغيير اللغة بعد الموافقة
-                          GetStorage().write('lang', value); // تخزين اللغة
-                          Get.back(); // إغلاق الـ dialog
+                              Locale(value)); 
+                          GetStorage().write('lang', value); 
+                          Get.back();
                         },
                         child: Text("Just change the Langage".tr),
                       ),
                       TextButton(
                         onPressed: () {
                           Get.updateLocale(
-                              Locale(value)); // تغيير اللغة بعد الموافقة
-                          GetStorage().write('lang', value); // تخزين اللغة
-                          restartApp(); // إعادة تشغيل التطبيق
-                          Get.back(); // إغلاق الـ dialog
+                              Locale(value)); 
+                          GetStorage().write('lang', value);
+                          restartApp(); 
+                          Get.back();
                         },
                         child: Text("OK".tr),
                       ),
@@ -80,7 +79,6 @@ class LanguageSelector extends StatelessWidget {
                   ),
                 );
               } else {
-                // في حال كانت الصفحة غير "settings"، يتم تغيير اللغة مباشرة
                 Get.updateLocale(Locale(value));
                 GetStorage().write('lang', value);
               }

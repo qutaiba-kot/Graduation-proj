@@ -14,7 +14,6 @@ class SearchWidget extends StatelessWidget {
     );
   }
 
-  // دالة لبناء TextField مع الإعدادات الخاصة به
   Widget _buildSearchTextField(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
@@ -28,7 +27,7 @@ class SearchWidget extends StatelessWidget {
         ],
       ),
       child: TextField(
-        controller: controller.textEditingController, // استخدام TextEditingController
+        controller: controller.textEditingController, 
         cursorColor: Theme.of(context).colorScheme.background,
         style: TextStyle(
           color: Theme.of(context).colorScheme.background,
@@ -71,7 +70,6 @@ class SearchWidget extends StatelessWidget {
     );
   }
 
-  // دالة لعرض اقتراحات البحث عند وجودها
   Widget _buildSearchSuggestions(BuildContext context) {
     return Obx(() => controller.searchSuggestions.isNotEmpty
         ? Container(

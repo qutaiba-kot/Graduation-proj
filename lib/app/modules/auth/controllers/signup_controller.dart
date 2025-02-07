@@ -95,7 +95,6 @@ class SignUpController extends GetxController {
     isLoading.value = true;
 
     try {
-      // Step 1: Register user in Supabase Authentication
       print("Sending email and password to Supabase authentication...");
       print("Email: $email, Password: $password");
       final signUpResponse = await Supabase.instance.client.auth.signUp(
@@ -109,7 +108,6 @@ class SignUpController extends GetxController {
       }
       print("User registered successfully with UUID: $uuid");
 
-      // Step 2: Insert user data into 'users' table
       print("Inserting user data into 'users' table...");
       final userResponse = await Supabase.instance.client
           .from('users')
@@ -125,7 +123,6 @@ class SignUpController extends GetxController {
       if (userResponse != null) {
         print("User data inserted successfully. Response: $userResponse");
 
-        // Save user data locally
         print("Saving user data locally...");
         userStorageService.saveUserData(
           email: userResponse['email'],
@@ -137,8 +134,6 @@ class SignUpController extends GetxController {
           isLoggedIn: true,
         );
         print("User data saved locally.");
-
-        // Navigate to the home page
         print("Navigating to the home page...");
         Get.offAllNamed(Routes.MAP);
       } else {

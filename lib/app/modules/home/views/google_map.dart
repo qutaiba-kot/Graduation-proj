@@ -25,9 +25,9 @@ class GoogleMapView extends GetView<MapController> {
     return PiPSwitcher(
       childWhenDisabled:  WillPopScope(
         onWillPop: () async {
-        pipController.enablePip(context, autoEnable: true); // تشغيل PiP بدلاً من الرجوع للخلف
+        pipController.enablePip(context, autoEnable: true); 
         pipController.enablePip(context);
-        return false; // منع الرجوع للخلف
+        return false;
       },
         child: Scaffold(
           resizeToAvoidBottomInset: false,

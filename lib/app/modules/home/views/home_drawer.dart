@@ -125,7 +125,7 @@ class MyDrawer extends GetWidget {
                 ],
               ),
               barrierDismissible:
-                  true, // يسمح بإغلاق الصندوق عند النقر في مكان آخر
+                  true, 
             ),
           ),
           ListTile(
@@ -178,7 +178,7 @@ class MyDrawer extends GetWidget {
                             style: TextButton.styleFrom(
                                 backgroundColor: Colors.green),
                             onPressed: () {
-                              Get.back(); // إغلاق الـ Dialog
+                              Get.back(); 
                             },
                             child: Text(
                               "Cancel".tr,
@@ -191,8 +191,8 @@ class MyDrawer extends GetWidget {
                           ),
                           ElevatedButton(
                             onPressed: () {
-                              controller.logout(); // تسجيل الخروج
-                              Get.back(); // إغلاق الـ Dialog بعد تسجيل الخروج
+                              controller.logout(); 
+                              Get.back(); 
                             },
                             child: Text(
                               'logout'.tr,

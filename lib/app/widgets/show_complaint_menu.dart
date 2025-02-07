@@ -16,9 +16,9 @@ void showComplaintMenu(MapController controller) {
       padding: EdgeInsets.symmetric(vertical: 16.0),
       child: GridView.count(
   shrinkWrap: true,
-  crossAxisCount: 2, // عدد الأعمدة في الشبكة
-  crossAxisSpacing: 10.0, // المسافة بين الأعمدة
-  mainAxisSpacing: 10.0, // المسافة بين الصفوف
+  crossAxisCount: 2, 
+  crossAxisSpacing: 10.0, 
+  mainAxisSpacing: 10.0,
   childAspectRatio: 2.0,
   children: HazardTypeService.getHazardTypes().map(
     (hazardType) => GestureDetector(

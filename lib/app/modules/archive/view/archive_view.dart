@@ -168,21 +168,21 @@ class ArchiveView extends StatelessWidget {
                         ],
                       ),
                     ),
-                    // عنصر لتلوين الزاوية العلوية اليسرى
+                    
                     Positioned(
                       top: 0,
                       left: 0,
                       child: Container(
-                        width: 30, // حجم اللون في الزاوية
+                        width: 30, 
                         height: 30,
                         decoration: BoxDecoration(
                           color: controller.makeColor(controller
-                              .statusCheck(status)), // اللون الذي تريده
+                              .statusCheck(status)),
                           borderRadius: BorderRadius.only(
                             topLeft:
-                                Radius.circular(12.0), // مطابق لحواف الكارد
+                                Radius.circular(12.0), 
                             bottomRight: Radius.circular(
-                                12.0), // يجعل الشكل مثلثًا صغيرًا
+                                12.0), 
                           ),
                         ),
                       ),

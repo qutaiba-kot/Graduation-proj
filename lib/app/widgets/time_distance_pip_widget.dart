@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:maps/app/modules/home/controllers/google_map_controller.dart';
 
-import '../const/size.dart'; // تأكد من أنك تستخدم GetX
+import '../const/size.dart'; 
 
 class TimaDistancePipWidget extends StatefulWidget {
   const TimaDistancePipWidget({super.key});
@@ -12,7 +12,6 @@ class TimaDistancePipWidget extends StatefulWidget {
 }
 
 class _TimaDistancePipWidgetState extends State<TimaDistancePipWidget> {
-  // تعريف الـ controller
   final MapController controller = Get.find<MapController>();
 
   @override
