@@ -63,6 +63,15 @@ class MyDrawer extends GetWidget {
             onTap: () => {Get.toNamed("/archive")},
           ),
           ListTile(
+            leading: Icon(Icons.leaderboard,
+                color: Theme.of(context).colorScheme.primary),
+            title: Text(
+              "leaderboard".tr,
+              style: TextStyle(color: Theme.of(context).colorScheme.primary),
+            ),
+            onTap: () => Get.toNamed('/lead-board'),
+          ),
+          ListTile(
             leading: Icon(Icons.help_outline,
                 color: Theme.of(context).colorScheme.primary),
             title: Text(

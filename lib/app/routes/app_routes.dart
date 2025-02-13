@@ -10,4 +10,5 @@ abstract class Routes {
   static const MY_DRAWER = '/my-drawer';
   static const REPORTATION = '/reportation';
   static const ARCHIVE = '/archive';
+  static const LEAD_BOARD = '/lead-board';
 }

@@ -145,4 +145,7 @@ const Map<String, String> en = {
     "Some changes will require a restart of the application." : "Some changes will require a restart of the application , Do you want to restart it ?",
     'Just change the theme' : 'Just change the theme',
     "Just change the Langage" : "Just change the Langage",
+    'leaderboard' : 'Leaders board',
+    'Points' : 'Points',
+    'Rank' : 'Rank',
 };

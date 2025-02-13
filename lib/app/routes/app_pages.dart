@@ -1,7 +1,8 @@
 import 'package:get/get.dart';
-import 'package:maps/app/modules/archive/binding/archive_binding.dart';
-import 'package:maps/app/modules/archive/view/archive_view.dart';
-import 'package:maps/app/modules/reportation/bindings/reportation_binding.dart';
+import 'package:maps/app/modules/home/bindings/my_drawer_binding.dart';
+
+import '../modules/archive/binding/archive_binding.dart';
+import '../modules/archive/view/archive_view.dart';
 import '../modules/auth/bindings/login_binding.dart';
 import '../modules/auth/bindings/signup_binding.dart';
 import '../modules/auth/views/login_view.dart';
@@ -9,11 +10,15 @@ import '../modules/auth/views/signup_view.dart';
 import '../modules/home/bindings/google_map_binding.dart';
 import '../modules/home/views/google_map.dart';
 import '../modules/home/views/home_drawer.dart';
+import '../modules/leadBoard/bindings/lead_board_binding.dart';
+import '../modules/leadBoard/views/lead_board_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
 import '../modules/profile/views/profile_view.dart';
+import '../modules/reportation/bindings/reportation_binding.dart';
 import '../modules/reportation/views/reportation_view.dart';
 import '../modules/settings/bindings/settings_binding.dart';
 import '../modules/settings/views/settings_view.dart';
+
 part 'app_routes.dart';
 
 class AppPages {
@@ -40,9 +45,9 @@ class AppPages {
       page: () => ProfileView(),
       binding: ProfileBinding(),
     ),
-   GetPage(
+    GetPage(
       name: Routes.REPORTATION,
-      page: () =>  ReportationView(),
+      page: () => ReportationView(),
       binding: ReportationBinding(),
     ),
     GetPage(
@@ -53,11 +58,17 @@ class AppPages {
     GetPage(
       name: Routes.MY_DRAWER,
       page: () => MyDrawer(),
+      binding: MyDrawerBinding(),
     ),
     GetPage(
       name: Routes.ARCHIVE,
       page: () => ArchiveView(),
       binding: ArchiveBinding(),
+    ),
+    GetPage(
+      name: Routes.LEAD_BOARD,
+      page: () =>  LeadBoardView(),
+      binding: LeadBoardBinding(),
     ),
   ];
 }
