@@ -6,7 +6,6 @@ import 'package:maps/app/theme/app_theme.dart';
 import 'app/data/user_info.dart';
 import 'app/routes/app_pages.dart';
 import 'app/supabase_config.dart';
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();

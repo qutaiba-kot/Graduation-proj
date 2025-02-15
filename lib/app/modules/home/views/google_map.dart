@@ -86,7 +86,7 @@ class GoogleMapView extends GetView<MapController> {
                     : SizedBox()),
               ),
               Positioned(
-                bottom: 285,
+                bottom: getHeight(context, 0.35),
                 left: language ? getWidth(context, 0.83) : getWidth(context, 0.02),
                 right: language ? getWidth(context, 0.02) : getWidth(context, 0.83),
                 child: FloatingActionButton(
@@ -100,7 +100,7 @@ class GoogleMapView extends GetView<MapController> {
                 ),
               ),
               Positioned(
-                bottom: 200,
+                bottom: getHeight(context, 0.24),
                 left: language ? getWidth(context, 0.83) : getWidth(context, 0.02),
                 right: language ? getWidth(context, 0.02) : getWidth(context, 0.83),
                 child: FloatingActionButton(
@@ -130,7 +130,7 @@ class GoogleMapView extends GetView<MapController> {
                 ),
               ),
               Positioned(
-                top: getHeight(context, 0.49),
+                top: getHeight(context, 0.46),
                 left: language ? getWidth(context, 0.83) : getWidth(context, 0.02),
                 right: language ? getWidth(context, 0.02) : getWidth(context, 0.84),
                 child: Obx(() => FloatingActionButton(
