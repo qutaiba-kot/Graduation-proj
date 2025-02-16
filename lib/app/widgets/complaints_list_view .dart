@@ -3,9 +3,7 @@ import 'package:get/get.dart';
 import 'package:maps/app/modules/archive/controller/archive_controller.dart';
 import '../assets/hazzard types/hazard_types.dart';
 
-class ComplaintsListView extends StatelessWidget {
-  final ArchiveController controller;
-  const ComplaintsListView({Key? key, required this.controller}) : super(key: key);
+class ComplaintsListView extends GetView<ArchiveController> {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(

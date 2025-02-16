@@ -10,8 +10,7 @@ import 'package:maps/app/modules/auth/controllers/signup_controller.dart';
 
 import '../../../global/language_selector.dart';
 
-class SignUpView extends StatelessWidget {
-  final SignUpController controller = Get.find<SignUpController>();
+class SignUpView extends GetView<SignUpController> {
 
   final nameController = TextEditingController();
   final emailController = TextEditingController();

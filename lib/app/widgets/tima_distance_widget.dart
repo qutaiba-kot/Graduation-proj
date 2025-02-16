@@ -2,17 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:maps/app/modules/home/controllers/google_map_controller.dart';
 
-import '../const/size.dart'; 
+import '../const/size.dart';
 
-class TimaDistanceWidget extends StatefulWidget {
+class TimaDistanceWidget extends GetView<MapController> {
   const TimaDistanceWidget({super.key});
-
-  @override
-  State<TimaDistanceWidget> createState() => _TimaDistanceWidgetState();
-}
-
-class _TimaDistanceWidgetState extends State<TimaDistanceWidget> {
-  final MapController controller = Get.find<MapController>();
 
   @override
   Widget build(BuildContext context) {
@@ -35,15 +28,18 @@ class _TimaDistanceWidgetState extends State<TimaDistanceWidget> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
+          // استخدم Obx لمراقبة المتغيرات
           Flexible(
-            child: Text(
-              controller.remainingDistance.value,
-              style: TextStyle(
-                fontSize: getWidth(context, 0.035),
-                fontWeight: FontWeight.bold,
-                color: Theme.of(context).colorScheme.background,
+            child: Obx(
+              () => Text(
+                controller.remainingDistance.value,
+                style: TextStyle(
+                  fontSize: getWidth(context, 0.035),
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).colorScheme.background,
+                ),
+                overflow: TextOverflow.ellipsis,
               ),
-              overflow: TextOverflow.ellipsis,
             ),
           ),
           ElevatedButton(
@@ -68,15 +64,18 @@ class _TimaDistanceWidgetState extends State<TimaDistanceWidget> {
               ),
             ),
           ),
+          // استخدم Obx لمراقبة المتغيرات
           Flexible(
-            child: Text(
-              controller.remainingDuration.value,
-              style: TextStyle(
-                fontSize: getWidth(context, 0.035),
-                fontWeight: FontWeight.bold,
-                color: Theme.of(context).colorScheme.background,
+            child: Obx(
+              () => Text(
+                controller.remainingDuration.value,
+                style: TextStyle(
+                  fontSize: getWidth(context, 0.035),
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).colorScheme.background,
+                ),
+                overflow: TextOverflow.ellipsis,
               ),
-              overflow: TextOverflow.ellipsis,
             ),
           ),
         ],

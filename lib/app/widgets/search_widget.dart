@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:maps/app/modules/home/controllers/google_map_controller.dart';
 
-class SearchWidget extends StatelessWidget {
-  final MapController controller = Get.find<MapController>();
+class SearchWidget extends GetView<MapController> {
   @override
   Widget build(BuildContext context) {
     return Column(

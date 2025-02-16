@@ -3,10 +3,9 @@ import 'package:get/get.dart';
 import 'package:maps/app/widgets/complaints_list_view%20.dart';
 import '../controller/archive_controller.dart';
 
-class ArchiveView extends StatelessWidget {
+class ArchiveView extends GetView<ArchiveController> {
   @override
   Widget build(BuildContext context) {
-    final controller = Get.find<ArchiveController>();
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(
@@ -29,7 +28,7 @@ class ArchiveView extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                       color: Theme.of(context).colorScheme.onBackground));
             }
-            return ComplaintsListView( controller: controller);
+            return ComplaintsListView();
           },
         ),
       ),

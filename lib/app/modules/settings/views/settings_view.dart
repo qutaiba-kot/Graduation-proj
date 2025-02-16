@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:maps/app/const/size.dart';
-import '../controllers/settings_controller.dart';
 import 'package:maps/app/global/language_selector.dart';
 import 'package:maps/app/global/theme_switcher.dart';
 
-class SettingsView extends GetView<SettingsController> {
+class SettingsView extends GetView {
   const SettingsView({super.key});
   @override
   Widget build(BuildContext context) {

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:maps/app/modules/home/controllers/drawer_controller.dart';
 
 class LogoutDialog {
-  static void showLogoutDialog(BuildContext context, dynamic controller) {
+  static void showLogoutDialog(BuildContext context) {
+    MyDrawerController controller = MyDrawerController();
+
     Get.dialog(
       AlertDialog(
         backgroundColor: Theme.of(context).colorScheme.background,
@@ -18,7 +21,8 @@ class LogoutDialog {
           ),
         ),
         content: Text(
-          'You will be logged out of the existing account. Do you want to continue the process?'.tr,
+          'You will be logged out of the existing account. Do you want to continue the process?'
+              .tr,
           style: TextStyle(
             fontSize: 14,
             color: Theme.of(context).colorScheme.onBackground,

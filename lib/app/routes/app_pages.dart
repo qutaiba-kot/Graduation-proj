@@ -58,7 +58,6 @@ class AppPages {
     GetPage(
       name: Routes.MY_DRAWER,
       page: () => MyDrawer(),
-      binding: MyDrawerBinding(),
     ),
     GetPage(
       name: Routes.ARCHIVE,

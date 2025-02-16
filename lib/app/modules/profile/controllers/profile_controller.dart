@@ -6,11 +6,6 @@ class ProfileController extends GetxController {
   final UserStorageService userStorage = UserStorageService();
   var profileImage = Rx<File?>(null);
 
-  @override
-  void onInit() {
-    super.onInit();
-  }
-
   ImageProvider getProfileImage() {
     if (profileImage.value == null) {
       return const AssetImage("lib/app/assets/images/OIP.jpeg");

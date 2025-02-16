@@ -14,7 +14,6 @@ import '../../../widgets/time_distance_pip_widget.dart';
 import '../controllers/google_map_controller.dart';
 
 class GoogleMapView extends GetView<MapController> {
-  final MapController mapController = Get.find<MapController>();
   final RecallTags recallTags = Get.find<RecallTags>();
 
   final PipController pipController = Get.find<PipController>();
@@ -137,12 +136,12 @@ class GoogleMapView extends GetView<MapController> {
                       heroTag: "sound controller",
                       backgroundColor: Theme.of(context).colorScheme.primary,
                       child: Icon(
-                        mapController.isMuted.value
+                        controller.isMuted.value
                             ? Icons.volume_off
                             : Icons.volume_up,
                         color: Theme.of(context).colorScheme.background,
                       ),
-                      onPressed: mapController.toggleMute,
+                      onPressed: controller.toggleMute,
                     )),
               ),
             ],

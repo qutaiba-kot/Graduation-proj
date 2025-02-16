@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controllers/profile_controller.dart';
 
-class ProfileView extends StatelessWidget {
-  final ProfileController controller = Get.find<ProfileController>();
+class ProfileView extends GetView<ProfileController> {
 
   @override
   Widget build(BuildContext context) {

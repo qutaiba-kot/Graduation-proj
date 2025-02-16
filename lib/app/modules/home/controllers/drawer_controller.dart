@@ -26,5 +26,9 @@ class MyDrawerController extends GetxController {
     print("An error occurred during logout: $e");
   }
 }
+@override
+  void onClose() {
+    super.onClose();
+  }
 
 }

@@ -3,31 +3,20 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:restart_app/restart_app.dart';
 
-class ThemeSwitcher extends StatefulWidget {
-  @override
-  _ThemeSwitcherState createState() => _ThemeSwitcherState();
-}
+class ThemeSwitcher extends StatelessWidget {
+  ThemeSwitcher({Key? key}) : super(key: key);
 
-class _ThemeSwitcherState extends State<ThemeSwitcher> {
-  late bool isDarkMode;
+  final box = GetStorage();
+  final bool isDarkMode = GetStorage().read('isDarkMode') ?? false;
+
   void restartApp() {
     Restart.restartApp(
-      /// In Web Platform, Fill webOrigin only when your new origin is different than the app's origin
-      // webOrigin: 'http://example.com',
-
-      // Customizing the restart notification message (only needed on iOS)
       notificationTitle: 'Restarting App',
       notificationBody: 'Please tap here to open the app again.',
     );
   }
 
-  @override
-  void initState() {
-    super.initState();
-    isDarkMode = GetStorage().read('isDarkMode') ?? false;
-  }
-
-  void toggleTheme() {
+  void toggleTheme(BuildContext context) {
     if (Get.currentRoute == '/settings') {
       Get.dialog(
         AlertDialog(
@@ -36,26 +25,20 @@ class _ThemeSwitcherState extends State<ThemeSwitcher> {
           actions: [
             TextButton(
               onPressed: () {
+                bool newThemeMode = !isDarkMode;
+                box.write('isDarkMode', newThemeMode);
+                Get.changeThemeMode(newThemeMode ? ThemeMode.dark : ThemeMode.light);
                 Get.back();
-                setState(() {
-                  isDarkMode = !isDarkMode;
-                });
-                Get.changeThemeMode(
-                    isDarkMode ? ThemeMode.dark : ThemeMode.light);
-                GetStorage().write('isDarkMode', isDarkMode);
                 restartApp();
               },
               child: Text('OK'.tr),
             ),
             TextButton(
               onPressed: () {
+                bool newThemeMode = !isDarkMode;
+                box.write('isDarkMode', newThemeMode);
+                Get.changeThemeMode(newThemeMode ? ThemeMode.dark : ThemeMode.light);
                 Get.back();
-                setState(() {
-                  isDarkMode = !isDarkMode;
-                });
-                Get.changeThemeMode(
-                    isDarkMode ? ThemeMode.dark : ThemeMode.light);
-                GetStorage().write('isDarkMode', isDarkMode);
               },
               child: Text('Just change the theme'.tr),
             ),
@@ -63,11 +46,9 @@ class _ThemeSwitcherState extends State<ThemeSwitcher> {
         ),
       );
     } else {
-      setState(() {
-        isDarkMode = !isDarkMode;
-      });
-      Get.changeThemeMode(isDarkMode ? ThemeMode.dark : ThemeMode.light);
-      GetStorage().write('isDarkMode', isDarkMode);
+      bool newThemeMode = !isDarkMode;
+      box.write('isDarkMode', newThemeMode);
+      Get.changeThemeMode(newThemeMode ? ThemeMode.dark : ThemeMode.light);
     }
   }
 
@@ -75,7 +56,7 @@ class _ThemeSwitcherState extends State<ThemeSwitcher> {
   Widget build(BuildContext context) {
     return IconButton(
       icon: Icon(isDarkMode ? Icons.dark_mode : Icons.light_mode),
-      onPressed: toggleTheme,
+      onPressed: () => toggleTheme(context),
       tooltip: isDarkMode ? "Switch to light mode" : "Switch to dark mode",
     );
   }

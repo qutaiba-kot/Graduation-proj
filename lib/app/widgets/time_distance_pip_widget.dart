@@ -4,16 +4,8 @@ import 'package:maps/app/modules/home/controllers/google_map_controller.dart';
 
 import '../const/size.dart'; 
 
-class TimaDistancePipWidget extends StatefulWidget {
+class TimaDistancePipWidget extends GetView<MapController> {
   const TimaDistancePipWidget({super.key});
-
-  @override
-  State<TimaDistancePipWidget> createState() => _TimaDistancePipWidgetState();
-}
-
-class _TimaDistancePipWidgetState extends State<TimaDistancePipWidget> {
-  final MapController controller = Get.find<MapController>();
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -36,7 +28,8 @@ class _TimaDistancePipWidgetState extends State<TimaDistancePipWidget> {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           Flexible(
-            child: Text(
+            child: Obx(
+              () =>Text(
               controller.remainingDistance.value,
               style: TextStyle(
                 fontSize: getWidth(context, 0.085),
@@ -45,10 +38,11 @@ class _TimaDistancePipWidgetState extends State<TimaDistancePipWidget> {
                 decoration: TextDecoration.none,
               ),
               overflow: TextOverflow.ellipsis,
-            ),
+            ),)
           ),
           Flexible(
-            child: Text(
+            child: Obx(
+              () =>Text(
               controller.remainingDuration.value,
               style: TextStyle(
                 fontSize: getWidth(context, 0.085),
@@ -58,7 +52,7 @@ class _TimaDistancePipWidgetState extends State<TimaDistancePipWidget> {
               ),
               overflow: TextOverflow.ellipsis,
             ),
-          ),
+          ),)
         ],
       ),
     );

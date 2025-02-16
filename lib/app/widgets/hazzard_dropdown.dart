@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:maps/app/modules/reportation/controllers/reportation_controller.dart';
 import '../assets/hazzard types/hazard_types.dart';
 
-class HazardDropdown extends StatelessWidget {
-  final controller;
-
-  HazardDropdown({required this.controller});
+class HazardDropdown extends GetView<ReportationController> {
 
   @override
   Widget build(BuildContext context) {

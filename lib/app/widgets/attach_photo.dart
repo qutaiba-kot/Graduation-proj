@@ -3,9 +3,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:maps/app/modules/reportation/controllers/reportation_controller.dart';
 
-class AttachPhoto extends StatelessWidget {
-  final ReportationController controller;
-  const AttachPhoto({Key? key, required this.controller}) : super(key: key);
+class AttachPhoto extends GetView<ReportationController> {
   @override
   Widget build(BuildContext context) {
     return Card(

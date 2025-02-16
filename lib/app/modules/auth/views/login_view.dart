@@ -10,11 +10,9 @@ import 'package:maps/app/global/theme_switcher.dart';
 import '../../../routes/app_pages.dart';
 import '../controllers/login_controller.dart';
 
-class LoginView extends StatelessWidget {
-  final LoginController controller = Get.find<LoginController>();
+class LoginView extends GetView<LoginController> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -127,11 +125,11 @@ class LoginView extends StatelessWidget {
             SizedBox(height: getHeight(context, 0.04)),
             CustomTextButton(
               text: 'forgot_password'.tr,
-              onPressed: () => {Get.snackbar(
-                  "This feature will be added soon".tr,
-                  "",
-                  snackPosition: SnackPosition.BOTTOM,
-                )}, 
+              onPressed: () => Get.snackbar(
+                "This feature will be added soon".tr,
+                "",
+                snackPosition: SnackPosition.BOTTOM,
+              ),
               backgroundColor: Theme.of(context).colorScheme.background,
               textColor: Theme.of(context).colorScheme.primary,
             ),

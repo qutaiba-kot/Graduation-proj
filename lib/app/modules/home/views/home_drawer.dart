@@ -5,8 +5,7 @@ import '../../../data/user_info.dart';
 import '../../../widgets/contact_dialog.dart';
 import '../../../widgets/logout_dialog.dart';
 
-class MyDrawer extends GetWidget {
-  final MyDrawerController controller = Get.find<MyDrawerController>();
+class MyDrawer extends GetView<MyDrawerController> {
 
   final UserStorageService userStorage = UserStorageService();
   @override
@@ -97,7 +96,7 @@ class MyDrawer extends GetWidget {
               "logout".tr,
               style: TextStyle(color: Theme.of(context).colorScheme.error),
             ),
-            onTap: () => LogoutDialog.showLogoutDialog(context , controller),
+            onTap: () => LogoutDialog.showLogoutDialog(context),
           ),
         ],
       ),

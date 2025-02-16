@@ -47,7 +47,7 @@ class ReportationView extends GetView<ReportationController> {
                             fontWeight: FontWeight.bold,
                             color: Theme.of(context).colorScheme.onBackground))
                   ])),
-              HazardDropdown(controller: controller),
+              HazardDropdown(),
               SizedBox(height: getHeight(context, 0.01)),
               Container(
                   padding: EdgeInsets.only(left: 10, right: 10),
@@ -91,7 +91,7 @@ class ReportationView extends GetView<ReportationController> {
                             fontWeight: FontWeight.bold,
                             color: Theme.of(context).colorScheme.onBackground))
                   ])),
-              AttachPhoto(controller: controller),
+              AttachPhoto(),
               SizedBox(height: 16),
               Container(
                   padding: EdgeInsets.only(left: 10, right: 10),
