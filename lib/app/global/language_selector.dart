@@ -86,7 +86,6 @@ class LanguageSelector extends StatelessWidget {
           }),
     );
   }
-
   void restartApp() {
     Restart.restartApp(
       notificationTitle: 'Restarting App',

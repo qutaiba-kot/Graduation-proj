@@ -15,7 +15,7 @@ class LeadBoardView extends StatelessWidget {
           style: TextStyle(color: Theme.of(context).colorScheme.onBackground),
         ),
         centerTitle: true,
-        backgroundColor: Theme.of(context).colorScheme.background,
+        //backgroundColor: Theme.of(context).colorScheme.background,
       ),
       body: Column(
         children: [

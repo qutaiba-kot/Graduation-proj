@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:maps/app/modules/home/controllers/drawer_controller.dart';
-import 'package:url_launcher/url_launcher.dart';
-
 import '../../../data/user_info.dart';
+import '../../../widgets/contact_dialog.dart';
+import '../../../widgets/logout_dialog.dart';
 
 class MyDrawer extends GetWidget {
   final MyDrawerController controller = Get.find<MyDrawerController>();
@@ -78,64 +78,7 @@ class MyDrawer extends GetWidget {
               "help".tr + " ؟ " + "Call Us".tr,
               style: TextStyle(color: Theme.of(context).colorScheme.primary),
             ),
-            onTap: () => Get.dialog(
-              AlertDialog(
-                backgroundColor: Theme.of(context).colorScheme.background,
-                content: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      "For any comments or problems please contact".tr,
-                      style: TextStyle(
-                          color: Theme.of(context).colorScheme.primary),
-                    ),
-                    Text(
-                      "+962786233247",
-                      style: TextStyle(
-                          color: Theme.of(context).colorScheme.primary),
-                    ),
-                  ],
-                ),
-                actions: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      TextButton(
-                        onPressed: () async {
-                          String phoneNumber = "+962786233247";
-                          final Uri phoneUri = Uri(
-                            scheme: 'tel',
-                            path: phoneNumber,
-                          );
-                          if (await canLaunch(phoneUri.toString())) {
-                            await launch(phoneUri.toString());
-                          } else {
-                            Get.snackbar(
-                                "Error", "Could not launch the phone app.");
-                          }
-                          Get.back();
-                        },
-                        child: Row(
-                          children: [
-                            Icon(Icons.call),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Text("Call".tr),
-                          ],
-                        ),
-                      ),
-                      TextButton(
-                        onPressed: () => Get.back(),
-                        child: Text("OK".tr),
-                      ),
-                    ],
-                  )
-                ],
-              ),
-              barrierDismissible:
-                  true, 
-            ),
+            onTap: () => ContactDialog.showContactDialog(context),
           ),
           ListTile(
             leading: Icon(Icons.settings,
@@ -147,85 +90,14 @@ class MyDrawer extends GetWidget {
             onTap: () => Get.toNamed('/settings'),
           ),
           Spacer(),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 16.0),
-            child: ListTile(
-              leading: Icon(Icons.logout, color: Colors.red),
-              title: Text(
-                "logout".tr,
-                style:
-                    TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
-              ),
-              onTap: () {
-                Get.dialog(
-                  AlertDialog(
-                    backgroundColor: Theme.of(Get.context!).colorScheme.background,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    title: Text(
-                      'Are you sure you\'re logged out?'.tr,
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Theme.of(Get.context!).colorScheme.primary,
-                      ),
-                    ),
-                    content: Text(
-                      'You will be logged out of the existing account. Do you want to continue the process?'
-                          .tr,
-                      style: TextStyle(
-                          fontSize: 14,
-                          color:
-                              Theme.of(Get.context!).colorScheme.onBackground),
-                    ),
-                    actions: <Widget>[
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          TextButton(
-                            style: TextButton.styleFrom(
-                                backgroundColor: Colors.green),
-                            onPressed: () {
-                              Get.back(); 
-                            },
-                            child: Text(
-                              "Cancel".tr,
-                              style: TextStyle(
-                                color: Theme.of(Get.context!)
-                                    .colorScheme
-                                    .background,
-                              ),
-                            ),
-                          ),
-                          ElevatedButton(
-                            onPressed: () {
-                              controller.logout(); 
-                              Get.back(); 
-                            },
-                            child: Text(
-                              'logout'.tr,
-                              style: TextStyle(
-                                color: Theme.of(Get.context!)
-                                    .colorScheme
-                                    .background,
-                              ),
-                            ),
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.red,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  barrierDismissible: true,
-                );
-              },
+          ListTile(
+            leading: Icon(Icons.logout,
+                color: Theme.of(context).colorScheme.error),
+            title: Text(
+              "logout".tr,
+              style: TextStyle(color: Theme.of(context).colorScheme.error),
             ),
+            onTap: () => LogoutDialog.showLogoutDialog(context , controller),
           ),
         ],
       ),

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:maps/app/const/size.dart';
 import 'package:maps/app/modules/reportation/controllers/reportation_controller.dart';
-import '../../../assets/hazzard types/hazard_types.dart';
+import 'package:maps/app/widgets/attach_photo.dart';
 import '../../../global/text_feild.dart';
+import '../../../widgets/hazzard_dropdown.dart';
 
 class ReportationView extends GetView<ReportationController> {
   @override
@@ -40,94 +40,23 @@ class ReportationView extends GetView<ReportationController> {
               ),
               SizedBox(height: 10,),
               Container(
-                padding: EdgeInsets.only(left: 10, right: 10),
-                child: Row(
-                  children: [
-                    Text(
-                      "Required : ".tr,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Theme.of(context).colorScheme.onBackground,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Card(
-                color: Theme.of(context).colorScheme.primary,
-                elevation: 3,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Obx(
-                    () => DropdownButton<int>(
-                      value: controller.selectedProblemId.value == 0
-                          ? null
-                          : controller.selectedProblemId.value,
-                      items: HazardTypeService.getHazardTypes()
-                          .map(
-                            (hazard) => DropdownMenuItem<int>(
-                              value: hazard.hazardTypeId,
-                              child: Row(
-                                children: [
-                                  Icon(hazard.icon,
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .onBackground),
-                                  SizedBox(width: 8),
-                                  Text(
-                                    hazard.name,
-                                    style: TextStyle(
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .onBackground),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          )
-                          .toList(),
-                      hint: Row(
-                        children: [
-                          Icon(Icons.warning,
-                              color: Theme.of(context).colorScheme.onBackground),
-                          SizedBox(width: 8),
-                          Text(
-                            'pick the type of the report'.tr,
-                            style: TextStyle(
-                                color:
-                                    Theme.of(context).colorScheme.onBackground),
-                          ),
-                        ],
-                      ),
-                      onChanged: (value) {
-                        controller.selectedProblemId.value = value!;
-                      },
-                      dropdownColor: Theme.of(context).colorScheme.primary,
-                      iconEnabledColor:
-                          Theme.of(context).colorScheme.onBackground,
-                      style: TextStyle(fontSize: 16),
-                    ),
-                  ),
-                ),
-              ),
+                  padding: EdgeInsets.only(left: 10, right: 10),
+                  child: Row(children: [
+                    Text("Required : ".tr,
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Theme.of(context).colorScheme.onBackground))
+                  ])),
+              HazardDropdown(controller: controller),
               SizedBox(height: getHeight(context, 0.01)),
               Container(
-                padding: EdgeInsets.only(left: 10, right: 10),
-                child: Row(
-                  children: [
-                    Text(
-                      "Required : ".tr,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Theme.of(context).colorScheme.onBackground,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+                  padding: EdgeInsets.only(left: 10, right: 10),
+                  child: Row(children: [
+                    Text("Required : ".tr,
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Theme.of(context).colorScheme.onBackground))
+                  ])),
               Card(
                 color: Theme.of(context).colorScheme.primary,
                 elevation: 3,
@@ -155,116 +84,23 @@ class ReportationView extends GetView<ReportationController> {
               ),
               SizedBox(height: getHeight(context, 0.01)),
               Container(
-                padding: EdgeInsets.only(left: 10, right: 10),
-                child: Row(
-                  children: [
-                    Text(
-                      "Required : ".tr,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Theme.of(context).colorScheme.onBackground,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Card(
-                color: Theme.of(context).colorScheme.primary,
-                elevation: 3,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Attach a photo:'.tr,
+                  padding: EdgeInsets.only(left: 10, right: 10),
+                  child: Row(children: [
+                    Text("Required : ".tr,
                         style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                          color: Theme.of(context).colorScheme.onBackground,
-                        ),
-                      ),
-                      SizedBox(height: 8),
-                      Row(
-                        children: [
-                          ElevatedButton.icon(
-                            onPressed: () {
-                              showModalBottomSheet(
-                                context: context,
-                                builder: (context) => Wrap(
-                                  children: [
-                                    ListTile(
-                                      leading: Icon(Icons.camera_alt),
-                                      title: Text('Take a photo'.tr),
-                                      onTap: () {
-                                        Navigator.pop(context);
-                                        controller.pickImage(
-                                            source: ImageSource.camera);
-                                      },
-                                    ),
-                                    ListTile(
-                                      leading: Icon(Icons.photo_library),
-                                      title: Text('Choose from the gallery'.tr),
-                                      onTap: () {
-                                        Navigator.pop(context);
-                                        controller.pickImage(
-                                            source: ImageSource.gallery);
-                                      },
-                                    ),
-                                  ],
-                                ),
-                              );
-                            },
-                            icon: Icon(Icons.image),
-                            label: Text('Attach a photo:'.tr),
-                          ),
-                          SizedBox(width: 16),
-                          Obx(
-                            () => controller.selectedImage.value != null
-                                ? ClipRRect(
-                                    borderRadius: BorderRadius.circular(8),
-                                    child: Image.file(
-                                      controller.selectedImage.value!,
-                                      width: 100,
-                                      height: 100,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  )
-                                : Flexible(
-                                    child: Text(
-                                      'No image selected'.tr,
-                                      style: TextStyle(
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .onBackground,
-                                      ),
-                                    ),
-                                  ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+                            fontWeight: FontWeight.bold,
+                            color: Theme.of(context).colorScheme.onBackground))
+                  ])),
+              AttachPhoto(controller: controller),
               SizedBox(height: 16),
               Container(
-                padding: EdgeInsets.only(left: 10, right: 10),
-                child: Row(
-                  children: [
-                    Text(
-                      "Required : ".tr,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Theme.of(context).colorScheme.onBackground,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+                  padding: EdgeInsets.only(left: 10, right: 10),
+                  child: Row(children: [
+                    Text("Required : ".tr,
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Theme.of(context).colorScheme.onBackground))
+                  ])),
               Card(
                 color: Theme.of(context).colorScheme.primary,
                 elevation: 3,

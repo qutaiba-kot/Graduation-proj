@@ -12,7 +12,6 @@ import '../controllers/login_controller.dart';
 
 class LoginView extends StatelessWidget {
   final LoginController controller = Get.find<LoginController>();
-
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 

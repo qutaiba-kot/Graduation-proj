@@ -17,7 +17,6 @@ class SignUpView extends StatelessWidget {
   final emailController = TextEditingController();
   final phoneController = TextEditingController(text: "+962");
   final passwordController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -39,11 +39,13 @@ class ProfileView extends StatelessWidget {
                         Icons.camera_alt,
                         color: Theme.of(context).colorScheme.primary,
                       ),
-                      onPressed: () {Get.snackbar(
-                  "This feature will be added soon".tr,
-                  "",
-                  snackPosition: SnackPosition.BOTTOM,
-                );},
+                      onPressed: () {
+                        Get.snackbar(
+                          "This feature will be added soon".tr,
+                          "",
+                          snackPosition: SnackPosition.BOTTOM,
+                        );
+                      },
                     ),
                   ),
                 ],
@@ -107,8 +109,8 @@ class ProfileView extends StatelessWidget {
                 style: TextStyle(color: Theme.of(context).colorScheme.primary),
               ),
               onTap: () {
-    Get.toNamed("/archive"); 
-  },
+                Get.toNamed("/archive");
+              },
             ),
             ListTile(
               leading: Icon(Icons.numbers,
@@ -124,11 +126,13 @@ class ProfileView extends StatelessWidget {
             ),
             SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () {Get.snackbar(
+              onPressed: () {
+                Get.snackbar(
                   "This feature will be added soon".tr,
                   "",
                   snackPosition: SnackPosition.BOTTOM,
-                );},
+                );
+              },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Theme.of(context).colorScheme.onBackground,
               ),
