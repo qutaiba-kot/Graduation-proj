@@ -21,7 +21,6 @@ class MapController extends GetxController {
 
   final Rx<Polyline> routePolyline = Polyline(
     polylineId: PolylineId("route"),
-    color: Colors.blue,
     width: 5,
   ).obs;
   final TextEditingController textEditingController = TextEditingController();
@@ -269,8 +268,8 @@ class MapController extends GetxController {
               data['routes'][0]['overview_polyline']['points']);
           routePolyline.value = Polyline(
             polylineId: PolylineId("route"),
-            color: Colors.blue,
-            width: 5,
+            color: Color(0xFF10A37F),
+            width: 10,
             points: points,
           );
           remainingDistance.value =

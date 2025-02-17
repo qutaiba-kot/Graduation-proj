@@ -1,6 +1,4 @@
 import 'package:get/get.dart';
-import 'package:maps/app/modules/home/bindings/my_drawer_binding.dart';
-
 import '../modules/archive/binding/archive_binding.dart';
 import '../modules/archive/view/archive_view.dart';
 import '../modules/auth/bindings/login_binding.dart';
@@ -18,7 +16,6 @@ import '../modules/reportation/bindings/reportation_binding.dart';
 import '../modules/reportation/views/reportation_view.dart';
 import '../modules/settings/bindings/settings_binding.dart';
 import '../modules/settings/views/settings_view.dart';
-
 part 'app_routes.dart';
 
 class AppPages {
