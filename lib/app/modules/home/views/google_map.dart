@@ -45,7 +45,7 @@ class GoogleMapView extends GetView<MapController> {
                         }
                       });
                     },
-                    zoomControlsEnabled: false,
+                    zoomControlsEnabled: true,
                     myLocationEnabled: true,
                     myLocationButtonEnabled: false,
                     markers: controller.markers.map((marker) {

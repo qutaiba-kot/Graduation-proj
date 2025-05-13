@@ -48,7 +48,6 @@ class MyApp extends StatelessWidget {
     final bool isDarkMode = GetStorage().read('isDarkMode') ?? false;
     return isDarkMode ? ThemeMode.dark : ThemeMode.light;
   }
-
   String _getInitialRoute() {
     if (userStorage.isLoggedIn) {
       return '/map';
