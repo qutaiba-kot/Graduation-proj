@@ -19,7 +19,7 @@ Widget leaderboardTopRow(BuildContext context, List<UserLeader> top3) {
                     shape: BoxShape.circle,
                     border: Border.all(
                       color: Colors.green,
-                      width: 4,
+                      width : getWidth(context, 0.009),
                     ),
                   ),
                   child: CircleAvatar(
@@ -32,8 +32,8 @@ Widget leaderboardTopRow(BuildContext context, List<UserLeader> top3) {
                   ),
                 ),
                 Positioned(
-                  bottom: getHeight(context, -0.0080),
-                  right: getWidth(context, 0.06),
+                  bottom: getHeight(context, -0.0050),
+                  right: getWidth(context, 0.079),
                   child: Container(
                     padding: EdgeInsets.all(getWidth(context, 0.01)),
                     decoration: BoxDecoration(
@@ -51,6 +51,7 @@ Widget leaderboardTopRow(BuildContext context, List<UserLeader> top3) {
                 ),
               ],
             ),
+            SizedBox(height: getHeight(context, 0.007),),
             Text(
               "${top3[1].userName}",
               style: TextStyle(
@@ -75,7 +76,7 @@ Widget leaderboardTopRow(BuildContext context, List<UserLeader> top3) {
                     shape: BoxShape.circle,
                     border: Border.all(
                       color: Colors.green,
-                      width: 4,
+                      width : getWidth(context, 0.009),
                     ),
                   ),
                   child: CircleAvatar(
@@ -88,8 +89,8 @@ Widget leaderboardTopRow(BuildContext context, List<UserLeader> top3) {
                   ),
                 ),
                 Positioned(
-                  bottom: getHeight(context, -0.0080),
-                  right: getWidth(context, 0.06),
+                  bottom: getHeight(context, -0.0050),
+                  right: getWidth(context, 0.117),
                   child: Container(
                     padding: EdgeInsets.all(getWidth(context, 0.01)),
                     decoration: BoxDecoration(
@@ -106,8 +107,8 @@ Widget leaderboardTopRow(BuildContext context, List<UserLeader> top3) {
                   ),
                 ),
                 Positioned(
-                  bottom: 8,
-                  right: 8,
+                  bottom: getHeight(context, 0.009),
+                  right: getWidth(context, 0.015),
                   child: Container(
                     padding: EdgeInsets.all(6),
                     decoration: BoxDecoration(
@@ -123,6 +124,7 @@ Widget leaderboardTopRow(BuildContext context, List<UserLeader> top3) {
                 ),
               ],
             ),
+            SizedBox(height: getHeight(context, 0.007),),
             Text(
               "${top3[0].userName}",
               style: TextStyle(
@@ -147,7 +149,7 @@ Widget leaderboardTopRow(BuildContext context, List<UserLeader> top3) {
                     shape: BoxShape.circle,
                     border: Border.all(
                       color: Colors.green,
-                      width: 4,
+                      width : getWidth(context, 0.009),
                     ),
                   ),
                   child: CircleAvatar(
@@ -160,8 +162,8 @@ Widget leaderboardTopRow(BuildContext context, List<UserLeader> top3) {
                   ),
                 ),
                 Positioned(
-                  bottom: getHeight(context, -0.0080),
-                  right: getWidth(context, 0.06),
+                  bottom: getHeight(context, -0.0050),
+                  right: getWidth(context, 0.079),
                   child: Container(
                     padding: EdgeInsets.all(getWidth(context, 0.01)),
                     decoration: BoxDecoration(
@@ -179,6 +181,7 @@ Widget leaderboardTopRow(BuildContext context, List<UserLeader> top3) {
                 ),
               ],
             ),
+            SizedBox(height: getHeight(context, 0.007),),
             Text(
               "${top3[2].userName}",
               style: TextStyle(
