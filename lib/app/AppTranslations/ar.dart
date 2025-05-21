@@ -150,6 +150,6 @@ const Map<String, String> ar = {
   "Just change the Langage": "فقط غير اللغة",
   'leaderboard': 'لوحة المتصدرين',
   'Points': 'النقاط',
-      'Rank' : 'المركز',
-
+  'Rank': 'المركز',
+  'Selected destination': 'الوجهة المختارة',
 };

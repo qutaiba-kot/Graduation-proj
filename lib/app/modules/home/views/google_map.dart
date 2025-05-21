@@ -45,7 +45,7 @@ class GoogleMapView extends GetView<MapController> {
                         }
                       });
                     },
-                    zoomControlsEnabled: true,
+                    zoomControlsEnabled: false,
                     myLocationEnabled: true,
                     myLocationButtonEnabled: false,
                     markers: controller.markers.map((marker) {
@@ -53,7 +53,7 @@ class GoogleMapView extends GetView<MapController> {
                         markerId: marker.markerId,
                         position: marker.position,
                         infoWindow: InfoWindow(
-                          title: marker.infoWindow.title,
+                          title:"Selected destination".tr,
                         ),
                         icon: marker.icon,
                         onTap: () {

@@ -307,7 +307,7 @@ class MapController extends GetxController {
           "Please pay attention".tr,
           "You are close to a note on the way ahead of you!".tr,
           snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.yellow,
+          backgroundColor: Color.fromARGB(255, 32, 94, 180),
           colorText: Get.theme.colorScheme.background,
         );
         try {
@@ -514,9 +514,9 @@ class MapController extends GetxController {
 
   Future<void> submitComplaint(int hazardTypeId) async {
     try {
-      print("🚀 بدء عملية إرسال الشكوى...");
+      print("Start the delivery process...");
 
-      print("📍 محاولة الحصول على الموقع الحالي...");
+      print("Trying to get the current location...");
       Position position = await Geolocator.getCurrentPosition(
           desiredAccuracy: LocationAccuracy.high);
 
